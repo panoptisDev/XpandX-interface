@@ -1,33 +1,34 @@
-import { extendTheme } from '@chakra-ui/react';
+import { extendTheme } from "@chakra-ui/react";
 
-import styles from './styles';
+import styles from "./styles";
 
-import radii from './foundations/borderRadius';
-import breakpoints from './foundations/breakpoints';
-import colors from './foundations/colors';
-import config from './foundations/config';
-import fontSizes from './foundations/fontSizes';
-import fontWeights from './foundations/fontWeights';
-import fonts from './foundations/fonts';
-import shadows from './foundations/shadows';
-import sizes from './foundations/sizes';
-import space from './foundations/space';
-import zIndices from './foundations/zIndices';
+import radii from "./foundations/borderRadius";
+import breakpoints from "./foundations/breakpoints";
+import colors from "./foundations/colors";
+import config from "./foundations/config";
+import fontSizes from "./foundations/fontSizes";
+import fontWeights from "./foundations/fontWeights";
+import fonts from "./foundations/fonts";
+import shadows from "./foundations/shadows";
+import sizes from "./foundations/sizes";
+import space from "./foundations/space";
+import zIndices from "./foundations/zIndices";
 
-import Accordion from './components/accordion';
-import Button from './components/button';
-import Card from './components/card';
-import Form from './components/form';
-import Input from './components/input';
-import Modal from './components/modal';
-import NumberInput from './components/numberInput';
-import PinInput from './components/pinInput';
-import Radio from './components/radio';
-import Select from './components/select';
-import Tabs from './components/tab';
-import Table from './components/table';
-import Text from './components/text';
-import Textarea from './components/textarea';
+import Accordion from "./components/accordion";
+import Button from "./components/button";
+import Card from "./components/card";
+import Form from "./components/form";
+import Input from "./components/input";
+import Modal from "./components/modal";
+import NumberInput from "./components/numberInput";
+import PinInput from "./components/pinInput";
+import Radio from "./components/radio";
+import Select from "./components/select";
+import Tabs from "./components/tab";
+import Table from "./components/table";
+import Text from "./components/text";
+import Textarea from "./components/textarea";
+import Menu from "./components/menu";
 
 const customTheme = {
   colors,
