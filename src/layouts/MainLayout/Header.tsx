@@ -13,24 +13,30 @@ import { ArrowRight, ChevronDownIcon, SettingIcon } from "@/icons";
 import { XButton, XLink } from "@/ui-kit";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const NAVIGATION = [
   {
     title: "swap",
     href: "/",
+    feature: "/swap",
   },
   {
     title: "tokens",
     href: "/tokens",
+    feature: "/token",
   },
   {
     title: "pools",
     href: "/pools",
+    feature: "/pools",
   },
 ];
 
 export const Header = () => {
   const { t } = useTranslation();
+  const router = useRouter();
+  const { asPath } = router;
 
   return (
     <Stack
@@ -50,11 +56,19 @@ export const Header = () => {
         </Box>
 
         <Stack spacing="24px" direction="row" fontSize="sm">
-          {NAVIGATION.map((item, idx) => (
-            <XLink href={item.href} key={idx}>
-              {t(item.title)}
-            </XLink>
-          ))}
+          {NAVIGATION.map((item, idx) => {
+            const isActive = asPath.startsWith(item.feature);
+            return (
+              <XLink
+                href={item.href}
+                key={idx}
+                color={isActive ? "text.50" : "text.400"}
+                fontWeight={isActive ? "bold" : "normal"}
+              >
+                {t(item.title)}
+              </XLink>
+            );
+          })}
           <Menu>
             {({ isOpen }) => (
               <>
@@ -62,6 +76,7 @@ export const Header = () => {
                   // isActive={false}
                   as={Text}
                   cursor="pointer"
+                  color='text.400'
                 >
                   More <ChevronDownIcon />
                 </MenuButton>
