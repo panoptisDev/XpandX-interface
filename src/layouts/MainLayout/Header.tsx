@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 import { ArrowRight, ChevronDownIcon, SettingIcon } from "@/icons";
-import { XLink } from "@/ui-kit";
+import { XButton, XLink } from "@/ui-kit";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
 
@@ -121,8 +121,8 @@ export const Header = () => {
           <ChevronDownIcon color="#FAFAFA" fontSize="24px" ml="-10px" />
         </Stack>
 
-        <Button p="3px 3px 3px 14px">
-          {t('connect_wallet')}
+        <XButton p="3px 3px 3px 14px">
+          {t("connect_wallet")}
           <Stack
             w={26}
             h={26}
@@ -134,7 +134,7 @@ export const Header = () => {
           >
             <ArrowRight />
           </Stack>
-        </Button>
+        </XButton>
       </Stack>
     </Stack>
   );
