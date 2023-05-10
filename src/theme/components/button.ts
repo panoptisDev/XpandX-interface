@@ -3,10 +3,7 @@ import type { ComponentStyleConfig } from "@chakra-ui/theme";
 const Button: ComponentStyleConfig = {
   baseStyle: {
     w: "100%",
-    h: "32px",
-    height: "32px",
     borderRadius: "50px",
-    fontSize: "sm",
     fontWeight: "normal",
     lineHeight: 1,
     display: "flex",
@@ -40,6 +37,27 @@ const Button: ComponentStyleConfig = {
         opacity: 0.7,
       },
     },
+
+    "primary-outline": {
+      bg: "transparent",
+      background: "transparent",
+      color: "text.900",
+      borderRadius: "1px solid",
+      borderColor: "text.300",
+
+      _hover: {
+        borderColor: "text.900",
+      },
+
+      _active: {
+        bg: "100",
+      },
+
+      _disabled: {
+        opacity: 0.7,
+      },
+    },
+
     secondary: {
       bg: "sec.2",
       background: "sec.2",
@@ -58,10 +76,15 @@ const Button: ComponentStyleConfig = {
   sizes: {
     sm: {
       h: "32px",
+      height: "32px",
+      fontSize: "sm",
     },
 
     md: {
-      h: "44px",
+      h: "46px",
+      height: "46px",
+      fontSize: "md",
+      fontWeight: "bold",
     },
   },
 
