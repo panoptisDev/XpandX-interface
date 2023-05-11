@@ -6,6 +6,9 @@ const {
 const nextConfig = {
   reactStrictMode: true,
   i18n,
+  experimental: {
+    outputStandalone: true,
+ }
 }
 
 module.exports = nextConfig
