@@ -1,12 +1,9 @@
 import {
   Box,
-  Button,
   Menu,
   MenuButton,
-  MenuItem,
-  MenuList,
   Stack,
-  Text,
+  Text
 } from "@chakra-ui/react";
 
 import { ArrowRight, ChevronDownIcon, SettingIcon } from "@/icons";
@@ -49,6 +46,7 @@ export const Header = () => {
       pos="fixed"
       top="0"
       bg="secondary.4"
+      backdropFilter="blur(4px)"
     >
       <Stack direction="row" align="center">
         <Box mr="50px">
@@ -76,7 +74,7 @@ export const Header = () => {
                   // isActive={false}
                   as={Text}
                   cursor="pointer"
-                  color='text.400'
+                  color="text.400"
                 >
                   More <ChevronDownIcon />
                 </MenuButton>

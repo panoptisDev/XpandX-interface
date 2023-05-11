@@ -21,7 +21,7 @@ export const TokenSingle = () => {
 
         <Divider />
 
-        <Flex justify="space-between" align='center'>
+        <Flex justify="space-between" align="center">
           <Flex gap="10px">
             <SelectToken />
 

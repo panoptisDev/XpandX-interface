@@ -16,7 +16,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
     >
       <Box>
         <Header />
-        <Box p="64px 84px" minH="100vh">
+        <Box p="80px 84px" minH="100vh">
           {children}
         </Box>
       </Box>

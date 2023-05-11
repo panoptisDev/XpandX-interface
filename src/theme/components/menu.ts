@@ -2,22 +2,18 @@ import type { ComponentStyleConfig } from "@chakra-ui/theme";
 
 const Menu: ComponentStyleConfig = {
   baseStyle: {
-    dialog: {
-      borderRadius: "14px",
-      background: "white",
+    list: {
+      background: "text.600",
+      color: "text.50",
+      border: "none",
+      borderRadius: '10px'
     },
-    header: {
-      textAlign: "center",
-      boxShadow: "800",
-    },
-    body: {
-      padding: "30px",
-      maxHeight: "600px",
-      overflowX: "auto",
-    },
-    overlay: {
-      backdropFilter: "blur(10px)",
-      background: "rgba(33, 32, 40, 0.5)",
+    item: {
+      background: "text.600",
+      "&:hover": {
+        background: "sec.1",
+        color: "text.900",
+      },
     },
   },
 };

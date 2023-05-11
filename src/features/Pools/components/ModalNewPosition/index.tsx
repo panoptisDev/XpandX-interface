@@ -63,7 +63,7 @@ export const ModalNewPosition = ({ isOpen, onClose }: IProps) => {
             </Flex>
 
             <Flex gap="12px">
-              {pool === 'pair' ? <TokenPair /> : <TokenSingle />}
+              {pool === "pair" ? <TokenPair /> : <TokenSingle />}
 
               <PoolInformation />
             </Flex>

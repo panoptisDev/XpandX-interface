@@ -23,5 +23,11 @@
   "max": "Max",
   "your_pool_allocation": "Your pool allocation",
   "price_impact": "Price impact",
-  "pool_ratio": "Pool ratio"
+  "pool_ratio": "Pool ratio",
+  "top_tokens_on_xpand_x": "Top tokens on XpandX",
+  "no": "NO.",
+  "token": "TOKEN",
+  "price": "PRICE",
+  "change": "CHANGE",
+  "volume24h": "VOLUME 24H"
 }

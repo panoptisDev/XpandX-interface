@@ -11,7 +11,7 @@ export const ChevronDownIcon = createIcon({
     <>
       <path
         d="M11.3726 6.40001L8.17256 9.60001L4.97256 6.40001"
-        stroke="#A1A1AA"
+        stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
