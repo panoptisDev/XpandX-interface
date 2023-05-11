@@ -1,0 +1,9 @@
+version: '3'
+services:
+  xphanx-interface:
+    build:
+      context: ./
+    ports:
+      - "3001:3000"
+    environment:
+      NODE_ENV: development
