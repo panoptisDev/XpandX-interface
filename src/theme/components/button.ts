@@ -41,8 +41,8 @@ const Button: ComponentStyleConfig = {
     "primary-outline": {
       bg: "transparent",
       background: "transparent",
-      color: "text.900",
-      borderRadius: "1px solid",
+      color: "text.50",
+      border: "1px solid",
       borderColor: "text.300",
 
       _hover: {
