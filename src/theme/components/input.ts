@@ -1,59 +1,60 @@
-import type { ComponentStyleConfig } from '@chakra-ui/theme';
-import { mode } from '@chakra-ui/theme-tools';
+import type { ComponentStyleConfig } from "@chakra-ui/theme";
+import { mode } from "@chakra-ui/theme-tools";
 
 const Input: ComponentStyleConfig = {
   baseStyle: {
     field: {
-      h: '50px',
-      height: '50px',
-      borderRadius: '6px',
+      h: "32px",
+      height: "32px",
+      borderRadius: "50px",
     },
   },
 
   variants: {
     primary: {
       field: {
-        backgroundColor: 'white',
-        border: '1px solid',
-        borderColor: 'text.100',
-        borderRadius: '6px',
-        color: mode('text.900', 'text.50'),
+        h: "32px",
+        height: "32px",
+        backgroundColor: "transparent",
+        border: "1px solid",
+        borderColor: "text.600",
+        borderRadius: "50px",
 
-        '::placeholder': {
-          color: 'text.200',
+        "::placeholder": {
+          color: "text.500",
         },
 
         _focus: {
-          boxShadow: '0 0 0 1px #E0DFE2',
+          borderColor: "text.500",
         },
       },
     },
 
-    'primary-dark': {
+    "primary-dark": {
       field: {
-        backgroundColor: 'text.600',
-        border: '1px solid',
-        borderColor: 'text.500',
-        borderRadius: '6px',
-        color: 'text.50',
+        backgroundColor: "text.600",
+        border: "1px solid",
+        borderColor: "text.500",
+        borderRadius: "6px",
+        color: "text.50",
 
-        '::placeholder': {
-          color: 'text.300',
+        "::placeholder": {
+          color: "text.300",
         },
 
         _focus: {
-          borderColor: 'text.50',
+          borderColor: "text.50",
         },
       },
     },
 
-    'in-valid': {
+    "in-valid": {
       field: {
-        backgroundColor: 'transparent',
-        border: '1px solid',
-        borderColor: 'fail',
-        borderRadius: '6px',
-        color: mode('text.900', 'text.50'),
+        backgroundColor: "transparent",
+        border: "1px solid",
+        borderColor: "fail",
+        borderRadius: "6px",
+        color: mode("text.900", "text.50"),
       },
     },
   },
@@ -61,22 +62,22 @@ const Input: ComponentStyleConfig = {
   sizes: {
     sm: {
       field: {
-        height: '44px',
-        borderRadius: '6px',
+        height: "44px",
+        borderRadius: "6px",
       },
     },
 
     md: {
       field: {
-        height: '50px',
-        borderRadius: '6px',
+        height: "50px",
+        borderRadius: "6px",
       },
     },
   },
 
   defaultProps: {
-    variant: 'primary',
-    size: 'sm',
+    variant: "primary",
+    size: "sm",
   },
 };
 

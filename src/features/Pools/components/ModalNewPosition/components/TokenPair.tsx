@@ -7,8 +7,8 @@ export const TokenPair = () => {
   const { t } = useTranslation();
   return (
     <Stack spacing={3} w="100%">
-      <InputSwapToken />
-      <InputSwapToken />
+      <InputSwapToken symbol="USDT" />
+      <InputSwapToken symbol="USDC" />
 
       <Flex
         p="18px"
