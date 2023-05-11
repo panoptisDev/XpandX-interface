@@ -1,8 +1,8 @@
 import { createIcon } from "@chakra-ui/react";
 
-export const ArrowRight = createIcon({
-  displayName: "ArrowRight",
-  viewBox: "0 0 14 14",
+export const TrendUpIcon = createIcon({
+  displayName: "TrendUpIcon",
+  viewBox: "0 0 20 20",
   defaultProps: {
     fill: "none",
     color: "white",
@@ -10,14 +10,14 @@ export const ArrowRight = createIcon({
   path: (
     <>
       <path
-        d="M2.1875 7H11.8125"
-        stroke="currentColor"
+        d="M18.125 4.37511L10.625 11.8751L7.5 8.75011L1.875 14.3751"
+        stroke="#A7F984"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M7.875 3.0625L11.8125 7L7.875 10.9375"
-        stroke="currentColor"
+        d="M18.125 9.37511V4.37511H13.125"
+        stroke="#A7F984"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

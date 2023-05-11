@@ -58,6 +58,7 @@ const customTheme = {
     Table,
     Select,
     Form,
+    Menu,
   },
 };
 

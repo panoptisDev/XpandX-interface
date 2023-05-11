@@ -1,78 +1,82 @@
-import type { ComponentStyleConfig } from '@chakra-ui/theme';
+import type { ComponentStyleConfig } from "@chakra-ui/theme";
 
 const Table: ComponentStyleConfig = {
   baseStyle: {
     td: {
-      maxW: '125px',
-      whiteSpace: 'nowrap',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
+      maxW: "125px",
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
     },
   },
   sizes: {
     xs: {
       table: {
+        border: "none",
+
         tr: {
-          h: '44px',
+          h: "44px",
         },
 
         th: {
-          whiteSpace: 'normal',
-          maxW: '150px',
-          p: '5px 0px',
-          border: 'none',
+          whiteSpace: "normal",
+          maxW: "150px",
+          p: "14px 0px",
+          pr: "30px",
+          borderColor: "rgba(63, 63, 70, 0.4)",
+          color: "text.500",
+          fontSize: "12px",
+          textTransform: "uppercase",
+          // borderRadius: "14px",
 
           _first: {
-            paddingLeft: '20px',
+            paddingLeft: "24px",
           },
           _last: {
-            paddingRight: '20px',
+            paddingRight: "24px",
           },
-        },
-
-        thead: {
-          background: 'text.700',
         },
       },
 
       tbody: {
         tr: {
           td: {
-            borderColor: 'text.500',
+            border: "none",
             _first: {
-              paddingLeft: '20px',
+              paddingLeft: "24px",
             },
             _last: {
-              paddingRight: '20px',
+              paddingRight: "24px",
             },
           },
 
-          // '&:nth-of-type(even)': {
-          //   td: {
-          //     bg: 'coolGray.50',
-          //   },
-          // },
+          "&:nth-of-type(2n+1)": {
+            td: {
+              bg: "blackAlpha.50",
+            },
+          },
         },
       },
 
       th: {
-        fontWeight: 'bold',
-        textTransform: 'inherit',
-        fontSize: 'sm',
-        color: 'text.100',
-        lineHeight: '160%',
+        fontWeight: "bold",
+        textTransform: "inherit",
+        fontSize: "sm",
+        color: "text.100",
+        lineHeight: "160%",
       },
 
       td: {
-        fontSize: 'sm',
-        color: 'text.300',
-        lineHeight: '160%',
+        fontSize: "sm",
+        color: "text.50",
+        lineHeight: "160%",
+        h: "52px",
       },
     },
   },
   defaultProps: {
-    size: 'xs',
-    variant: 'unstyled',
+    size: "xs",
+    variant: "unstyled",
   },
 };
 
