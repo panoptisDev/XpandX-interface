@@ -2,8 +2,10 @@ import {
   Box,
   Menu,
   MenuButton,
+  MenuItem,
+  MenuList,
   Stack,
-  Text
+  Text,
 } from "@chakra-ui/react";
 
 import { ArrowRight, ChevronDownIcon, SettingIcon } from "@/icons";
@@ -30,10 +32,51 @@ const NAVIGATION = [
   },
 ];
 
+const NAVIGATION_MORE = [
+  {
+    title: "referral",
+    href: "/referral",
+    feature: "/referral",
+    isComingSoon: true,
+  },
+  {
+    title: "analytics",
+    href: "/analytics",
+    feature: "/analytics",
+    isComingSoon: false,
+  },
+  {
+    title: "earning_dashboard",
+    href: "/earning-dashboard",
+    feature: "/earning-dashboard",
+    isComingSoon: false,
+  },
+  {
+    title: "launchpad",
+    href: "/launchpad",
+    feature: "/launchpad",
+    isComingSoon: false,
+  },
+  {
+    title: "dividend",
+    href: "/dividend",
+    feature: "/dividend",
+    isComingSoon: false,
+  },
+];
+
+const MORE = [
+  "/referral",
+  "/analytics",
+  "/earning-dashboard",
+  "/launchpad",
+  "/dividend",
+];
+
 export const Header = () => {
   const { t } = useTranslation();
   const router = useRouter();
-  const { asPath } = router;
+  const { asPath, pathname } = router;
 
   return (
     <Stack
@@ -68,24 +111,45 @@ export const Header = () => {
             );
           })}
           <Menu>
-            {({ isOpen }) => (
-              <>
-                <MenuButton
-                  // isActive={false}
-                  as={Text}
-                  cursor="pointer"
-                  color="text.400"
-                >
-                  More <ChevronDownIcon />
-                </MenuButton>
-                {/* <MenuList>
-                  <MenuItem>Download</MenuItem>
-                  <MenuItem onClick={() => alert("Kagebunshin")}>
-                    Create a Copy
+            <MenuButton
+              // isActive={false}
+              as={Text}
+              cursor="pointer"
+              color={MORE.includes(asPath) ? "text.50" : "text.400"}
+              fontWeight={MORE.includes(asPath) ? "bold" : "normal"}
+            >
+              More ({t(pathname.split("/")[1])}) <ChevronDownIcon />
+            </MenuButton>
+            <MenuList>
+              {NAVIGATION_MORE.map((item, idx) => {
+                const isActive = asPath.startsWith(item.feature);
+                return (
+                  <MenuItem
+                    key={idx}
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    onClick={() => !item.isComingSoon && router.push(item.href)}
+                    bg={isActive ? "sec.1" : "text.600"}
+                    color={isActive ? "text.900" : "text.50"}
+                  >
+                    {t(item.title)}
+                    {item.isComingSoon && (
+                      <Box
+                        bg="text.50"
+                        borderRadius="5px"
+                        p="2px 6px"
+                        fontWeight="bold"
+                        color="sec.3"
+                        fontSize="xxs"
+                      >
+                        {t("coming_soon")}
+                      </Box>
+                    )}
                   </MenuItem>
-                </MenuList> */}
-              </>
-            )}
+                );
+              })}
+            </MenuList>
           </Menu>
         </Stack>
       </Stack>
@@ -145,7 +209,7 @@ export const Header = () => {
             align="center"
             justify="center"
           >
-            <ArrowRight />
+            <ArrowRight color="text.900" />
           </Stack>
         </XButton>
       </Stack>

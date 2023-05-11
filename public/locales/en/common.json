@@ -29,5 +29,20 @@
   "token": "TOKEN",
   "price": "PRICE",
   "change": "CHANGE",
-  "volume24h": "VOLUME 24H"
+  "volume24h": "VOLUME 24H",
+  "referral": "Referral",
+  "analytics": "Analytics",
+  "earning_dashboard": "Earning Dashboard",
+  "earning-dashboard": "Earning Dashboard",
+  "launchpad": "Launchpad",
+  "dividend": "Dividend",
+  "coming_soon": "Coming soon",
+  "earnings_dashboard": "Earnings dashboard",
+  "easily_monitor_and_harvest_your_active_positions": "Easily monitor and harvest your active positions.",
+  "active_assets": "Active assets",
+  "harvest_all": "Harvest all",
+  "total_active_holdings": "Total active holdings",
+  "total_average_apr": "Total average APR",
+  "staked_positions": "Staked positions",
+  "pending_rewards": "Pending rewards"
 }
