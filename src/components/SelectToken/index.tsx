@@ -34,7 +34,7 @@ export const SelectToken = ({ symbol, selectEnabled }: Props) => {
       <Box w="20px" h="20px" position="relative" flexShrink="0" mr="6px">
         <XImage src={coin?.img} alt={coin?.name} layout="fill" />
       </Box>
-      <Text fontSize="xs" color="text.50" lineHeight="160%">
+      <Text fontSize="xs" color="text.50">
         {coin?.symbol}
       </Text>
       {selectEnabled && <ChevronDownIcon fontSize="12px" ml="0" />}

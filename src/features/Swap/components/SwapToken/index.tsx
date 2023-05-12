@@ -19,8 +19,8 @@ export const SwapToken = ({ ...rest }: Props) => {
   };
 
   return (
-    <Stack w="408px" {...rest}>
-      <Box pos="relative">
+    <Stack zIndex="0" w="408px" {...rest}>
+      <Box position="relative">
         <Box
           bgColor="text.700"
           borderBottom="1px solid #18181B"

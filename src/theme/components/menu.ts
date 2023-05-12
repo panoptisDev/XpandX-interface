@@ -6,7 +6,9 @@ const Menu: ComponentStyleConfig = {
       background: "text.600",
       color: "text.50",
       border: "none",
-      borderRadius: '10px'
+      borderRadius: "10px",
+      zIndex: "1800",
+      position: "inherit",
     },
     item: {
       background: "text.600",

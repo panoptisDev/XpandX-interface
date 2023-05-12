@@ -1,17 +1,18 @@
-import { Box, Stack } from "@chakra-ui/react";
+import { Box, Flex, Stack } from "@chakra-ui/react";
 
-import { SwapToken, CreditCardOption, SwapInfo } from "./components";
+import { XContainer } from "@/ui-kit";
+import { CreditCardOption, SwapInfo, SwapToken } from "./components";
 
 export const Swap = () => {
   return (
-    <Stack align="center">
+    <XContainer>
       <Box m="91px auto">
-        <Stack direction="row">
+        <Flex justify="center" gap="12px">
           <SwapToken />
           <SwapInfo />
-        </Stack>
+        </Flex>
         <CreditCardOption m="34px auto" />
       </Box>
-    </Stack>
+    </XContainer>
   );
 };

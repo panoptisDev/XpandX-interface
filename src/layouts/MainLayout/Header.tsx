@@ -83,7 +83,7 @@ export const Header = () => {
       direction="row"
       h="56px"
       w="100%"
-      p="12px 84px"
+      p="18px 84px"
       align="center"
       justify="space-between"
       pos="fixed"
@@ -93,7 +93,7 @@ export const Header = () => {
     >
       <Stack direction="row" align="center">
         <Box mr="50px">
-          <Image src="/logo.svg" width={75.17} height={20} alt="Swap logo" />
+          <Image src="/logo.svg" width={100} height={26} alt="Swap logo" />
         </Box>
 
         <Stack spacing="24px" direction="row" fontSize="sm">
@@ -105,6 +105,7 @@ export const Header = () => {
                 key={idx}
                 color={isActive ? "text.50" : "text.400"}
                 fontWeight={isActive ? "bold" : "normal"}
+                fontSize="md"
               >
                 {t(item.title)}
               </XLink>
@@ -117,6 +118,7 @@ export const Header = () => {
               cursor="pointer"
               color={MORE.includes(asPath) ? "text.50" : "text.400"}
               fontWeight={MORE.includes(asPath) ? "bold" : "normal"}
+              fontSize="md"
             >
               More ({t(pathname.split("/")[1])}) <ChevronDownIcon />
             </MenuButton>
@@ -132,6 +134,7 @@ export const Header = () => {
                     onClick={() => !item.isComingSoon && router.push(item.href)}
                     bg={isActive ? "sec.1" : "text.600"}
                     color={isActive ? "text.900" : "text.50"}
+                    fontSize="md"
                   >
                     {t(item.title)}
                     {item.isComingSoon && (
@@ -156,8 +159,8 @@ export const Header = () => {
 
       <Stack direction="row" align="center">
         <Stack
-          w="32px"
-          h="32px"
+          w="34px"
+          h="34px"
           align="center"
           justify="center"
           rounded="50%"
@@ -169,7 +172,7 @@ export const Header = () => {
             filter: "brightness(0.95)",
           }}
         >
-          <SettingIcon />
+          <SettingIcon w="22px" h="22px" />
         </Stack>
 
         <Stack
@@ -178,7 +181,7 @@ export const Header = () => {
           rounded="50px"
           bg="text.700"
           p="4px"
-          h="32px"
+          h="34px"
           w="117px"
           direction="row"
           spacing={0}
@@ -188,17 +191,12 @@ export const Header = () => {
             filter: "brightness(0.95)",
           }}
         >
-          <Image
-            src="/icons/venom-icon.svg"
-            width={26}
-            height={26}
-            alt="Venom"
-          />
+          <Image src="/venom.svg" width={26} height={26} alt="Venom" />
           <Text>Venom</Text>
           <ChevronDownIcon color="#FAFAFA" fontSize="24px" ml="-10px" />
         </Stack>
 
-        <XButton p="3px 3px 3px 14px">
+        <XButton p="3px 3px 3px 14px" h="34px" fontSize="16px" color="text.900">
           {t("connect_wallet")}
           <Stack
             w={26}

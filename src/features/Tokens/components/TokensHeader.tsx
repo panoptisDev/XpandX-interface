@@ -35,7 +35,7 @@ export const TokensHeader = () => {
           }}
         >
           <XImage
-            src="/icons/venom-icon.svg"
+            src="/venom.svg"
             width={26}
             height={26}
             alt="Venom"

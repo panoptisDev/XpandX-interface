@@ -38,7 +38,7 @@ export const EarningAnalytics = () => {
           borderRadius="14px"
           p="12px"
           gap="16px"
-          w='100%'
+          w="100%"
         >
           <Flex
             w="50px"
