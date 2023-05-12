@@ -44,5 +44,14 @@
   "total_active_holdings": "Total active holdings",
   "total_average_apr": "Total average APR",
   "staked_positions": "Staked positions",
-  "pending_rewards": "Pending rewards"
+  "pending_rewards": "Pending rewards",
+  "buy_crypto_with_credit_card": "Buy Crypto with Credit Card",
+  "search_token": "Search token...",
+  "minimum_to_receive": "Minimum to Receive",
+  "possible_slippage": "Possible Slippage",
+  "avg_transaction_cost": "Avg. Transaction Cost",
+  "refundable_fee": "Refundable Fee",
+  "route": "Route",
+  "exchange_rate": "Exchange Rate",
+  "select_token": "Select token"
 }

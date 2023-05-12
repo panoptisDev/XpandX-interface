@@ -8,7 +8,7 @@ export const TokenSingle = () => {
   const { t } = useTranslation();
   return (
     <Stack spacing={3} w="100%">
-      <InputSwapToken />
+      <InputSwapToken symbol="USDT" />
 
       <Stack
         spacing={4}
@@ -23,7 +23,7 @@ export const TokenSingle = () => {
 
         <Flex justify="space-between" align="center">
           <Flex gap="10px">
-            <SelectToken />
+            <SelectToken symbol="USDC" />
 
             <Text color="text.50" fontSize="sm">
               ~$0
@@ -31,7 +31,7 @@ export const TokenSingle = () => {
           </Flex>
 
           <Flex gap="10px">
-            <SelectToken />
+            <SelectToken symbol="USDT" />
 
             <Text color="text.50" fontSize="sm">
               ~$0

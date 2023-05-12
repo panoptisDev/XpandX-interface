@@ -3,18 +3,30 @@ import {
   Box,
   Flex,
   Icon,
-  Input,
   NumberInput,
   NumberInputField,
   Stack,
   Text,
+  StackProps,
 } from "@chakra-ui/react";
 import React from "react";
 import { useTranslation } from "next-i18next";
-import { XImage } from "@/ui-kit";
-import { SelectToken } from "../SelectToken";
 
-export const InputSwapToken = ({ ...rest }) => {
+import { SelectToken } from "../SelectToken";
+import { Symbol } from "@/typings/coin";
+
+interface Props extends StackProps {
+  hideRate?: boolean;
+  symbol: Symbol;
+  selectEnabled?: boolean;
+}
+
+export const InputSwapToken = ({
+  hideRate,
+  symbol,
+  selectEnabled,
+  ...rest
+}: Props) => {
   const { t } = useTranslation();
 
   return (
@@ -55,13 +67,15 @@ export const InputSwapToken = ({ ...rest }) => {
               ~$1,335
             </Text>
 
-            <SelectToken />
+            <SelectToken symbol={symbol} selectEnabled={selectEnabled} />
           </Flex>
         </Flex>
       </Stack>
-      <Text fontSize="xs" color="text.500" mt="8px">
-        1 USDC = $1.00
-      </Text>
+      {!hideRate && (
+        <Text fontSize="xs" color="text.500" mt="8px">
+          1 USDC = $1.00
+        </Text>
+      )}
     </Box>
   );
 };
