@@ -1,4 +1,11 @@
-# Front-End Base
+# XpandX Protocol Inteface
+
+XpandX is a decentralized exchange protocol for TIP-3 tokens, built on top of Venom Blockchain. 
+
+- Website: [xpandx.xyz](https://xpandx.xyz/)
+- Twitter: [@xpandx_xyz](https://twitter.com/xpandx_xyz)
+- Docs: [docs.xpandx.xyz](https://docs.xpandx.xyz/) 
+
 
 ## Install & Start
 
