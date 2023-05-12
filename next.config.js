@@ -8,7 +8,7 @@ const nextConfig = {
   i18n,
   experimental: {
     outputStandalone: true,
- }
+  }
 }
 
 module.exports = nextConfig
