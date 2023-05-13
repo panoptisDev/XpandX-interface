@@ -1,5 +1,5 @@
-import Image from "next/image";
+import Image, { ImageProps } from "next/image";
 
-export const XImage = ({ src, alt, ...rest }: any) => {
-  return <Image src={src} alt={alt} {...rest} />;
+export const XImage = (props: ImageProps) => {
+  return <Image {...props} />;
 };

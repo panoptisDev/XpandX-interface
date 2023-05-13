@@ -59,9 +59,10 @@ const Button: ComponentStyleConfig = {
     },
 
     secondary: {
-      bg: "sec.2",
-      background: "sec.2",
-      color: "text.50",
+      bg: "text.700",
+      background: "text.700",
+      color: "sec.1",
+      rounded: "10px",
 
       _active: {
         filter: "brightness(0.9)",

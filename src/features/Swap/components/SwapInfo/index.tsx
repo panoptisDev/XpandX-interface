@@ -41,7 +41,7 @@ export const SwapInfo = () => {
         <InfoItem name="exchange_rate" value="1 WVENOM = 0.26 USDT" />
       </Stack>
 
-      <Text align="center" fontSize="sm" color="text.400" mt="16px">
+      <Text align="center" color="text.400" mt="10px">
         {t("minimum_to_receive")}
       </Text>
       <Text align="center" fontSize="xl" fontWeight="bold">
@@ -57,12 +57,10 @@ const InfoItem = ({ name, value }: InfoItemProps) => {
   return (
     <Stack direction="row" align="center" justify="space-between">
       <Stack direction="row">
-        <Text fontSize="sm">{t(name)}</Text>
+        <Text>{t(name)}</Text>
         <NoteIcon />
       </Stack>
-      <Text ml="auto" fontSize="sm">
-        {value}
-      </Text>
+      <Text ml="auto">{value}</Text>
     </Stack>
   );
 };
