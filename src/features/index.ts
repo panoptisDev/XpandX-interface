@@ -5,3 +5,4 @@ export * from "./EarningDashboard";
 export * from "./Analytics";
 export * from "./Launchpad";
 export * from "./Launchpad/Detail";
+export * from "./Dividend";
