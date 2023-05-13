@@ -90,6 +90,7 @@ export const Header = () => {
       top="0"
       bg="secondary.4"
       backdropFilter="blur(4px)"
+      zIndex="tooltip"
     >
       <Stack direction="row" align="center">
         <Box mr="50px">
@@ -120,7 +121,8 @@ export const Header = () => {
               fontWeight={MORE.includes(asPath) ? "bold" : "normal"}
               fontSize="md"
             >
-              More ({t(pathname.split("/")[1])}) <ChevronDownIcon />
+              More {MORE.includes(asPath) && `(${t(pathname.split("/")[1])})`}{" "}
+              <ChevronDownIcon />
             </MenuButton>
             <MenuList>
               {NAVIGATION_MORE.map((item, idx) => {

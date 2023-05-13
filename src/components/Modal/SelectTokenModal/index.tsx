@@ -45,7 +45,7 @@ export const SelectTokenModal = ({ isOpen, onClose }: IProps) => {
             <XInput
               leftIcon={<SearchIcon />}
               mb={2}
-              placeholder="search_token..."
+              placeholder={t("search_token") || ""}
               onChange={(e) => setFilter(_.toLower(e.target.value))}
             />
           </Box>

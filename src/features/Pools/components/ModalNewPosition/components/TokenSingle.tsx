@@ -1,14 +1,20 @@
 import { InputSwapToken, SelectToken } from "@/components";
-import { XImage } from "@/ui-kit";
-import { Box, Divider, Flex, Stack, Text } from "@chakra-ui/react";
+import { COINS } from "@/constants/coin";
+import { Divider, Flex, Stack, Text } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
-import React from "react";
 
 export const TokenSingle = () => {
   const { t } = useTranslation();
   return (
     <Stack spacing={3} w="100%">
-      <InputSwapToken symbol="USDT" />
+      <InputSwapToken
+        // hideRate
+        symbol={COINS[6].symbol}
+        selectEnabled
+        border="1px solid"
+        borderColor="text.600"
+        borderRadius="14px"
+      />
 
       <Stack
         spacing={4}
@@ -23,7 +29,7 @@ export const TokenSingle = () => {
 
         <Flex justify="space-between" align="center">
           <Flex gap="10px">
-            <SelectToken symbol="USDC" />
+            <SelectToken symbol={COINS[6].symbol} selectEnabled />
 
             <Text color="text.50" fontSize="sm">
               ~$0
@@ -31,7 +37,7 @@ export const TokenSingle = () => {
           </Flex>
 
           <Flex gap="10px">
-            <SelectToken symbol="USDT" />
+            <SelectToken symbol={COINS[6].symbol} selectEnabled />
 
             <Text color="text.50" fontSize="sm">
               ~$0

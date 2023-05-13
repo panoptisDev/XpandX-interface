@@ -11,13 +11,24 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useTranslation } from "next-i18next";
-import { ArrowRight, ChevronDownIcon, LightIcon, PlusIcon } from "@/icons";
+import {
+  ArrowRight,
+  ChevronDownIcon,
+  LightIcon,
+  PlusIcon,
+  RefreshIcon,
+} from "@/icons";
 import { XButton, XImage } from "@/ui-kit";
-import { ModalNewPosition } from "./components";
+import { ModalNewPosition, ModalRefreshTable } from "./components";
 
 export const Pools = () => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenModalRefresh,
+    onOpen: onOpenModalRefresh,
+    onClose: onCloseModalRefresh,
+  } = useDisclosure();
 
   return (
     <Stack w="100%" maxW="624px" margin="0 auto" spacing={4}>
@@ -27,22 +38,18 @@ export const Pools = () => {
         </Text>
 
         <Flex align="center" justify="space-between" gap="8px">
-          <Menu>
-            {({ isOpen }) => (
-              <>
-                <MenuButton
-                  as={Button}
-                  bg="text.700"
-                  color="text.50"
-                  minW="82px"
-                  h="32px"
-                >
-                  {t("more")} <ChevronDownIcon />
-                </MenuButton>
-              </>
-            )}
-          </Menu>
-
+          <Flex
+            bg="text.700"
+            borderRadius="50px"
+            align="center"
+            p="5px 18px"
+            gap="6px"
+            cursor="pointer"
+            onClick={onOpenModalRefresh}
+          >
+            <Icon as={RefreshIcon} />
+            <Text>{t("refresh")}</Text>
+          </Flex>
           <XButton
             bg="transparent"
             border="1px solid"
@@ -73,7 +80,7 @@ export const Pools = () => {
             height="211"
           />
 
-          <Text fontSize="lg" color="text.50">
+          <Text fontSize="xl" color="text.50">
             {t("your_active_v3_liquidity_positions_will_appear_here")}
           </Text>
 
@@ -88,14 +95,14 @@ export const Pools = () => {
 
             <Box>
               <Text
-                fontSize="xs"
+                fontSize="sm"
                 fontWeight="bold"
                 lineHeight="160%"
                 color="text.200"
               >
                 {t("learn_about_providing_liquidity")}
               </Text>
-              <Text fontSize="sm" lineHeight="160%" color="text.400">
+              <Text lineHeight="160%" color="text.400">
                 {t("check_out_our_v3_lp_walkthrough_and_migration_guides")}
               </Text>
             </Box>
@@ -106,14 +113,14 @@ export const Pools = () => {
 
             <Box>
               <Text
-                fontSize="xs"
+                fontSize="sm"
                 fontWeight="bold"
                 lineHeight="160%"
                 color="text.200"
               >
                 {t("top_pools")}
               </Text>
-              <Text fontSize="sm" lineHeight="160%" color="text.400">
+              <Text lineHeight="160%" color="text.400">
                 {t("explore_xpand_x_analytics")}
               </Text>
             </Box>
@@ -121,6 +128,10 @@ export const Pools = () => {
         </Flex>
       </Box>
       <ModalNewPosition isOpen={isOpen} onClose={onClose} />
+      <ModalRefreshTable
+        isOpen={isOpenModalRefresh}
+        onClose={onCloseModalRefresh}
+      />
     </Stack>
   );
 };

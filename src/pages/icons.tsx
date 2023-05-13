@@ -1,4 +1,12 @@
-import { ArrowRight, LightIcon, PlusIcon, TrendDownIcon, TrendUpIcon, WalletIcon } from "@/icons";
+import {
+  ArrowRight,
+  LightIcon,
+  PlusIcon,
+  RefreshIcon,
+  TrendDownIcon,
+  TrendUpIcon,
+  WalletIcon,
+} from "@/icons";
 import { ChevronDownIcon } from "@/icons";
 import { SettingIcon } from "@/icons";
 import { Box } from "@chakra-ui/react";
@@ -15,6 +23,7 @@ const Icons = () => {
       <WalletIcon />
       <TrendDownIcon />
       <TrendUpIcon />
+      <RefreshIcon />
     </Box>
   );
 };
