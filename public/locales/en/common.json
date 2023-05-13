@@ -106,5 +106,16 @@
   "three_stages_sale_content_3": "During the following 12h, only whitelisted addresses can participate, with a 5x higher allocation cap.",
   "three_stages_sale_content_4": "Starting Apr 15 - 11am UTC, other participants can purchase the remaining tokens on a first-come, first-served basis. This stage will last for 48 hours.",
   "join": "Join",
-  "back": "Back"
+  "back": "Back",
+  "dividends": "Dividends",
+  "allocate_dxpx_here": "Allocate dXPX here to earn a share of protocol earnings in the form of real yield.",
+  "total_allocations": "Total allocations",
+  "current_epoch": "Current epoch",
+  "apy": "APY",
+  "deallocation_fee": "Deallocation fee",
+  "not_connected": "Not connected",
+  "your_dividends": "Your dividends",
+  "remaining_time": "Remaining time",
+  "min_estimated_value": "Min. estimated value",
+  "next_epoch": "Next epoch"
 }

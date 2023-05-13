@@ -16,6 +16,7 @@ export default {
     1: "#E2E46F",
     2: "#5C97D6",
     3: "#1770D0",
+    4: "#FF796C",
   },
   text: {
     0: "#FFFFFF",

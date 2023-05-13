@@ -32,7 +32,11 @@ export const SelectToken = ({ symbol, selectEnabled }: Props) => {
       onClick={handleOpenSelectTokenModal}
     >
       <Box w="20px" h="20px" position="relative" flexShrink="0" mr="6px">
-        <XImage src={coin?.img} alt={coin?.name} layout="fill" />
+        <XImage
+          src={coin?.img as string}
+          alt={coin?.name as string}
+          layout="fill"
+        />
       </Box>
       <Text fontSize="xs" color="text.50">
         {coin?.symbol}

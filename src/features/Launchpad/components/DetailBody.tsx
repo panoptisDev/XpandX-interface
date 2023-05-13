@@ -18,7 +18,6 @@ import {
   HandIcon,
   WalletIconV2,
 } from "@/icons";
-import { routes } from "@/constants/routes";
 import { BoxInfoV2, BoxInfoV3 } from "./";
 import { XImage, XButton, XCard } from "@/ui-kit";
 
