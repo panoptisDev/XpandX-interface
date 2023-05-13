@@ -13,21 +13,22 @@ import { XButton, XLink } from "@/ui-kit";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { routes } from "@/constants/routes";
 
 const NAVIGATION = [
   {
     title: "swap",
-    href: "/",
+    href: routes.Swap,
     feature: "/swap",
   },
   {
     title: "tokens",
-    href: "/tokens",
+    href: routes.Tokens,
     feature: "/token",
   },
   {
     title: "pools",
-    href: "/pools",
+    href: routes.Pools,
     feature: "/pools",
   },
 ];
@@ -35,43 +36,43 @@ const NAVIGATION = [
 const NAVIGATION_MORE = [
   {
     title: "referral",
-    href: "/referral",
+    href: routes.Referral,
     feature: "/referral",
     isComingSoon: true,
   },
   {
     title: "analytics",
-    href: "/analytics",
+    href: routes.Analytics,
     feature: "/analytics",
     isComingSoon: false,
   },
   {
     title: "earning_dashboard",
-    href: "/earning-dashboard",
+    href: routes.Earning,
     feature: "/earning-dashboard",
     isComingSoon: false,
   },
   {
     title: "launchpad",
-    href: "/launchpad",
+    href: routes.Launchpad,
     feature: "/launchpad",
     isComingSoon: false,
   },
   {
     title: "dividend",
-    href: "/dividend",
+    href: routes.Dividend,
     feature: "/dividend",
     isComingSoon: false,
   },
 ];
 
 const MORE = [
-  "/referral",
-  "/analytics",
-  "/earning-dashboard",
-  "/launchpad",
-  "/dividend",
-];
+  routes.Referral,
+  routes.Analytics,
+  routes.Earning,
+  routes.Launchpad,
+  routes.Dividend,
+] as string[];
 
 export const Header = () => {
   const { t } = useTranslation();
@@ -133,7 +134,7 @@ export const Header = () => {
                     display="flex"
                     alignItems="center"
                     justifyContent="space-between"
-                    onClick={() => !item.isComingSoon && router.push(item.href)}
+                    onClick={() => router.push(item.href)}
                     bg={isActive ? "sec.1" : "text.600"}
                     color={isActive ? "text.900" : "text.50"}
                     fontSize="md"

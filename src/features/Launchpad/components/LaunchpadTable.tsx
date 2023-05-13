@@ -62,7 +62,7 @@ export const LaunchpadTable = () => {
                 rounded="5px"
                 bg="#FF796C"
               >
-                {item.status}
+                {t(item.status)}
               </Flex>
             </XTableTd>
             <XTableTd>{item.totalRaised}</XTableTd>

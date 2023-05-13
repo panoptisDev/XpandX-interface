@@ -129,6 +129,7 @@ export const DividendBody = () => {
           </Flex>
           <Box
             w="60%"
+            maxW="254px"
             pos="absolute"
             bottom="0"
             left="50%"
