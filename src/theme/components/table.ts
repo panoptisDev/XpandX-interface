@@ -25,7 +25,7 @@ const Table: ComponentStyleConfig = {
           pr: "30px",
           borderColor: "rgba(63, 63, 70, 0.4)",
           color: "text.500",
-          fontSize: "12px",
+          fontSize: "14px",
           textTransform: "uppercase",
           // borderRadius: "14px",
 
@@ -67,7 +67,7 @@ const Table: ComponentStyleConfig = {
       },
 
       td: {
-        fontSize: "sm",
+        fontSize: "md",
         color: "text.50",
         lineHeight: "160%",
         h: "52px",

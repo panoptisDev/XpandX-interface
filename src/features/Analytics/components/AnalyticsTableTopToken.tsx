@@ -1,5 +1,10 @@
-import { ArrowRight, TrendDownIcon, TrendUpIcon } from "@/icons";
-import { XButton, XImage, XTable, XTableTd, XTableTh } from "@/ui-kit";
+import {
+  ArrowRight,
+  ChevronDownIcon,
+  TrendDownIcon,
+  TrendUpIcon,
+} from "@/icons";
+import { XImage, XTable, XTableTd, XTableTh } from "@/ui-kit";
 import { Flex, Icon, Stack, Tbody, Text, Thead, Tr } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 
@@ -114,19 +119,21 @@ const data = [
   },
 ];
 
-export const EarningTable = () => {
+export const AnalyticsTableTopToken = () => {
   const { t } = useTranslation();
   return (
     <Stack spacing={3.5}>
       <Flex align="center" justify="space-between">
-        <Text color="text.300">{t("active_assets")}</Text>
-        <XButton
-          maxW="134px"
-          variant="primary-outline"
-          rightIcon={<Icon as={ArrowRight} />}
-        >
-          {t("harvest_all")}
-        </XButton>
+        <Text color="text.300">{t("top_tokens")}</Text>
+        <Flex align="center" fontSize="sm">
+          {t("explore")}{" "}
+          <Icon
+            as={ChevronDownIcon}
+            transform="rotate(270deg)"
+            w="20px"
+            h="20px"
+          />
+        </Flex>
       </Flex>
       <XTable>
         <Thead>

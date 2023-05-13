@@ -32,15 +32,21 @@ export const XTable = ({ children }: any) => {
             cursor="pointer"
             justify="center"
             align="center"
-            w="28px"
-            h="28px"
+            minW="30px"
+            w="30px"
+            h="30px"
             borderRadius="6"
             border="1px solid"
             borderColor="text.600"
           >
-            <Icon as={ChevronDownIcon} transform="rotate(90deg)" />
+            <Icon
+              as={ChevronDownIcon}
+              transform="rotate(90deg)"
+              w="22px"
+              h="22px"
+            />
           </Flex>
-          <Text fontSize="xs" color="text.500">
+          <Text fontSize="sm" color="text.500">
             Page{" "}
             <Box as="span" color="text.200">
               1 / 4
@@ -54,8 +60,9 @@ export const XTable = ({ children }: any) => {
             cursor="pointer"
             justify="center"
             align="center"
-            w="28px"
-            h="28px"
+            minW="30px"
+            w="30px"
+            h="30px"
             borderRadius="6"
             border="1px solid"
             borderColor="text.600"

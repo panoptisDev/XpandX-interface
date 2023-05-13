@@ -1,26 +1,11 @@
-import { ArrowRight } from "@/icons";
-import { XButton } from "@/ui-kit";
 import {
   Box,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
   Divider,
   Flex,
-  Icon,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   Stack,
-  Text,
+  Text
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
-import { useState } from "react";
 
 export const PoolInformation = () => {
   const { t } = useTranslation();
