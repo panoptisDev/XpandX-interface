@@ -4,3 +4,4 @@ export * from "./XLink";
 export * from "./XTable";
 export * from "./XContainer";
 export * from "./XInput";
+export * from "./XCard";

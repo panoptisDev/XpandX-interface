@@ -8,7 +8,7 @@ export const CreditCardOption = (props: Props) => {
 
   return (
     <Stack {...props}>
-      <Text align="center" color="text.400" fontSize="12px">
+      <Text align="center" color="text.400" fontSize="sm">
         {t("buy_crypto_with_credit_card")}
       </Text>
       <Stack direction="row" align="center" spacing="30px" justify="center">
