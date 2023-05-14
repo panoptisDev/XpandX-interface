@@ -3,7 +3,7 @@ import { useTranslation } from "next-i18next";
 import { useState } from "react";
 import _ from "lodash";
 
-import { InputSwapToken } from "@/components";
+import { ConnectWallet, InputSwapToken } from "@/components";
 import { XButton } from "@/ui-kit";
 import { ArrowRight, SwapIcon } from "@/icons";
 import { COINS } from "@/constants/coin";
@@ -64,9 +64,7 @@ export const SwapToken = ({ ...rest }: Props) => {
           selectEnabled
         />
         <Box p="0 16px 16px">
-          <XButton rightIcon={<Icon as={ArrowRight} />} size="md">
-            {t("connect_a_wallet")}
-          </XButton>
+          <ConnectWallet type='inApp'/>
         </Box>
       </Box>
     </Stack>

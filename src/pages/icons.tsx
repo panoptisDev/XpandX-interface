@@ -1,7 +1,9 @@
 import {
   ArrowRight,
+  GearSixIcon,
   LightIcon,
   PlusIcon,
+  PowerIcon,
   RefreshIcon,
   TrendDownIcon,
   TrendUpIcon,
@@ -24,6 +26,8 @@ const Icons = () => {
       <TrendDownIcon />
       <TrendUpIcon />
       <RefreshIcon />
+      <GearSixIcon />
+      <PowerIcon />
     </Box>
   );
 };

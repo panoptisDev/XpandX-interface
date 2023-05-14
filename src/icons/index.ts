@@ -25,3 +25,5 @@ export * from "./stack";
 export * from "./target";
 export * from "./coins";
 export * from "./discount-star";
+export * from "./gear-six";
+export * from "./power";

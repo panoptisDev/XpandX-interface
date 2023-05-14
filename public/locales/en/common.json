@@ -119,5 +119,10 @@
   "min_estimated_value": "Min. estimated value",
   "next_epoch": "Next epoch",
   "coming_soon_2": "Coming soon...",
-  "claim": "Claim"
+  "claim": "Claim",
+  "choose_the_way_to_connect": "Choose the way to connect",
+  "buy_crypto": "Buy crypto",
+  "activity": "Activity",
+  "hidden": "Hidden",
+  "show": "Show"
 }

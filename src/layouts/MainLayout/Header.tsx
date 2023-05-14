@@ -8,12 +8,13 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import { ArrowRight, ChevronDownIcon, SettingIcon } from "@/icons";
-import { XButton, XLink } from "@/ui-kit";
+import { ConnectWallet } from "@/components";
+import { routes } from "@/constants/routes";
+import { ChevronDownIcon, SettingIcon } from "@/icons";
+import { XLink } from "@/ui-kit";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { routes } from "@/constants/routes";
 
 const NAVIGATION = [
   {
@@ -91,7 +92,7 @@ export const Header = () => {
       top="0"
       bg="secondary.4"
       backdropFilter="blur(4px)"
-      zIndex="tooltip"
+      zIndex="docked"
     >
       <Stack direction="row" align="center">
         <Box mr="50px">
@@ -199,20 +200,7 @@ export const Header = () => {
           <ChevronDownIcon color="#FAFAFA" fontSize="24px" ml="-10px" />
         </Stack>
 
-        <XButton p="3px 3px 3px 14px" h="34px" fontSize="16px" color="text.900">
-          {t("connect_wallet")}
-          <Stack
-            w={26}
-            h={26}
-            bg="white"
-            rounded="50%"
-            ml={2}
-            align="center"
-            justify="center"
-          >
-            <ArrowRight color="text.900" />
-          </Stack>
-        </XButton>
+        <ConnectWallet type="header" />
       </Stack>
     </Stack>
   );
