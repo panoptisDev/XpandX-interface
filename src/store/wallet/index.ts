@@ -18,6 +18,7 @@ export const useConnectWallet = create<ConnectWalletState>((set) => ({
   balance: "",
   address: "",
   venomConnect: undefined,
+  venomProvider: undefined,
   setLoading: (loading) =>
     set(() => ({
       loading,
