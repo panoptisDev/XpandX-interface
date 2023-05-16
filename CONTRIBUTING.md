@@ -1,24 +1,18 @@
 # CONTRIBUTING
 
----
-
-The goal is easy for XpandX developers and contributors to manage our product effectively. Thanks for being our contributors. 
+The goal is to make it easy for XpandX developers and contributors to effectively manage our product. We appreciate you being our contributors.
 
 ## Branching
 
 We have 5 types of branches:
 
-- **hotfix:** Start from the **`master`**, fix a problem who can not wait for the next release. It should be merged on **`master`** AND **`dev`**.
-- **master*:** Current version in **prod**, each merge on this branch should be **tagged** and **deployed**.
-- **develop*:** Next prod release, should be merged on **`master`** when a version is ready.
-- **feature:** Start from **`dev`**, this is a work in progress feature, that should be merged into **`dev`**
-- **fix:** Same with dev**,** start from **`dev`**, this is a bug fix for develop, that should be merged into **`dev`**
+- **master:** Current version in **production**, each merge on this branch should be **tagged** and **deployed**.
+- **develop:** Next prod release, should be merged on **`master`** when a version is ready.
+- **feature:** Starts from **`dev`**, this is a work in progress feature that should be merged into **`dev`**
+- **hotfix:** Starts from the **`master`**. Fixes a problem that cannot wait for the next release. It should be merged on **`master`** AND **`dev`**.
+- **fix:**Similar with **`feature`**, starts from **`dev`**, This is a bug fix from develop that should be merged into **`dev`**.
 
-* is the *master* branch
-
-# Explanation
-
----
+## Explanation
 
 ### Master 
 
