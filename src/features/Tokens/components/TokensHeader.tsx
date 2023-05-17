@@ -1,16 +1,21 @@
-import { ChevronDownIcon } from "@/icons";
+import { LayoutIcon, SlidersIcon, SquaresFourIcon } from "@/icons";
 import { XImage } from "@/ui-kit";
 import {
   Flex,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
+  Icon,
+  Input,
+  InputGroup,
+  InputLeftElement,
   Text,
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 
-export const TokensHeader = () => {
+interface IProps {
+  layout: string;
+  setLayout: (value: string) => void;
+}
+
+export const TokensHeader = ({ layout, setLayout }: IProps) => {
   const { t } = useTranslation();
 
   return (
@@ -34,38 +39,68 @@ export const TokensHeader = () => {
             filter: "brightness(0.95)",
           }}
         >
-          <XImage
-            src="/venom.svg"
-            width={26}
-            height={26}
-            alt="Venom"
-          />
+          <XImage src="/venom.svg" width={26} height={26} alt="Venom" />
           <Text>Venom</Text>
         </Flex>
 
-        <Menu>
-          <MenuButton
-            as={Flex}
-            cursor="pointer"
-            rounded="50px"
-            align="center"
-            p="5px 14px"
-            bg="text.700"
+        <InputGroup minW="220px">
+          <InputLeftElement
+            pointerEvents="none"
             color="text.50"
-            minW="fit-content"
+            w="44px"
             h="32px"
-            fontSize="sm"
           >
-            {t("1D")} <ChevronDownIcon w="16px" h="16px" color="text.50" />
-          </MenuButton>
-          <MenuList minW="120px">
-            <MenuItem>1H</MenuItem>
-            <MenuItem>1D</MenuItem>
-            <MenuItem>1M</MenuItem>
-            <MenuItem>1W</MenuItem>
-            <MenuItem>1Y</MenuItem>
-          </MenuList>
-        </Menu>
+            <Icon as={SlidersIcon} w="20px" h="20px" />
+          </InputLeftElement>
+          <Input
+          pl='40px'
+            borderColor="text.600"
+            placeholder={t("filter_tokens") || ""}
+            _placeholder={{ color: "text.500" }}
+          />
+        </InputGroup>
+        <Flex
+          bg="text.700"
+          borderRadius="50px"
+          p="3px"
+          h="32px"
+          minW="132px"
+          gap="8px"
+          justify="center"
+          align="center"
+        >
+          <Text fontSize="sm" color="text.400">
+            {t("view_by")}
+          </Text>
+
+          <Flex gap="2px">
+            <Flex
+              w="26px"
+              h="26px"
+              bg={layout === "table" ? "text.500" : "transparent"}
+              borderRadius="50px"
+              justify="center"
+              align="center"
+              onClick={() => setLayout("table")}
+              cursor="pointer"
+            >
+              <Icon as={LayoutIcon} w="20px" h="20px" />
+            </Flex>
+
+            <Flex
+              w="26px"
+              h="26px"
+              bg={layout === "cards" ? "text.500" : "transparent"}
+              borderRadius="50px"
+              justify="center"
+              align="center"
+              onClick={() => setLayout("cards")}
+              cursor="pointer"
+            >
+              <Icon as={SquaresFourIcon} w="20px" h="20px" />
+            </Flex>
+          </Flex>
+        </Flex>
       </Flex>
     </Flex>
   );
