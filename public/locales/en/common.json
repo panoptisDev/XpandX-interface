@@ -124,5 +124,10 @@
   "buy_crypto": "Buy Crypto",
   "activity": "Activity",
   "hidden": "Hidden",
-  "show": "Show"
+  "show": "Show",
+  "auto": "Auto",
+  "slippage": "Slippage",
+  "custom": "Custom",
+  "view_by": "View by",
+  "filter_tokens": "Filter tokens"
 }

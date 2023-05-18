@@ -27,3 +27,6 @@ export * from "./coins";
 export * from "./discount-star";
 export * from "./gear-six";
 export * from "./power";
+export * from "./layout";
+export * from "./squares-four";
+export * from "./sliders";
