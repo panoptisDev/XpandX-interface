@@ -58,6 +58,10 @@ const Button: ComponentStyleConfig = {
       },
     },
 
+    outline: {
+      borderColor: "text.50",
+    },
+
     secondary: {
       bg: "text.700",
       background: "text.700",

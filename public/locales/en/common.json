@@ -5,6 +5,7 @@
   "more": "More",
   "connect_wallet": "Connect Wallet",
   "new_position": "New position",
+  "add_liquidity": "Add liquidity",
   "your_active_v3_liquidity_positions_will_appear_here": "Your active v1 liquidity positions will appear here.",
   "connect_a_wallet": "Connect wallet",
   "learn_about_providing_liquidity": "Learn about providing liquidity",
@@ -14,6 +15,7 @@
   "token_pair": "TOKEN PAIR",
   "single_token": "SINGLE TOKEN",
   "balance": "Balance",
+  "deposit_amounts": "Deposit amounts",
   "your_share_of_pool": "Your share of pool",
   "pool_information": "Pool information",
   "current_price": "Current price",
@@ -113,6 +115,7 @@
   "current_epoch": "Current epoch",
   "apy": "APY",
   "deallocation_fee": "Deallocation fee",
+  "select": "select",
   "not_connected": "Not connected",
   "your_dividends": "Your dividends",
   "remaining_time": "Remaining time",
@@ -124,5 +127,10 @@
   "buy_crypto": "Buy Crypto",
   "activity": "Activity",
   "hidden": "Hidden",
-  "show": "Show"
+  "show": "Show",
+  "fee_tier": "{{fee}}% fee tier",
+  "set_price_range": "Set price range",
+  "min_price": "Min price",
+  "max_price": "Max price",
+  "full_range": "Full range"
 }

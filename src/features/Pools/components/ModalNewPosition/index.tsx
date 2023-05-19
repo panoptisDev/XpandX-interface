@@ -1,9 +1,6 @@
 import { ArrowRight } from "@/icons";
 import { XButton } from "@/ui-kit";
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
   Flex,
   Icon,
   Modal,
@@ -14,11 +11,9 @@ import {
   ModalHeader,
   ModalOverlay,
   Stack,
-  Text,
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
-import { useState } from "react";
-import { PoolInformation, TokenPair, TokenSingle } from "./components";
+import { SetPriceRange, TokenPair } from "./components";
 
 interface IProps {
   isOpen: boolean;
@@ -27,52 +22,25 @@ interface IProps {
 
 export const ModalNewPosition = ({ isOpen, onClose }: IProps) => {
   const { t } = useTranslation();
-  const [pool, setPool] = useState("pair");
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="xl">
       <ModalOverlay />
       <ModalContent maxW="860px">
-        <ModalHeader>{t("new_position")}</ModalHeader>
+        <ModalHeader>{t("add_liquidity")}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Stack spacing={4}>
-            <Flex justify="space-between" align="center" w="100%">
-              <Breadcrumb fontSize="sm" fontWeight="bold" color="text.500">
-                <BreadcrumbItem>
-                  <BreadcrumbLink
-                    color={pool === "pair" ? "sec.1" : "text.500"}
-                    onClick={() => setPool("pair")}
-                  >
-                    {t("token_pair")}
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbItem>
-                  <BreadcrumbLink
-                    color={pool === "single" ? "sec.1" : "text.500"}
-                    onClick={() => setPool("single")}
-                  >
-                    {t("single_token")}
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-              </Breadcrumb>
-
-              <Text fontSize="sm" color="text.500">
-                USDC - USDT pool
-              </Text>
-            </Flex>
-
             <Flex gap="12px">
-              {pool === "pair" ? <TokenPair /> : <TokenSingle />}
-
-              <PoolInformation />
+              <TokenPair />
+              <SetPriceRange />
             </Flex>
           </Stack>
         </ModalBody>
 
         <ModalFooter>
           <XButton rightIcon={<Icon as={ArrowRight} />} size="md" maxW="210px">
-            {t("connect_a_wallet")}
+            {t("add_liquidity")}
           </XButton>
         </ModalFooter>
       </ModalContent>
