@@ -132,5 +132,10 @@
   "set_price_range": "Set price range",
   "min_price": "Min price",
   "max_price": "Max price",
-  "full_range": "Full range"
+  "full_range": "Full range",
+  "auto": "Auto",
+  "slippage": "Slippage",
+  "custom": "Custom",
+  "view_by": "View by",
+  "filter_tokens": "Filter tokens"
 }

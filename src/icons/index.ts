@@ -30,3 +30,6 @@ export * from "./power";
 export * from "./edit";
 export * from "./minus";
 export * from "./vector";
+export * from "./layout";
+export * from "./squares-four";
+export * from "./sliders";

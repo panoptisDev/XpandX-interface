@@ -10,11 +10,12 @@ import {
 
 import { ConnectWallet } from "@/components";
 import { routes } from "@/constants/routes";
-import { ChevronDownIcon, SettingIcon } from "@/icons";
+import { ChevronDownIcon } from "@/icons";
 import { XLink } from "@/ui-kit";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { Setting } from "./components";
 
 const NAVIGATION = [
   {
@@ -99,7 +100,7 @@ export const Header = () => {
           <Image src="/logo.svg" width={100} height={26} alt="Swap logo" />
         </Box>
 
-        <Stack spacing="24px" direction="row" fontSize="sm">
+        <Stack spacing="0px" direction="row" fontSize="sm">
           {NAVIGATION.map((item, idx) => {
             const isActive = asPath.startsWith(item.feature);
             return (
@@ -109,6 +110,11 @@ export const Header = () => {
                 color={isActive ? "text.50" : "text.400"}
                 fontWeight={isActive ? "bold" : "normal"}
                 fontSize="md"
+                p="8px 24px"
+                borderRadius="10px"
+                _hover={{
+                  bg: "#99a1bd14",
+                }}
               >
                 {t(item.title)}
               </XLink>
@@ -122,6 +128,11 @@ export const Header = () => {
               color={MORE.includes(asPath) ? "text.50" : "text.400"}
               fontWeight={MORE.includes(asPath) ? "bold" : "normal"}
               fontSize="md"
+              p="8px 24px"
+              borderRadius="12px"
+              _hover={{
+                bg: "#99a1bd14",
+              }}
             >
               More {MORE.includes(asPath) && `(${t(pathname.split("/")[1])})`}{" "}
               <ChevronDownIcon />
@@ -162,22 +173,7 @@ export const Header = () => {
       </Stack>
 
       <Stack direction="row" align="center">
-        <Stack
-          w="34px"
-          h="34px"
-          align="center"
-          justify="center"
-          rounded="50%"
-          bg="text.700"
-          p="8px"
-          flexShrink="0"
-          cursor="pointer"
-          _hover={{
-            filter: "brightness(0.95)",
-          }}
-        >
-          <SettingIcon w="22px" h="22px" />
-        </Stack>
+        <Setting />
 
         <Stack
           align="center"

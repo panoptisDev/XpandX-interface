@@ -3,7 +3,7 @@ import { XImage, XTable, XTableTd, XTableTh } from "@/ui-kit";
 import { Icon, Tbody, Text, Thead, Tr } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 
-const data = [
+export const data = [
   {
     token: {
       icon: "/venom.svg",

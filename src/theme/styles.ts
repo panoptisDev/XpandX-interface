@@ -8,7 +8,6 @@ const styles = {
       // fontFamily: 'Satoshi',
       // transitionProperty: 'background-color',
       // transitionDuration: 'normal',
-      lineHeight: "base",
     },
     html: {
       fontFamily: "Satoshi",
