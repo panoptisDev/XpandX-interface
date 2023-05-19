@@ -22,10 +22,10 @@ jobs:
           
             #Now we have got the access of EC2 and we will start the deploy .
             cd /srv/XpandX-interface &&
-            git checkout master &&
+            git checkout develop &&
             git fetch --all &&
-            git reset --hard origin/master &&
-            git pull origin master &&
+            git reset --hard origin/develop &&
+            git pull origin develop &&
             docker-compose down &&
             docker-compose  up -d --build 
           '
