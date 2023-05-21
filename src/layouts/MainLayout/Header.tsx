@@ -1,92 +1,29 @@
-import {
-  Box,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
-
-import { ConnectWallet } from "@/components";
-import { routes } from "@/constants/routes";
-import { ChevronDownIcon } from "@/icons";
-import { XLink } from "@/ui-kit";
+import { Box, Stack, Text, Hide, useMediaQuery } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { Setting } from "./components";
 
-const NAVIGATION = [
-  {
-    title: "swap",
-    href: routes.Swap,
-    feature: "/swap",
-  },
-  {
-    title: "tokens",
-    href: routes.Tokens,
-    feature: "/token",
-  },
-  {
-    title: "pools",
-    href: routes.Pools,
-    feature: "/pools",
-  },
-];
-
-const NAVIGATION_MORE = [
-  {
-    title: "referral",
-    href: routes.Referral,
-    feature: "/referral",
-    isComingSoon: true,
-  },
-  {
-    title: "analytics",
-    href: routes.Analytics,
-    feature: "/analytics",
-    isComingSoon: false,
-  },
-  {
-    title: "earning_dashboard",
-    href: routes.Earning,
-    feature: "/earning-dashboard",
-    isComingSoon: false,
-  },
-  {
-    title: "launchpad",
-    href: routes.Launchpad,
-    feature: "/launchpad",
-    isComingSoon: false,
-  },
-  {
-    title: "dividend",
-    href: routes.Dividend,
-    feature: "/dividend",
-    isComingSoon: false,
-  },
-];
-
-const MORE = [
-  routes.Referral,
-  routes.Analytics,
-  routes.Earning,
-  routes.Launchpad,
-  routes.Dividend,
-] as string[];
+import { ConnectWallet } from "@/components";
+import { NAVIGATION } from "@/constants/navigation";
+import { ChevronDownIcon } from "@/icons";
+import { XLink } from "@/ui-kit";
+import { Setting, MenuDropdown, MoreDropdown, MenuModal } from "./components";
+import breakpoints from '@/theme/foundations/breakpoints';
 
 export const Header = () => {
   const { t } = useTranslation();
   const router = useRouter();
-  const { asPath, pathname } = router;
+  const { asPath } = router;
+  const [isLargerLg] = useMediaQuery(`(min-width: ${breakpoints.lg})`);
+  const [isSmallerSm] = useMediaQuery(`(max-width: ${breakpoints.sm})`);
+
 
   return (
     <Stack
       direction="row"
       h="56px"
       w="100%"
-      p="18px 84px"
+      p={{ base: "20px", sm: "20px 40px", xl: "20px 84px" }}
       align="center"
       justify="space-between"
       pos="fixed"
@@ -96,84 +33,48 @@ export const Header = () => {
       zIndex="docked"
     >
       <Stack direction="row" align="center">
-        <Box mr="50px">
-          <Image src="/logo.svg" width={100} height={26} alt="Swap logo" />
-        </Box>
+        <Hide below="sm">
+          <Box mr="50px" width={100} height={26} pos="relative">
+            <Image src="/logo.svg" layout="fill" alt="Swap logo" />
+          </Box>
+        </Hide>
 
-        <Stack spacing="0px" direction="row" fontSize="sm">
-          {NAVIGATION.map((item, idx) => {
-            const isActive = asPath.startsWith(item.feature);
-            return (
-              <XLink
-                href={item.href}
-                key={idx}
-                color={isActive ? "text.50" : "text.400"}
-                fontWeight={isActive ? "bold" : "normal"}
-                fontSize="md"
-                p="8px 24px"
-                borderRadius="10px"
-                _hover={{
-                  bg: "#99a1bd14",
-                }}
-              >
-                {t(item.title)}
-              </XLink>
-            );
-          })}
-          <Menu>
-            <MenuButton
-              // isActive={false}
-              as={Text}
-              cursor="pointer"
-              color={MORE.includes(asPath) ? "text.50" : "text.400"}
-              fontWeight={MORE.includes(asPath) ? "bold" : "normal"}
-              fontSize="md"
-              p="8px 24px"
-              borderRadius="12px"
-              _hover={{
-                bg: "#99a1bd14",
-              }}
-            >
-              More {MORE.includes(asPath) && `(${t(pathname.split("/")[1])})`}{" "}
-              <ChevronDownIcon />
-            </MenuButton>
-            <MenuList>
-              {NAVIGATION_MORE.map((item, idx) => {
-                const isActive = asPath.startsWith(item.feature);
-                return (
-                  <MenuItem
-                    key={idx}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-between"
-                    onClick={() => router.push(item.href)}
-                    bg={isActive ? "sec.1" : "text.600"}
-                    color={isActive ? "text.900" : "text.50"}
-                    fontSize="md"
-                  >
-                    {t(item.title)}
-                    {item.isComingSoon && (
-                      <Box
-                        bg="text.50"
-                        borderRadius="5px"
-                        p="2px 6px"
-                        fontWeight="bold"
-                        color="sec.3"
-                        fontSize="xxs"
-                      >
-                        {t("coming_soon")}
-                      </Box>
-                    )}
-                  </MenuItem>
-                );
-              })}
-            </MenuList>
-          </Menu>
-        </Stack>
+        <Hide above="sm">
+          <Box mr="50px" width={30} height={30} pos="relative">
+            <Image src="/mobile-logo.svg" layout="fill" alt="XpandX" />
+          </Box>
+        </Hide>
+
+        <Hide below="lg">
+          <Stack spacing="0px" direction="row" fontSize="sm">
+            {NAVIGATION.map((item, idx) => {
+              const isActive = asPath.startsWith(item.feature);
+              return (
+                <XLink
+                  href={item.href}
+                  key={idx}
+                  color={isActive ? "text.50" : "text.400"}
+                  fontWeight={isActive ? "bold" : "normal"}
+                  fontSize="md"
+                  p="8px 24px"
+                  borderRadius="10px"
+                  _hover={{
+                    bg: "#99a1bd14",
+                  }}
+                >
+                  {t(item.title)}
+                </XLink>
+              );
+            })}
+            <MoreDropdown />
+          </Stack>
+        </Hide>
       </Stack>
 
       <Stack direction="row" align="center">
-        <Setting />
+        <Hide below="sm">
+          <Setting />
+        </Hide>
 
         <Stack
           align="center"
@@ -196,7 +97,15 @@ export const Header = () => {
           <ChevronDownIcon color="#FAFAFA" fontSize="24px" ml="-10px" />
         </Stack>
 
-        <ConnectWallet type="header" />
+        <Hide below="sm">
+          <ConnectWallet type="header" />
+        </Hide>
+
+        {(!isLargerLg && !isSmallerSm) && <MenuDropdown />}
+
+        <Hide above="sm">
+          <MenuModal />
+        </Hide>
       </Stack>
     </Stack>
   );

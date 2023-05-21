@@ -1,6 +1,7 @@
 import { ChevronDownIcon, SettingIcon } from "@/icons";
 import {
   Box,
+  FlexProps,
   Flex,
   InputGroup,
   InputRightElement,
@@ -29,7 +30,7 @@ const TABS = [
   { title: "custom", value: "custom" },
 ];
 
-export const Setting = () => {
+export const Setting = (props: FlexProps) => {
   const [selectedTab, setSelectedTab] = useState("auto");
   const { t } = useTranslation();
   return (
@@ -51,6 +52,7 @@ export const Setting = () => {
               bg: "#E2E46F",
             }}
             role="group"
+            {...props}
           >
             <SettingIcon
               w="22px"

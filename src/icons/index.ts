@@ -33,3 +33,4 @@ export * from "./vector";
 export * from "./layout";
 export * from "./squares-four";
 export * from "./sliders";
+export * from "./bar";

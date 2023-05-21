@@ -12,10 +12,13 @@ export const LaunchpadTable = () => {
   const router = useRouter();
 
   return (
-    <XTable>
+    <XTable minW="950px">
       <Thead>
         <Tr>
-          <XTableTh w="400px" maxW="400px !important">
+          <XTableTh
+            w={{ base: "250px", lg: "400px" }}
+            maxW={{ base: "250px !important", lg: "400px !important" }}
+          >
             {t("name")}
           </XTableTh>
           <XTableTh>{t("hardcap")}</XTableTh>

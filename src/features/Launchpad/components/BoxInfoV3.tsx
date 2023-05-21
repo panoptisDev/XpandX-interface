@@ -18,7 +18,12 @@ interface Props extends FlexProps {
 export const BoxInfoV3 = ({ name, value, icon, ...props }: Props) => {
   const { t } = useTranslation();
   return (
-    <Flex w="calc(50% - 10px)" gap="10px" align="center" {...props}>
+    <Flex
+      w={{ base: "100%", lg: "calc(50% - 10px)" }}
+      gap="10px"
+      align="center"
+      {...props}
+    >
       <Flex
         w="44px"
         h="44px"
@@ -26,6 +31,7 @@ export const BoxInfoV3 = ({ name, value, icon, ...props }: Props) => {
         justify="center"
         bg="text.800"
         rounded="50%"
+        flexShrink="0"
       >
         <Icon as={icon} w="20px" h="20px" />
       </Flex>

@@ -23,11 +23,18 @@ export const DetailHeader = () => {
         <Text color="text.400">{t("back")}</Text>
       </Flex>
 
-      <Flex mt="24px" justify="space-between" align="center">
+      <Flex
+        mt="24px"
+        gap="8px"
+        justify="space-between"
+        align={{ base: "unset", sm: "center" }}
+        direction={{ base: "column", sm: "row" }}
+      >
         <Text color="text.50" fontSize="2xl" fontWeight="bold">
           WaterrDAO
         </Text>
         <BoxInfo
+          w="fit-content"
           icon="/icons/launchpad/trophy.svg"
           value="Total raised: $1,3971.39"
         />
@@ -46,14 +53,27 @@ export const DetailHeader = () => {
       <Flex
         pt="24px"
         mt="24px"
-        gap="40px"
+        gap={{ base: "16px", sm: "40px" }}
         borderTop="1px solid"
         borderColor="text.700"
+        direction={{ base: "column", sm: "row" }}
       >
-        <Box flex={1} pos="relative" pb="200px">
-          <XImage layout="fill" src="/launchpad-pic.png" alt="" />
+        <Box
+          flex={{ base: 2, lg: 1 }}
+          pos="relative"
+          h={{ base: "220px", lg: "200px" }}
+          minH={{ base: "220px", lg: "200px" }}
+          rounded="16px"
+          overflow="hidden"
+        >
+          <XImage
+            layout="fill"
+            src="/launchpad-pic.png"
+            alt=""
+            objectFit="cover"
+          />
         </Box>
-        <Text color="text.400" flex={1}>
+        <Text color="text.400" flex={{ base: 3, lg: 1 }}>
           Lorem ipsum dolor sit amet consectetur. Accumsan sit eget nullam
           euismod risus viverra. Donec dolor dui ultrices a diam. Mollis enim
           tortor sed semper venenatis risus augue sem dictumst. Scelerisque

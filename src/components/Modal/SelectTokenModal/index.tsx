@@ -37,7 +37,7 @@ export const SelectTokenModal = ({ isOpen, onClose }: IProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="md">
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent mx="20px">
         <ModalHeader textAlign="left">{t("select_token")}</ModalHeader>
         <ModalCloseButton />
         <ModalBody p="0 0 10px">

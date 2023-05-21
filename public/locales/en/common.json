@@ -137,5 +137,6 @@
   "slippage": "Slippage",
   "custom": "Custom",
   "view_by": "View by",
-  "filter_tokens": "Filter tokens"
+  "filter_tokens": "Filter tokens",
+  "lex_price": "Lex price"
 }

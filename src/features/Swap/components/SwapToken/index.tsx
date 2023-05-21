@@ -19,7 +19,7 @@ export const SwapToken = ({ ...rest }: Props) => {
   };
 
   return (
-    <Stack zIndex="0" w="408px" {...rest}>
+    <Stack zIndex="0" w={{ base: "335px", sm: "500px", lg: "408px" }} {...rest}>
       <Box position="relative">
         <Box
           bgColor="text.700"
@@ -64,7 +64,7 @@ export const SwapToken = ({ ...rest }: Props) => {
           selectEnabled
         />
         <Box p="0 16px 16px">
-          <ConnectWallet type='inApp'/>
+          <ConnectWallet type="inApp" />
         </Box>
       </Box>
     </Stack>
