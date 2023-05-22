@@ -1,17 +1,26 @@
 import { ArrowRight, ChevronDownIcon } from "@/icons";
 import { XButton, XImage } from "@/ui-kit";
 import { ellipseAddress } from "@/utils";
-import { Box, Flex, Icon, Stack, Text, useDisclosure, BoxProps } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Icon,
+  Stack,
+  Text,
+  useDisclosure,
+  BoxProps,
+} from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { useRef } from "react";
 import { Wallet } from "./components";
 import { useConnectWallet } from "@/store/wallet";
 
 interface Props extends BoxProps {
-  type: 'inApp' | 'header';
+  type: "inApp" | "header";
+  filledConnectedBtn?: boolean;
 }
 
-export const ConnectWallet = ({ type, ...rest }: Props) => {
+export const ConnectWallet = ({ type, filledConnectedBtn, ...rest }: Props) => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef(null);
@@ -47,8 +56,8 @@ export const ConnectWallet = ({ type, ...rest }: Props) => {
             <XButton
               rightIcon={<Icon as={ArrowRight} />}
               size="md"
-            // onClick={onOpen}
-            // onClick={onConnectButtonClick}
+              // onClick={onOpen}
+              // onClick={onConnectButtonClick}
             >
               {t("swap")}
             </XButton>
@@ -90,6 +99,15 @@ export const ConnectWallet = ({ type, ...rest }: Props) => {
               cursor="pointer"
               ref={btnRef}
               onClick={onOpen}
+              sx={
+                filledConnectedBtn
+                  ? {
+                      rounded: "50px",
+                      py: "10px",
+                      display: "flex",
+                    }
+                  : {}
+              }
             >
               <XImage src="/wallet.svg" alt="wallet" width="28" height="28" />
               <Text>{ellipseAddress(address, 4)}</Text>

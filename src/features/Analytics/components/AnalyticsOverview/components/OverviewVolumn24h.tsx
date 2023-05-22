@@ -139,6 +139,7 @@ export const OverviewVolumn24h = () => {
       bg="text.700"
       borderRadius="14px"
       w="100%"
+      h="100%"
     >
       <Box>
         <Text>{t("volume24h")}</Text>

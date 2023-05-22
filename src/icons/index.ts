@@ -34,3 +34,4 @@ export * from "./layout";
 export * from "./squares-four";
 export * from "./sliders";
 export * from "./bar";
+export * from "./close";

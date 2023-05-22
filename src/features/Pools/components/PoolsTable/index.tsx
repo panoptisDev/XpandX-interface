@@ -108,11 +108,11 @@ export const data = [
 export const TokensTable = () => {
   const { t } = useTranslation();
   return (
-    <XTable>
+    <XTable minW="700px">
       <Thead>
         <Tr>
           <XTableTh w="50px">{t("no")}</XTableTh>
-          <XTableTh>{t("pool")}</XTableTh>
+          <XTableTh minW="250px">{t("pool")}</XTableTh>
           <XTableTh>{t("volume24h")}</XTableTh>
           <XTableTh>{t("volume7d")}</XTableTh>
           <XTableTh boxProps={{ align: "center", gap: "4px" }}>
@@ -134,7 +134,7 @@ export const TokensTable = () => {
               {1 + idx}
             </XTableTd>
             <XTableTd boxProps={{ align: "center" }}>
-              <Flex>
+              <Flex flexShrink="0">
                 <XImage
                   src={item.token.icon1}
                   alt="venom"

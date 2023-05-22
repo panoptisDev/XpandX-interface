@@ -1,4 +1,4 @@
-import { GearSixIcon, PowerIcon, TrendDownIcon } from "@/icons";
+import { CloseIcon, PowerIcon, TrendDownIcon } from "@/icons";
 import { XButton, XImage } from "@/ui-kit";
 import { ellipseAddress } from "@/utils";
 import {
@@ -15,6 +15,7 @@ import {
   Icon,
   Stack,
   Text,
+  Hide,
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { useState } from "react";
@@ -50,10 +51,10 @@ export const Wallet = ({
     >
       <DrawerOverlay />
       <DrawerContent
-        margin="14px"
-        borderRadius="14px"
+        margin={{ base: 0, sm: "14px" }}
+        rounded={{ base: 0, sm: "14px" }}
         bg="text.600"
-        minW="380px"
+        minW={{ base: "100%", sm: "380px" }}
       >
         <DrawerBody p="0px">
           <Stack spacing={5}>
@@ -69,8 +70,7 @@ export const Wallet = ({
                 <Text color="text.50">{ellipseAddress(address, 4)}</Text>
               </Flex>
 
-              <Flex gap="8px">
-                <XImage src="/gear-six.svg" alt="gear" width="20" height="20" />
+              <Flex gap="8px" align="center">
                 <Icon
                   as={PowerIcon}
                   w="20px"
@@ -82,10 +82,26 @@ export const Wallet = ({
                   }}
                   cursor="pointer"
                 />
+                <Hide above="sm">
+                  <Icon
+                    as={CloseIcon}
+                    w="16px"
+                    h="16px"
+                    color="text.400"
+                    onClick={onClose}
+                    cursor="pointer"
+                  />
+                </Hide>
               </Flex>
             </Flex>
 
-            <Divider bg="text.600" p="0px 20px" />
+            <Divider
+              bg="text.600"
+              w="calc(100% - 40px)"
+              left="50%"
+              pos="relative"
+              transform="translateX(-50%)"
+            />
 
             <Stack spacing={2.5} p="0px 20px">
               <Box>

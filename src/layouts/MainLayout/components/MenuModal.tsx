@@ -43,7 +43,7 @@ export const MenuModal = () => {
 
       <Modal isOpen={isOpen} onClose={onClose} size="full">
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg="text.800">
           <ModalHeader textAlign="left">
             <Flex>
               <Box mr="50px" width={100} height={26} pos="relative">
@@ -97,25 +97,26 @@ export const MenuModal = () => {
               })}
             </List>
             <Flex
+              align="center"
               sx={{
-                'button': {
-                  h: '46px',
-                  pos: 'relative',
-                  fontWeight: 'bold',
-                  fontSize: 'lg'
+                button: {
+                  h: "46px",
+                  pos: "relative",
+                  fontWeight: "bold",
+                  fontSize: "lg",
                 },
-                '.chakra-button__icon': {
-                  '.chakra-stack': {
-                    w: '40px',
-                    h: '40px',
-                    pos: 'absolute',
-                    right: '3px',
-                    top: '3px'
-                  }
-                }
+                ".chakra-button__icon": {
+                  ".chakra-stack": {
+                    w: "40px",
+                    h: "40px",
+                    pos: "absolute",
+                    right: "3px",
+                    top: "3px",
+                  },
+                },
               }}
             >
-              <ConnectWallet type="header" flex={1} />
+              <ConnectWallet type="header" flex={1} filledConnectedBtn />
               <Setting w="46px" h="46px" bg="text.600" ml="14px" />
             </Flex>
           </ModalBody>

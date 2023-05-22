@@ -24,14 +24,14 @@ export const ModalNewPosition = ({ isOpen, onClose }: IProps) => {
   const { t } = useTranslation();
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="xl">
+    <Modal isOpen={isOpen} onClose={onClose} size={{ base: "full", sm: "xl" }}>
       <ModalOverlay />
-      <ModalContent maxW="860px">
+      <ModalContent maxW={{ base: "640px", lg: "860px" }}>
         <ModalHeader>{t("add_liquidity")}</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
+        <ModalBody maxH="670px">
           <Stack spacing={4}>
-            <Flex gap="12px">
+            <Flex gap="12px" flexDir={{ base: "column", lg: "row" }}>
               <TokenPair />
               <SetPriceRange />
             </Flex>
