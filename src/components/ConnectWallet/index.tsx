@@ -1,13 +1,17 @@
 import { ArrowRight, ChevronDownIcon } from "@/icons";
 import { XButton, XImage } from "@/ui-kit";
 import { ellipseAddress } from "@/utils";
-import { Box, Flex, Icon, Stack, Text, useDisclosure } from "@chakra-ui/react";
+import { Box, Flex, Icon, Stack, Text, useDisclosure, BoxProps } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { useRef } from "react";
 import { Wallet } from "./components";
 import { useConnectWallet } from "@/store/wallet";
 
-export const ConnectWallet = ({ type, ...rest }: any) => {
+interface Props extends BoxProps {
+  type: 'inApp' | 'header';
+}
+
+export const ConnectWallet = ({ type, ...rest }: Props) => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef(null);
@@ -26,7 +30,7 @@ export const ConnectWallet = ({ type, ...rest }: any) => {
   };
 
   return (
-    <Box>
+    <Box {...rest}>
       {type === "inApp" && (
         <>
           {venomConnect && !address && (
@@ -43,8 +47,8 @@ export const ConnectWallet = ({ type, ...rest }: any) => {
             <XButton
               rightIcon={<Icon as={ArrowRight} />}
               size="md"
-              // onClick={onOpen}
-              // onClick={onConnectButtonClick}
+            // onClick={onOpen}
+            // onClick={onConnectButtonClick}
             >
               {t("swap")}
             </XButton>

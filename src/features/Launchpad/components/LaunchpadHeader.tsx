@@ -1,4 +1,4 @@
-import { Flex, Text, Box } from "@chakra-ui/react";
+import { Flex, Text, Box, Hide } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { XInput } from "@/ui-kit";
 import { SearchIcon } from "@/icons";
@@ -17,16 +17,31 @@ export const LaunchpadHeader = () => {
           <Text color="text.500">{t("custom_built_in_launchpad")}</Text>
         </Box>
 
-        <Flex align="center" justify="space-between" gap="8px">
-          <BoxInfo icon="/icons/launchpad/trophy.svg" value="$1,3971.39" />
-          <BoxInfo icon="/icons/launchpad/coin.svg" value="$84.298M TVL" />
-        </Flex>
+        <Hide below="lg">
+          <Flex align="center" justify="space-between" gap="8px">
+            <BoxInfo icon="/icons/launchpad/trophy.svg" value="$1,3971.39" />
+            <BoxInfo icon="/icons/launchpad/coin.svg" value="$84.298M TVL" />
+          </Flex>
+        </Hide>
       </Flex>
-      <XInput
-        leftIcon={<SearchIcon />}
-        inputGroupProps={{ mt: 2, maxW: "408px" }}
-        placeholder={t("search") || ""}
-      />
+      <Flex
+        align={{ base: "unset", sm: "center" }}
+        direction={{ base: "column", sm: "row" }}
+        gap={{ base: "16px", sm: "20px" }}
+        mt={2}
+      >
+        <XInput
+          leftIcon={<SearchIcon />}
+          inputGroupProps={{ maxW: "408px", w: "unset", flex: 1 }}
+          placeholder={t("search") || ""}
+        />
+        <Hide above="lg">
+          <Flex align="center" justify="space-between" gap="8px">
+            <BoxInfo icon="/icons/launchpad/trophy.svg" value="$1,3971.39" />
+            <BoxInfo icon="/icons/launchpad/coin.svg" value="$84.298M TVL" />
+          </Flex>
+        </Hide>
+      </Flex>
     </Box>
   );
 };

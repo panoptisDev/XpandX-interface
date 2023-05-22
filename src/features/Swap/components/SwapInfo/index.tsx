@@ -14,7 +14,7 @@ export const SwapInfo = () => {
   return (
     <Box
       h="369px"
-      w="408px"
+      w={{ base: "335px", sm: "500px", lg: "408px" }}
       border="1px solid"
       borderColor="text.600"
       rounded="14px"

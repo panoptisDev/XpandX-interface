@@ -5,6 +5,7 @@ import {
   Icon,
   ComponentWithAs,
   IconProps,
+  GridItem,
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 
@@ -17,12 +18,12 @@ interface Props {
 export const BoxInfoV2 = ({ name, value, icon }: Props) => {
   const { t } = useTranslation();
   return (
-    <Box
+    <GridItem
       border="1px solid"
       borderColor="text.700"
       rounded="14px"
       p="16px 12px"
-      flex={1}
+      w="100%"
     >
       <Flex
         align="center"
@@ -41,6 +42,6 @@ export const BoxInfoV2 = ({ name, value, icon }: Props) => {
 
         <Icon as={icon} w="34px" h="34px" />
       </Flex>
-    </Box>
+    </GridItem>
   );
 };

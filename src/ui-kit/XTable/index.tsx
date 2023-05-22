@@ -6,27 +6,37 @@ import {
   Icon,
   Table,
   TableContainer,
+  TableContainerProps,
   Td,
   Text,
   Th,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
-export const XTable = ({ children }: any) => {
+export const XTable = ({ children, ...props }: TableContainerProps) => {
   return (
     <Box
       border="1px solid"
       borderColor="text.700"
       borderRadius="14px"
       overflow="auto"
+      pb="10px"
     >
-      <TableContainer>
+      <TableContainer {...props}>
         <Table variant="striped" colorScheme="rgba(63, 63, 70, 0.4)">
           {children}
         </Table>
-
-        <Pagination />
       </TableContainer>
+
+      <Box
+        sx={{
+          position: "sticky",
+          left: 0,
+          width: "100%",
+        }}
+      >
+        <Pagination />
+      </Box>
     </Box>
   );
 };

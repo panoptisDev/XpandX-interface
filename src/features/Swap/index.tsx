@@ -7,10 +7,15 @@ export const Swap = () => {
   return (
     <XContainer>
       <Box m="91px auto">
-        <Flex justify="center" gap="12px">
+        <Stack
+          justify="center"
+          align="center"
+          spacing="16px"
+          direction={{ base: "column", lg: "row" }}
+        >
           <SwapToken />
           <SwapInfo />
-        </Flex>
+        </Stack>
         <CreditCardOption m="34px auto" />
       </Box>
     </XContainer>
