@@ -3,19 +3,27 @@ import {
   RangeSliderTrack,
   RangeSliderFilledTrack,
   RangeSliderThumb,
-  SliderMark,
   RangeSliderMark,
   Icon,
 } from "@chakra-ui/react";
 import { VectorIcon } from "@/icons";
+import { usePools } from "@/store/pools";
 
 export const PriceRangeSlider = () => {
+  const minPrice = usePools((state) => state.minPrice);
+  const maxPrice = usePools((state) => state.maxPrice);
+  const setMaxPrice = usePools((state) => state.setMaxPrice);
+  const setMinPrice = usePools((state) => state.setMinPrice);
+
   return (
     <RangeSlider
       h="100px"
       aria-label={["min", "max"]}
-      onChangeEnd={(val) => console.log(val)}
-      defaultValue={[1550, 2450]}
+      onChange={(val) => {
+        setMinPrice(val[0]);
+        setMaxPrice(val[1]);
+      }}
+      value={[minPrice, maxPrice]}
       min={800}
       max={3400}
       sx={{
