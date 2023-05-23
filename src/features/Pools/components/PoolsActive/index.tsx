@@ -31,7 +31,11 @@ export const PoolsActive = () => {
         <ConnectWallet type="inApp" />
       </Stack>
 
-      <Flex p="24px 20px">
+      <Flex
+        p="24px 20px"
+        direction={{ base: "column", sm: "row" }}
+        gap={{ base: "20px", sm: "0" }}
+      >
         <Flex gap="4px" w="100%">
           <Icon as={LightIcon} w="20px" h="20px" />
 

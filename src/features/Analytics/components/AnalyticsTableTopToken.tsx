@@ -135,11 +135,11 @@ export const AnalyticsTableTopToken = () => {
           />
         </Flex>
       </Flex>
-      <XTable>
+      <XTable minW="850px">
         <Thead>
           <Tr>
             <XTableTh w="50px">{t("no")}</XTableTh>
-            <XTableTh>{t("token")}</XTableTh>
+            <XTableTh minW="280px">{t("token")}</XTableTh>
             <XTableTh>{t("price")}</XTableTh>
             <XTableTh>{t("change")}</XTableTh>
             <XTableTh>{t("volume24h")}</XTableTh>

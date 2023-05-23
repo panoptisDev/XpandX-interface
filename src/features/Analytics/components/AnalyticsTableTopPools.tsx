@@ -114,10 +114,10 @@ export const AnalyticsTableTopPools = () => {
         </Flex>
       </Flex>
       <XTable>
-        <Thead>
+        <Thead minW="950px">
           <Tr>
             <XTableTh w="50px">{t("no")}</XTableTh>
-            <XTableTh>{t("pool")}</XTableTh>
+            <XTableTh minW="280px">{t("pool")}</XTableTh>
             <XTableTh>{t("volume24h")}</XTableTh>
             <XTableTh>{t("volume7d")}</XTableTh>
             <XTableTh boxProps={{ align: "center", gap: "4px" }}>

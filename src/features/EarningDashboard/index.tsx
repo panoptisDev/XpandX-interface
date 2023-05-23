@@ -8,7 +8,11 @@ export const EarningDashboard = () => {
   return (
     <XContainer>
       <Stack spacing={6}>
-        <Flex align="center" gap="10px">
+        <Flex
+          align={{ base: "flex-start", lg: "center" }}
+          gap={{ base: "2px", lg: "10px" }}
+          direction={{ base: "column", lg: "row" }}
+        >
           <Text color="text.50" fontSize="2xl" fontWeight="bold">
             {t("earnings_dashboard")}
           </Text>

@@ -7,6 +7,7 @@ import {
   InputGroup,
   InputLeftElement,
   Text,
+  Hide,
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 
@@ -19,7 +20,13 @@ export const TokensHeader = ({ layout, setLayout }: IProps) => {
   const { t } = useTranslation();
 
   return (
-    <Flex w="100%" align="center" justify="space-between">
+    <Flex
+      w="100%"
+      gap="8px"
+      align={{ base: "flex-start", lg: "center" }}
+      justify="space-between"
+      direction={{ base: "column", lg: "row" }}
+    >
       <Text color="text.50" fontSize="2xl" fontWeight="bold">
         {t("top_tokens_on_xpand_x")}
       </Text>
@@ -43,7 +50,7 @@ export const TokensHeader = ({ layout, setLayout }: IProps) => {
           <Text>Venom</Text>
         </Flex>
 
-        <InputGroup minW="220px">
+        <InputGroup minW={{ base: "100px", sm: "220px" }}>
           <InputLeftElement
             pointerEvents="none"
             color="text.50"
@@ -53,7 +60,7 @@ export const TokensHeader = ({ layout, setLayout }: IProps) => {
             <Icon as={SlidersIcon} w="20px" h="20px" />
           </InputLeftElement>
           <Input
-          pl='40px'
+            pl="40px"
             borderColor="text.600"
             placeholder={t("filter_tokens") || ""}
             _placeholder={{ color: "text.500" }}
@@ -62,16 +69,18 @@ export const TokensHeader = ({ layout, setLayout }: IProps) => {
         <Flex
           bg="text.700"
           borderRadius="50px"
-          p="3px"
+          p={{ base: "3px 4px 3px 5px", sm: "3px" }}
           h="32px"
-          minW="132px"
+          minW={{ base: "unset", sm: "132px" }}
           gap="8px"
           justify="center"
           align="center"
         >
-          <Text fontSize="sm" color="text.400">
-            {t("view_by")}
-          </Text>
+          <Hide below="sm">
+            <Text fontSize="sm" color="text.400">
+              {t("view_by")}
+            </Text>
+          </Hide>
 
           <Flex gap="2px">
             <Flex

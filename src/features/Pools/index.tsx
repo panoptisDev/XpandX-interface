@@ -1,13 +1,14 @@
-import { ConnectWallet } from "@/components";
+import { LayoutIcon, PlusIcon, RefreshIcon, SquaresFourIcon } from "@/icons";
+import { XButton, XContainer } from "@/ui-kit";
 import {
-  LayoutIcon,
-  LightIcon,
-  PlusIcon,
-  RefreshIcon,
-  SquaresFourIcon,
-} from "@/icons";
-import { XButton, XContainer, XImage } from "@/ui-kit";
-import { Box, Flex, Icon, Stack, Text, useDisclosure } from "@chakra-ui/react";
+  Box,
+  Flex,
+  Icon,
+  Stack,
+  Text,
+  useDisclosure,
+  Hide,
+} from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import {
   ModalNewPosition,
@@ -30,16 +31,21 @@ export const Pools = () => {
   const address = useConnectWallet((state) => state.address);
   const [layout, setLayout] = useState("cards");
 
-  console.log({ address });
   return (
     <XContainer>
       <Stack
         w="100%"
         margin="0 auto"
         spacing={4}
-        maxW={!address ? "624px" : "100%"}
+        maxW={!address ? { base: "100%", lg: "624px" } : "100%"}
       >
-        <Flex w="100%" align="center" justify="space-between">
+        <Flex
+          w="100%"
+          gap="8px"
+          align={{ base: "flex-start", lg: "center" }}
+          justify="space-between"
+          direction={{ base: "column", lg: "row" }}
+        >
           <Text color="text.50" fontSize="2xl" fontWeight="bold">
             {t("pools")}
           </Text>
@@ -63,7 +69,7 @@ export const Pools = () => {
               borderColor="text.50"
               color="text.50"
               leftIcon={<Icon as={PlusIcon} />}
-              minW="150px"
+              minW={{ base: "140px", sm: "150px" }}
               onClick={onOpen}
             >
               {t("new_position")}
@@ -72,16 +78,18 @@ export const Pools = () => {
             <Flex
               bg="text.700"
               borderRadius="50px"
-              p="3px"
+              p={{ base: "3px 4px 3px 5px", sm: "3px" }}
               h="32px"
-              minW="132px"
+              minW={{ base: "unset", sm: "132px" }}
               gap="8px"
               justify="center"
               align="center"
             >
-              <Text fontSize="sm" color="text.400">
-                {t("view_by")}
-              </Text>
+              <Hide below="sm">
+                <Text fontSize="sm" color="text.400">
+                  {t("view_by")}
+                </Text>
+              </Hide>
 
               <Flex gap="2px">
                 <Flex
@@ -114,7 +122,15 @@ export const Pools = () => {
           </Flex>
         </Flex>
 
-        {address ? layout === "table" ?<TokensTable />:<TokensCards /> : <PoolsActive />}
+        {address ? (
+          layout === "table" ? (
+            <TokensTable />
+          ) : (
+            <TokensCards />
+          )
+        ) : (
+          <PoolsActive />
+        )}
 
         <ModalNewPosition isOpen={isOpen} onClose={onClose} />
         <ModalRefreshTable

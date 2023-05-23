@@ -6,7 +6,7 @@ import {
   ComposedChart,
   ResponsiveContainer,
   XAxis,
-  YAxis
+  YAxis,
 } from "recharts";
 
 const data = [
@@ -140,11 +140,15 @@ export const OverviewChartTVL = () => {
 
   return (
     <Stack
+      direction={{ base: "column", sm: "row", lg: "column" }}
+      alignItems={{ base: "unset", sm: "center", lg: "unset" }}
+      gap={{ base: "unset", sm: "100px", lg: "unset" }}
       spacing="11px"
       p="12px 16px"
       bg="text.700"
       borderRadius="14px"
       w="100%"
+      h="100%"
     >
       <Box>
         <Text>{t("tvl")}</Text>
