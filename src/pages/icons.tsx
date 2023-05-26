@@ -1,6 +1,7 @@
 import {
   ArrowRight,
   GearSixIcon,
+  HourglassIcon,
   LayoutIcon,
   LightIcon,
   PlusIcon,
@@ -34,6 +35,7 @@ const Icons = () => {
       <LayoutIcon />
       <SquaresFourIcon />
       <SlidersIcon />
+      <HourglassIcon />
     </Box>
   );
 };

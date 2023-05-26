@@ -29,7 +29,13 @@ export const TokensCards = () => {
         }}
       >
         {data.map((item, idx) => (
-          <GridItem key={idx} p="16px" borderRadius="14px" bg="blackAlpha.50">
+          <GridItem
+            key={idx}
+            p="16px"
+            borderRadius="14px"
+            bg="blackAlpha.50"
+            _hover={{ bg: "text.700" }}
+          >
             <Stack spacing={3.5}>
               <Flex gap="10px" align="center">
                 <XImage

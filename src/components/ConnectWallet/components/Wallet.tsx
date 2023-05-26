@@ -1,4 +1,4 @@
-import { CloseIcon, PowerIcon, TrendDownIcon } from "@/icons";
+import { CloseIcon, HourglassIcon, PowerIcon, TrendDownIcon } from "@/icons";
 import { XButton, XImage } from "@/ui-kit";
 import { ellipseAddress } from "@/utils";
 import {
@@ -12,10 +12,11 @@ import {
   DrawerContent,
   DrawerOverlay,
   Flex,
+  Hide,
   Icon,
   Stack,
   Text,
-  Hide,
+  Tooltip
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { useState } from "react";
@@ -121,7 +122,29 @@ export const Wallet = ({
                 </Flex>
               </Box>
 
-              <XButton size="md">{t("buy_crypto")}</XButton>
+              <Tooltip
+                label={
+                  <Flex align="center" gap="4px" minH="30px">
+                    <Icon
+                      as={HourglassIcon}
+                      w="18px"
+                      h="18px"
+                      color="text.900"
+                    />
+                    {t("Coming soon")}
+                  </Flex>
+                }
+                hasArrow
+                placement="top"
+                bg="text.0"
+                borderRadius="5"
+                color="text.900"
+                fontSize="sm"
+              >
+                <Box>
+                  <XButton size="md">{t("buy_crypto")}</XButton>
+                </Box>
+              </Tooltip>
             </Stack>
 
             <Breadcrumb

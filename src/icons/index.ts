@@ -35,3 +35,4 @@ export * from "./squares-four";
 export * from "./sliders";
 export * from "./bar";
 export * from "./close";
+export * from "./hourglass";

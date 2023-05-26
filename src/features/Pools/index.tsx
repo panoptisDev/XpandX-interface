@@ -58,7 +58,6 @@ export const Pools = () => {
               p="5px 18px"
               gap="6px"
               cursor="pointer"
-              onClick={onOpenModalRefresh}
             >
               <Icon as={RefreshIcon} />
               <Text>{t("refresh")}</Text>
