@@ -1,9 +1,12 @@
-import { Box, Flex, Stack } from "@chakra-ui/react";
+import { Box, Fade, Stack } from "@chakra-ui/react";
 
 import { XContainer } from "@/ui-kit";
 import { CreditCardOption, SwapInfo, SwapToken } from "./components";
+import { useSwap } from "@/store/swap";
 
 export const Swap = () => {
+  const amount = useSwap((state) => state.amount);
+
   return (
     <XContainer>
       <Box m="91px auto">
@@ -14,7 +17,11 @@ export const Swap = () => {
           direction={{ base: "column", lg: "row" }}
         >
           <SwapToken />
-          <SwapInfo />
+          {!!amount && (
+            <Fade in={!!amount}>
+              <SwapInfo />
+            </Fade>
+          )}
         </Stack>
         <CreditCardOption m="34px auto" />
       </Box>

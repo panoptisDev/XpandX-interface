@@ -1,22 +1,26 @@
-import { Box, Stack, Text, Icon, StackProps } from "@chakra-ui/react";
+import { Box, Stack, Text, StackProps } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
-import { useState } from "react";
 import _ from "lodash";
 
 import { ConnectWallet, InputSwapToken } from "@/components";
-import { XButton } from "@/ui-kit";
-import { ArrowRight, SwapIcon } from "@/icons";
-import { COINS } from "@/constants/coin";
+import { SwapIcon } from "@/icons";
+import { useSwap } from "@/store/swap";
+import { useCoinPrice } from "@/hooks";
 
 interface Props extends StackProps {}
 
 export const SwapToken = ({ ...rest }: Props) => {
   const { t } = useTranslation();
-  const [tokens, setTokens] = useState([COINS[1], COINS[2]]);
+  const swapTokens = useSwap((state) => state.swapTokens);
+  const amount = useSwap((state) => state.amount);
+  const reverseTokens = useSwap((state) => state.reverseTokens);
+  const setAmount = useSwap((state) => state.setAmount);
+  const onChangeSwapTokens = useSwap((state) => state.onChangeSwapTokens);
 
-  const handleSwapToken = () => {
-    setTokens([..._.reverse(tokens)]);
-  };
+  const leftRootPrice = useCoinPrice(swapTokens[0].symbol);
+  const rightRootPrice = useCoinPrice(swapTokens[1].symbol);
+
+  const rightRootAmount = (leftRootPrice / rightRootPrice) * _.toNumber(amount);
 
   return (
     <Stack zIndex="0" w={{ base: "335px", sm: "500px", lg: "408px" }} {...rest}>
@@ -35,8 +39,14 @@ export const SwapToken = ({ ...rest }: Props) => {
           border="none"
           bgColor="text.700"
           pb="32px"
-          symbol={tokens[0].symbol}
+          symbol={swapTokens[0].symbol}
           selectEnabled
+          onChangeCoin={(coin) => onChangeSwapTokens([coin, swapTokens[1]])}
+          disabledSelectTokens={[swapTokens[1].symbol]}
+          inputProps={{
+            value: amount,
+            onChange: (val) => setAmount(val),
+          }}
         />
         <Stack
           bg="sec.1"
@@ -50,7 +60,7 @@ export const SwapToken = ({ ...rest }: Props) => {
           left="50%"
           transform="translate(-50%, 50%)"
           cursor="pointer"
-          onClick={handleSwapToken}
+          onClick={reverseTokens}
         >
           <SwapIcon fontSize="24px" />
         </Stack>
@@ -60,8 +70,15 @@ export const SwapToken = ({ ...rest }: Props) => {
         <InputSwapToken
           hideRate
           border="none"
-          symbol={tokens[1].symbol}
+          symbol={swapTokens[1].symbol}
           selectEnabled
+          onChangeCoin={(coin) => onChangeSwapTokens([swapTokens[0], coin])}
+          disabledSelectTokens={[swapTokens[0].symbol]}
+          inputProps={{
+            value: amount && rightRootAmount,
+            userSelect: "none",
+            pointerEvents: "none",
+          }}
         />
         <Box p="0 16px 16px">
           <ConnectWallet type="inApp" />

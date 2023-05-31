@@ -14,6 +14,7 @@ import { useTranslation } from "next-i18next";
 import { useRef } from "react";
 import { Wallet } from "./components";
 import { useConnectWallet } from "@/store/wallet";
+import { useSwap } from "@/store/swap";
 
 interface Props extends BoxProps {
   type: "inApp" | "header";
@@ -29,6 +30,9 @@ export const ConnectWallet = ({ type, filledConnectedBtn, ...rest }: Props) => {
   const loading = useConnectWallet((state) => state.loading);
   const venomConnect = useConnectWallet((state) => state.venomConnect);
   const venomProvider = useConnectWallet((state) => state.venomProvider);
+
+  const amount = useSwap((state) => state.amount);
+  const swapLoading = useSwap((state) => state.loading);
 
   const onConnectButtonClick = async () => {
     venomConnect?.connect();
@@ -56,8 +60,8 @@ export const ConnectWallet = ({ type, filledConnectedBtn, ...rest }: Props) => {
             <XButton
               rightIcon={<Icon as={ArrowRight} />}
               size="md"
-              // onClick={onOpen}
-              // onClick={onConnectButtonClick}
+              disabled={!amount}
+              isLoading={swapLoading}
             >
               {t("swap")}
             </XButton>

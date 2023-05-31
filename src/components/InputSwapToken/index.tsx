@@ -8,26 +8,37 @@ import {
   Stack,
   Text,
   StackProps,
+  NumberInputProps,
 } from "@chakra-ui/react";
 import React from "react";
 import { useTranslation } from "next-i18next";
 
 import { SelectToken } from "../SelectToken";
-import { Symbol } from "@/typings/coin";
+import { Coin, Symbol } from "@/typings/coin";
+import { useCoinPrice } from "@/hooks";
 
 interface Props extends StackProps {
   hideRate?: boolean;
   symbol: Symbol;
   selectEnabled?: boolean;
+  value?: string;
+  inputProps?: NumberInputProps;
+  disabledSelectTokens?: string[];
+  onChangeCoin?: (coin: Coin) => void;
 }
 
 export const InputSwapToken = ({
   hideRate,
   symbol,
   selectEnabled,
+  value,
+  inputProps,
+  disabledSelectTokens,
+  onChangeCoin,
   ...rest
 }: Props) => {
   const { t } = useTranslation();
+  const coinPrice = useCoinPrice(symbol);
 
   return (
     <Box>
@@ -50,8 +61,9 @@ export const InputSwapToken = ({
         </Flex>
 
         <Flex align="center" gap="18px">
-          <NumberInput defaultValue="0">
+          <NumberInput {...inputProps}>
             <NumberInputField
+              placeholder="0"
               w="100%"
               bg="transparent"
               border="none"
@@ -64,10 +76,15 @@ export const InputSwapToken = ({
 
           <Flex gap="18px">
             <Text color="text.500" fontSize="sm">
-              ~$1,335
+              ~${coinPrice}
             </Text>
 
-            <SelectToken symbol={symbol} selectEnabled={selectEnabled} />
+            <SelectToken
+              symbol={symbol}
+              selectEnabled={selectEnabled}
+              onChangeCoin={onChangeCoin}
+              disabledSelectTokens={disabledSelectTokens}
+            />
           </Flex>
         </Flex>
       </Stack>
