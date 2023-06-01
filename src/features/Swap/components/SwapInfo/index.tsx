@@ -42,7 +42,7 @@ export const SwapInfo = () => {
       </Stack>
 
       <Text align="center" color="text.400" mt="10px">
-        {t("minimum_to_receive")}
+        {t("you_will_receive")}
       </Text>
       <Text align="center" fontSize="xl" fontWeight="bold">
         0.492749 USDT
