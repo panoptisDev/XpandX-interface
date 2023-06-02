@@ -1,7 +1,7 @@
 import { Address } from "everscale-inpage-provider";
 
 import DexPairAbi from "@/abis/DexPair.json";
-import { ever } from "./ever";
+import { loadContract } from "./ever";
 
 export interface ExchangeInfo {
   expected_amount: number;
@@ -13,13 +13,7 @@ export const getExchangeInfo = async (
   spentTokenAddress: string,
   amount: number
 ): Promise<ExchangeInfo | undefined> => {
-  await ever.ensureInitialized();
-  await ever.requestPermissions({
-    permissions: ["basic"],
-  });
-
-  const dexPair = new ever.Contract(DexPairAbi, dexPairAddress);
-
+  const dexPair = await loadContract(dexPairAddress, DexPairAbi);
   try {
     const info: any = await (dexPair.methods as any)
       .expectedExchange({

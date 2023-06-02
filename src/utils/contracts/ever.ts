@@ -1,5 +1,6 @@
 import { ProviderRpcClient } from "everscale-inpage-provider";
 import { EverscaleStandaloneClient } from "everscale-standalone-client";
+import { Address, Contract } from "everscale-inpage-provider";
 
 export const ever = new ProviderRpcClient({
   fallback: () =>
@@ -14,3 +15,15 @@ export const ever = new ProviderRpcClient({
       },
     }),
 });
+
+export const loadContract = async (address: string | Address, abi: any) => {
+  await ever.ensureInitialized();
+  await ever.requestPermissions({
+    permissions: ["basic"],
+  });
+  return new Contract(
+    ever,
+    abi,
+    typeof address === "string" ? new Address(address) : address
+  );
+};
