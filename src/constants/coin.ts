@@ -1,57 +1,70 @@
+import { ADDRESSES } from "@/utils/contracts/_constant";
+
 export const COINS = [
   {
-    img: "/icons/coins/venom.svg",
-    name: "Venom",
-    symbol: "VENOM",
-    decimals: 9
-  },
-  {
-    img: "/icons/coins/wrapped-btc.svg",
-    name: "Wrapped Bitcoin",
-    symbol: "WBTC",
-    decimals: 9
-
-  },
-  {
-    img: "/icons/coins/wrapped-eth.svg",
-    name: "Wrapped Ethereum",
-    symbol: "WETH",
-    decimals: 9
-
-  },
-  {
-    img: "/icons/coins/binance.svg",
-    name: "Binance",
-    symbol: "BNB",
-    decimals: 9
-
-  },
-  {
-    img: "/icons/coins/fantom.svg",
-    name: "Fantom",
-    symbol: "FTM",
-    decimals: 9
-
+    img: "/icons/coins/xpandx.svg",
+    name: "XpandX",
+    symbol: "XPX",
+    address: ADDRESSES.XPANDAX,
+    price: 0.5,
+    decimals: 9,
   },
   {
     img: "/icons/coins/usdt.svg",
     name: "Tether USD",
     symbol: "USDT",
-    decimals: 9
-
+    address: ADDRESSES.USDT,
+    price: 1,
+    decimals: 9,
   },
   {
     img: "/icons/coins/usdc.svg",
     name: "USD Coin",
     symbol: "USDC",
-    decimals: 9
-
+    address: ADDRESSES.USDC,
+    price: 2,
+    decimals: 9,
+  },
+  {
+    img: "/icons/coins/venom.svg",
+    name: "Venom",
+    symbol: "VENOM",
+    address: "",
+    decimals: 9,
+  },
+  {
+    img: "/icons/coins/wrapped-btc.svg",
+    name: "Wrapped Bitcoin",
+    symbol: "WBTC",
+    address: "",
+    decimals: 9,
+  },
+  {
+    img: "/icons/coins/wrapped-eth.svg",
+    name: "Wrapped Ethereum",
+    symbol: "WETH",
+    address: "",
+    decimals: 9,
+  },
+  {
+    img: "/icons/coins/binance.svg",
+    name: "Binance",
+    symbol: "BNB",
+    address: "",
+    decimals: 9,
+  },
+  {
+    img: "/icons/coins/fantom.svg",
+    name: "Fantom",
+    symbol: "FTM",
+    address: "",
+    decimals: 9,
   },
   {
     img: "/icons/coins/dai.svg",
     name: "DAI",
     symbol: "DAI",
-    decimals: 9
-
+    address: "",
+    decimals: 9,
   },
-] as const;
+];
