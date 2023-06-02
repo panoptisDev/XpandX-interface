@@ -1,3 +1,4 @@
+import { useConverBigNummber } from "@/hooks";
 import { CloseIcon, HourglassIcon, PowerIcon, TrendDownIcon } from "@/icons";
 import { XButton, XImage } from "@/ui-kit";
 import { ellipseAddress } from "@/utils";
@@ -16,12 +17,13 @@ import {
   Icon,
   Stack,
   Text,
-  Tooltip
+  Tooltip,
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { useState } from "react";
 import { WalletActivity } from "./WalletActivity";
 import { WalletToken } from "./WalletToken";
+import { ethers } from "ethers";
 
 interface IProps {
   isOpen: boolean;
@@ -29,7 +31,7 @@ interface IProps {
   btnRef: any;
   address: string;
   onDisconnectButtonClick: () => void;
-  balance: string;
+  balance: ethers.BigNumber;
 }
 
 export const Wallet = ({
@@ -42,6 +44,7 @@ export const Wallet = ({
 }: IProps) => {
   const { t } = useTranslation();
   const [status, setStatus] = useState("tokens");
+  let _balance = useConverBigNummber("VENOM", balance);
 
   return (
     <Drawer
@@ -112,7 +115,7 @@ export const Wallet = ({
                   fontWeight="bold"
                   lineHeight="140%"
                 >
-                  ${balance}
+                  ${_balance}
                 </Text>
 
                 <Flex align="center" gap="6px">

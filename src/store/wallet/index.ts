@@ -1,13 +1,14 @@
+import { ethers } from "ethers";
 import { create } from "zustand";
 
 interface ConnectWalletState {
   loading: boolean;
-  balance: string;
+  balance: ethers.BigNumber;
   address: string;
   venomConnect: any;
   venomProvider: any;
   setLoading: (loading: boolean) => void;
-  setBalance: (balance: string) => void;
+  setBalance: (balance: ethers.BigNumber) => void;
   setAddress: (address: string) => void;
   setVenomConnect: (venomConnect: any) => void;
   setVenomProvider: (venomProvider: any) => void;
@@ -15,7 +16,7 @@ interface ConnectWalletState {
 
 export const useConnectWallet = create<ConnectWalletState>((set) => ({
   loading: false,
-  balance: "",
+  balance: ethers.utils.parseEther('0'),
   address: "",
   venomConnect: undefined,
   venomProvider: undefined,
