@@ -122,7 +122,7 @@ export const ConnectWallet = ({ type, filledConnectedBtn, ...rest }: Props) => {
         btnRef={btnRef}
         address={address || ""}
         onDisconnectButtonClick={onDisconnectButtonClick}
-        balance={balance || ""}
+        balance={balance || 0}
       />
     </Box>
   );
