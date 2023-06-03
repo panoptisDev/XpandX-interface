@@ -28,27 +28,27 @@ export const SwapInfo = () => {
   const rightRootPrice = useCoinPrice(swapTokens[1].symbol);
   const rate = leftRootPrice / rightRootPrice;
 
-  useEffect(() => {
-    (async () => {
-      try {
-        setLoading(true);
-        const address = await getPair(
-          swapTokens[0].address,
-          swapTokens[1].address
-        );
-        const exchangeInfo = await getExchangeInfo(
-          address as Address,
-          swapTokens[0].address,
-          _.toNumber(amount) || 0
-        );
-        setInfo(exchangeInfo);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [amount, swapTokens]);
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       setLoading(true);
+  //       const address = await getPair(
+  //         swapTokens[0].address,
+  //         swapTokens[1].address
+  //       );
+  //       const exchangeInfo = await getExchangeInfo(
+  //         address as Address,
+  //         swapTokens[0].address,
+  //         _.toNumber(amount) || 0
+  //       );
+  //       setInfo(exchangeInfo);
+  //     } catch (err) {
+  //       console.log(err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   })();
+  // }, [amount, swapTokens]);
 
   return (
     <Stack
