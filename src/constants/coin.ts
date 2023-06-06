@@ -2,6 +2,7 @@ import { ADDRESSES } from "@/utils/contracts/_constant";
 
 export const COINS = [
   {
+    id: "",
     img: "/icons/coins/xpandx.svg",
     name: "XpandX",
     symbol: "XPX",
@@ -10,6 +11,7 @@ export const COINS = [
     decimals: 18,
   },
   {
+    id: "tether",
     img: "/icons/coins/usdt.svg",
     name: "Tether USD",
     symbol: "USDT",
@@ -18,6 +20,7 @@ export const COINS = [
     decimals: 18,
   },
   {
+    id: "usd-coin",
     img: "/icons/coins/usdc.svg",
     name: "USD Coin",
     symbol: "USDC",
@@ -26,6 +29,7 @@ export const COINS = [
     decimals: 18,
   },
   {
+    id: "venom",
     img: "/icons/coins/venom.svg",
     name: "Wrapped Venom",
     symbol: "WVENOM",
@@ -34,6 +38,7 @@ export const COINS = [
     decimals: 18,
   },
   {
+    id: "wrapped-bitcoin",
     img: "/icons/coins/wrapped-btc.svg",
     name: "Wrapped Bitcoin",
     symbol: "WBTC",
@@ -41,6 +46,7 @@ export const COINS = [
     decimals: 18,
   },
   {
+    id: "weth",
     img: "/icons/coins/wrapped-eth.svg",
     name: "Wrapped Ethereum",
     symbol: "WETH",
@@ -48,6 +54,7 @@ export const COINS = [
     decimals: 18,
   },
   {
+    id: "binancecoin",
     img: "/icons/coins/binance.svg",
     name: "Binance",
     symbol: "BNB",
@@ -56,6 +63,7 @@ export const COINS = [
     price: 1,
   },
   {
+    id: "dai",
     img: "/icons/coins/dai.svg",
     name: "DAI",
     symbol: "DAI",
