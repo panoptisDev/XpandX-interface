@@ -7,7 +7,7 @@ export const COINS = [
     symbol: "XPX",
     address: ADDRESSES.XPANDAX,
     price: 0.5,
-    decimals: 9,
+    decimals: 18,
   },
   {
     img: "/icons/coins/usdt.svg",
@@ -15,7 +15,7 @@ export const COINS = [
     symbol: "USDT",
     address: ADDRESSES.USDT,
     price: 1,
-    decimals: 9,
+    decimals: 18,
   },
   {
     img: "/icons/coins/usdc.svg",
@@ -23,7 +23,7 @@ export const COINS = [
     symbol: "USDC",
     address: ADDRESSES.USDC,
     price: 2,
-    decimals: 9,
+    decimals: 18,
   },
   {
     img: "/icons/coins/venom.svg",
@@ -31,28 +31,28 @@ export const COINS = [
     symbol: "WVENOM",
     address: ADDRESSES.WVENOM,
     price: 1,
-    decimals: 9,
+    decimals: 18,
   },
   {
     img: "/icons/coins/wrapped-btc.svg",
     name: "Wrapped Bitcoin",
     symbol: "WBTC",
     address: "",
-    decimals: 9,
+    decimals: 18,
   },
   {
     img: "/icons/coins/wrapped-eth.svg",
     name: "Wrapped Ethereum",
     symbol: "WETH",
     address: ADDRESSES.WETH,
-    decimals: 9,
+    decimals: 18,
   },
   {
     img: "/icons/coins/binance.svg",
     name: "Binance",
     symbol: "BNB",
     address: ADDRESSES.BNB,
-    decimals: 9,
+    decimals: 18,
     price: 1,
   },
   {
@@ -60,7 +60,7 @@ export const COINS = [
     name: "DAI",
     symbol: "DAI",
     address: ADDRESSES.DAI,
-    decimals: 9,
+    decimals: 18,
     price: 2,
   },
 ];

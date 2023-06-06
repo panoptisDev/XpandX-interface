@@ -1,26 +1,59 @@
-import { Box, Stack, Text, StackProps } from "@chakra-ui/react";
+import { Box, Stack, Text, StackProps, useToast } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import _ from "lodash";
 
 import { ConnectWallet, InputSwapToken } from "@/components";
 import { SwapIcon } from "@/icons";
 import { useSwap } from "@/store/swap";
+import { useConnectWallet } from "@/store/wallet";
 import { useCoinPrice } from "@/hooks";
+import { exchange } from "@/utils/contracts/dexpair";
 
 interface Props extends StackProps {}
 
 export const SwapToken = ({ ...rest }: Props) => {
   const { t } = useTranslation();
+  const toast = useToast();
+
   const swapTokens = useSwap((state) => state.swapTokens);
   const amount = useSwap((state) => state.amount);
   const reverseTokens = useSwap((state) => state.reverseTokens);
   const setAmount = useSwap((state) => state.setAmount);
   const onChangeSwapTokens = useSwap((state) => state.onChangeSwapTokens);
+  const swapInfo = useSwap((state) => state.swapInfo);
+  const setLoading = useSwap((state) => state.setLoading);
+  const address = useConnectWallet((state) => state.address);
 
   const leftRootPrice = useCoinPrice(swapTokens[0].symbol);
   const rightRootPrice = useCoinPrice(swapTokens[1].symbol);
-
   const rightRootAmount = (leftRootPrice / rightRootPrice) * _.toNumber(amount);
+
+  const handleSwapToken = async () => {
+    try {
+      if (!swapInfo || !address) return;
+      setLoading(true);
+
+      await exchange({
+        spent_amount: swapInfo.spentAmount,
+        spent_token_root: swapInfo.spentToken,
+        receive_token_root: swapInfo.receiveToken,
+        send_gas_to: address,
+        expected_amount: swapInfo?.expectedAmountAsNumber,
+      });
+      toast({
+        description: "Swap successfully",
+        status: "success",
+      });
+    } catch (err) {
+      toast({
+        description: "Swap failed",
+        status: "error",
+      });
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Stack zIndex="0" w={{ base: "335px", sm: "500px", lg: "408px" }} {...rest}>
@@ -40,7 +73,7 @@ export const SwapToken = ({ ...rest }: Props) => {
           bgColor="text.700"
           pb="32px"
           symbol={swapTokens[0].symbol}
-          selectEnabled
+          selectEnabled={swapTokens[0].symbol !== "USDT"}
           onChangeCoin={(coin) => onChangeSwapTokens([coin, swapTokens[1]])}
           disabledSelectTokens={[swapTokens[1].symbol]}
           inputProps={{
@@ -71,7 +104,7 @@ export const SwapToken = ({ ...rest }: Props) => {
           hideRate
           border="none"
           symbol={swapTokens[1].symbol}
-          selectEnabled
+          selectEnabled={swapTokens[1].symbol !== "USDT"}
           onChangeCoin={(coin) => onChangeSwapTokens([swapTokens[0], coin])}
           disabledSelectTokens={[swapTokens[0].symbol]}
           inputProps={{
@@ -81,7 +114,7 @@ export const SwapToken = ({ ...rest }: Props) => {
           }}
         />
         <Box p="0 16px 16px">
-          <ConnectWallet type="inApp" />
+          <ConnectWallet type="inApp" onSwap={handleSwapToken} />
         </Box>
       </Box>
     </Stack>

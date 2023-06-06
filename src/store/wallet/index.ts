@@ -16,7 +16,7 @@ interface ConnectWalletState {
 
 export const useConnectWallet = create<ConnectWalletState>((set) => ({
   loading: false,
-  balance: ethers.utils.parseEther('0'),
+  balance: ethers.utils.parseEther("0"),
   address: "",
   venomConnect: undefined,
   venomProvider: undefined,
