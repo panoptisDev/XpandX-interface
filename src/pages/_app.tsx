@@ -9,6 +9,9 @@ import { EverscaleStandaloneClient } from "everscale-standalone-client";
 import { VenomConnect } from "venom-connect";
 import { useEffect, useState } from "react";
 import { useConnectWallet } from "@/store/wallet";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 export type NextPageWithLayout = NextComponentType & {
   getLayout?: (page: React.ReactElement) => React.ReactNode;
@@ -189,7 +192,9 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
 
   return (
     <ChakraProvider resetCSS theme={theme}>
-      {getLayout(<Component {...pageProps} />)}
+      <QueryClientProvider client={queryClient}>
+        {getLayout(<Component {...pageProps} />)}
+      </QueryClientProvider>
     </ChakraProvider>
   );
 };
