@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Box, Stack, Image, Text } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { Address } from "everscale-inpage-provider";
@@ -6,9 +6,10 @@ import _ from "lodash";
 
 import { NoteIcon } from "@/icons";
 import { getPair } from "@/utils/contracts/dexroot";
-import { getExchangeInfo, ExchangeInfo } from "@/utils/contracts/dexpair";
+import { getExchangeInfo } from "@/utils/contracts/dexpair";
 import { useSwap } from "@/store/swap";
-import { useCoinPrice } from "@/hooks";
+import { useCoinPrice, useDebounce } from "@/hooks";
+import { ExchangeInfo } from "@/typings/swap";
 
 interface InfoItemProps {
   name: string;
@@ -18,38 +19,47 @@ interface InfoItemProps {
 export const SwapInfo = () => {
   const { t } = useTranslation();
 
-  const [info, setInfo] = useState<ExchangeInfo>();
-
   const swapTokens = useSwap((state) => state.swapTokens);
+  const swapInfo = useSwap((state) => state.swapInfo);
   const amount = useSwap((state) => state.amount);
   const setLoading = useSwap((state) => state.setLoading);
+  const setSwapInfo = useSwap((state) => state.setSwapInfo);
 
   const leftRootPrice = useCoinPrice(swapTokens[0].symbol);
   const rightRootPrice = useCoinPrice(swapTokens[1].symbol);
+  const rightRootAmount = (leftRootPrice / rightRootPrice) * _.toNumber(amount);
+
   const rate = leftRootPrice / rightRootPrice;
+  const debounceAmount = useDebounce(amount, 300);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       setLoading(true);
-  //       const address = await getPair(
-  //         swapTokens[0].address,
-  //         swapTokens[1].address
-  //       );
-
-  //       const exchangeInfo = await getExchangeInfo(
-  //         address as Address,
-  //         swapTokens[0].address,
-  //         _.toNumber(amount) || 0
-  //       );
-  //       setInfo(exchangeInfo);
-  //     } catch (err) {
-  //       console.log(err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   })();
-  // }, [amount, swapTokens]);
+  useEffect(() => {
+    (async () => {
+      try {
+        setLoading(true);
+        const address = await getPair(
+          swapTokens[0].address,
+          swapTokens[1].address
+        );
+        const amount = _.toNumber(debounceAmount) || 0;
+        const exchangeInfo = await getExchangeInfo(
+          address as Address,
+          swapTokens[0].address,
+          amount
+        );
+        setSwapInfo({
+          ...exchangeInfo,
+          spentAmount: amount,
+          spentToken: swapTokens[0].address,
+          receiveToken: swapTokens[1].address,
+        } as ExchangeInfo);
+      } catch (err) {
+        setSwapInfo(undefined);
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [debounceAmount, swapTokens]);
 
   return (
     <Stack
@@ -73,11 +83,15 @@ export const SwapInfo = () => {
           {/* <InfoItem name="possible_slippage" value="5%" /> */}
           <InfoItem
             name="avg_transaction_cost"
-            value={`${info?.expected_amount || 0} VENOM`}
+            value={`${swapInfo?.expectedAmountAsString || 0} ${
+              swapTokens[0].symbol
+            }`}
           />
           <InfoItem
             name="refundable_fee"
-            value={`${info?.expected_fee || 0} VENOM`}
+            value={`${swapInfo?.expectedFeeAsString || 0} ${
+              swapTokens[0].symbol
+            }`}
           />
           {/* <InfoItem name="price_impact" value="Under 0.000008%" /> */}
           <InfoItem
@@ -100,7 +114,7 @@ export const SwapInfo = () => {
           {t("you_will_receive")}
         </Text>
         <Text align="center" fontSize="xl" fontWeight="bold">
-          0.492749 USDT
+          {rightRootAmount} {swapTokens[1].symbol}
         </Text>
       </Box>
     </Stack>

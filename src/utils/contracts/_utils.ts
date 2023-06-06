@@ -6,3 +6,10 @@ export const bigNumberAsFloat = (
 ): number => {
   return parseFloat(ethers.utils.formatUnits(value, unit));
 };
+
+export const floatAsBigNumber = (
+  value: number,
+  unit?: string | BigNumberish
+): ethers.BigNumber => {
+  return ethers.utils.parseUnits(`${value}`, unit);
+};

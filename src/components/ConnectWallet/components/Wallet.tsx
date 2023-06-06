@@ -44,7 +44,9 @@ export const Wallet = ({
 }: IProps) => {
   const { t } = useTranslation();
   const [status, setStatus] = useState("tokens");
-  let _balance = useConverBigNummber("VENOM", balance);
+  const _balanceFromBigNb = useConverBigNummber("VENOM", balance, 9);
+  let _balance =
+    typeof balance === "string" ? +balance / +`1e${9}` : _balanceFromBigNb;
 
   return (
     <Drawer

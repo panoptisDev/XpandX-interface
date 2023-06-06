@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { COINS } from "@/constants/coin";
 import { Coin } from "@/typings/coin";
+import { ExchangeInfo } from "@/typings/swap";
 
 interface SwapState {
   swapTokens: Coin[];
@@ -10,6 +11,8 @@ interface SwapState {
   setLoading: (loading: boolean) => void;
   setAmount: (amount: string) => void;
   onChangeSwapTokens: (tokens: Coin[]) => void;
+  setSwapInfo: (swapInfo?: ExchangeInfo) => void;
+  swapInfo?: ExchangeInfo;
 }
 
 export const useSwap = create<SwapState>((set) => ({
@@ -30,5 +33,9 @@ export const useSwap = create<SwapState>((set) => ({
   onChangeSwapTokens: (tokens: Coin[]) =>
     set(() => ({
       swapTokens: tokens,
+    })),
+  setSwapInfo: (swapInfo) =>
+    set(() => ({
+      swapInfo,
     })),
 }));

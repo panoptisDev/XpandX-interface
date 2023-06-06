@@ -19,14 +19,21 @@ import { useSwap } from "@/store/swap";
 interface Props extends BoxProps {
   type: "inApp" | "header";
   filledConnectedBtn?: boolean;
+  onSwap?: () => void;
 }
 
-export const ConnectWallet = ({ type, filledConnectedBtn, ...rest }: Props) => {
+export const ConnectWallet = ({
+  type,
+  filledConnectedBtn,
+  onSwap,
+  ...rest
+}: Props) => {
   const { t } = useTranslation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef(null);
   const address = useConnectWallet((state) => state.address);
   const balance = useConnectWallet((state) => state.balance);
+
   const loading = useConnectWallet((state) => state.loading);
   const venomConnect = useConnectWallet((state) => state.venomConnect);
   const venomProvider = useConnectWallet((state) => state.venomProvider);
@@ -62,6 +69,7 @@ export const ConnectWallet = ({ type, filledConnectedBtn, ...rest }: Props) => {
               size="md"
               disabled={!amount}
               isLoading={swapLoading}
+              onClick={onSwap}
             >
               {t("swap")}
             </XButton>
