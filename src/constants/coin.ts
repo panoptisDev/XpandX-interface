@@ -27,8 +27,8 @@ export const COINS = [
   },
   {
     img: "/icons/coins/venom.svg",
-    name: "Venom",
-    symbol: "VENOM",
+    name: "Wrapped Venom",
+    symbol: "WVENOM",
     address: ADDRESSES.WVENOM,
     price: 1,
     decimals: 9,
@@ -44,7 +44,7 @@ export const COINS = [
     img: "/icons/coins/wrapped-eth.svg",
     name: "Wrapped Ethereum",
     symbol: "WETH",
-    address: "",
+    address: ADDRESSES.WETH,
     decimals: 9,
   },
   {
