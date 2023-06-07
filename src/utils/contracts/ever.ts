@@ -17,10 +17,6 @@ export const ever = new ProviderRpcClient({
 });
 
 export const loadContract = async (address: string | Address, abi: any) => {
-  await ever.ensureInitialized();
-  await ever.requestPermissions({
-    permissions: ["basic"],
-  });
   return new Contract(
     ever,
     abi,
