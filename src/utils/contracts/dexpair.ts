@@ -69,5 +69,9 @@ export const exchange = async ({
       expected_amount: expected_amount * 1e18,
       send_gas_to: new Address(send_gas_to),
     })
-    .call();
+    .send({
+      from: new Address(send_gas_to),
+      amount: "1000000000",
+      bounce: true,
+    });
 };
