@@ -3,17 +3,6 @@
 # dependencies
 node_modules/*
 
-!node_modules/everscale-standalone-client
-node_modules/everscale-standalone-client/client
-node_modules/everscale-standalone-client/core.d.ts
-node_modules/everscale-standalone-client/core.js
-node_modules/everscale-standalone-client/index.d.ts
-node_modules/everscale-standalone-client/README.md
-node_modules/everscale-standalone-client/LICENSE
-node_modules/everscale-standalone-client/nodejs.d.ts
-node_modules/everscale-standalone-client/nodejs.js
-node_modules/everscale-standalone-client/package.json
-
 /.pnp
 .pnp.js
 

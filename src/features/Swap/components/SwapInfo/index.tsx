@@ -10,6 +10,7 @@ import { getExchangeInfo } from "@/utils/contracts/dexpair";
 import { useSwap } from "@/store/swap";
 import { useCoinPrice, useDebounce } from "@/hooks";
 import { ExchangeInfo } from "@/typings/swap";
+import { useConnectWallet } from "@/store/wallet";
 
 interface InfoItemProps {
   name: string;
@@ -24,6 +25,7 @@ export const SwapInfo = () => {
   const amount = useSwap((state) => state.amount);
   const setLoading = useSwap((state) => state.setLoading);
   const setSwapInfo = useSwap((state) => state.setSwapInfo);
+  const venomProvider = useConnectWallet((state) => state.venomProvider);
 
   const leftRootPrice = useCoinPrice(swapTokens[0].symbol);
   const rightRootPrice = useCoinPrice(swapTokens[1].symbol);
@@ -34,17 +36,20 @@ export const SwapInfo = () => {
 
   useEffect(() => {
     (async () => {
+      if (!venomProvider) return;
       try {
         setLoading(true);
         const address = await getPair(
           swapTokens[0].address,
-          swapTokens[1].address
+          swapTokens[1].address,
+          venomProvider
         );
         const amount = _.toNumber(debounceAmount) || 0;
         const exchangeInfo = await getExchangeInfo(
           address as Address,
           swapTokens[0].address,
-          amount
+          amount,
+          venomProvider
         );
         setSwapInfo({
           ...exchangeInfo,
@@ -59,7 +64,7 @@ export const SwapInfo = () => {
         setLoading(false);
       }
     })();
-  }, [debounceAmount, swapTokens]);
+  }, [debounceAmount, swapTokens, venomProvider]);
 
   return (
     <Stack

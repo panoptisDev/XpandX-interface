@@ -4,12 +4,13 @@ import { ChakraProvider } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
 import type { NextComponentType } from "next";
 import { appWithTranslation } from "next-i18next";
-import { ProviderRpcClient } from "everscale-inpage-provider";
+import { ProviderRpcClient, Address } from "everscale-inpage-provider";
 import { EverscaleStandaloneClient } from "everscale-standalone-client";
 import { VenomConnect } from "venom-connect";
 import { useEffect, useState } from "react";
 import { useConnectWallet } from "@/store/wallet";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import _ from "lodash";
 
 const queryClient = new QueryClient();
 
@@ -23,7 +24,7 @@ type AppPropsWithLayout = AppProps & {
 
 const initTheme = "dark" as const;
 
-const standaloneFallback = () =>
+export const standaloneFallback = () =>
   EverscaleStandaloneClient.create({
     connection: {
       id: 1002,
@@ -33,6 +34,7 @@ const standaloneFallback = () =>
         endpoint: "https://jrpc-devnet.venom.foundation/",
       },
     },
+    // initInput: "../../node_modules/nekoton-wasm/nekoton_wasm_bg.wasm",
   });
 
 const initVenomConnect = async () => {
@@ -121,9 +123,9 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
   const setVenomConnect = useConnectWallet((state) => state.setVenomConnect);
   const setVenomProvider = useConnectWallet((state) => state.setVenomProvider);
 
-  const [venomConnectLib, setVenomConnectLib] = useState<any>();
+  const [venomConnectLib, setVenomConnectLib] = useState<VenomConnect>();
 
-  const getAddress = async (provider: any) => {
+  const getAddress = async (provider: ProviderRpcClient) => {
     const providerState = await provider?.getProviderState?.();
 
     const address =
@@ -132,19 +134,20 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
     return address;
   };
 
-  const getBalance = async (provider: any, _address: string) => {
+  const getBalance = async (provider: ProviderRpcClient, _address: string) => {
     try {
-      const providerBalance = await provider?.getBalance?.(_address);
-
+      const providerBalance = await provider?.getBalance?.(
+        new Address(_address)
+      );
       return providerBalance;
     } catch (error) {
       return undefined;
     }
   };
 
-  const checkAuth = async (_venomConnect: any) => {
+  const checkAuth = async (_venomConnect: VenomConnect) => {
     const auth = await _venomConnect?.checkAuth();
-    if (auth) await getAddress(_venomConnect);
+    if (auth) await getAddress(_venomConnect as any);
   };
 
   const onInitButtonClick = async () => {
@@ -157,13 +160,14 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
     setLoading(false);
   };
 
-  const check = async (_provider: any) => {
+  const check = async (_provider: ProviderRpcClient) => {
+    await _provider.ensureInitialized();
     const _address = _provider ? await getAddress(_provider) : undefined;
     const _balance =
       _provider && _address ? await getBalance(_provider, _address) : undefined;
 
     setAddress(_address);
-    setBalance(_balance);
+    setBalance(_balance ? _.toNumber(_balance) / 1e9 : 0);
 
     if (_provider && _address)
       setTimeout(() => {
@@ -171,9 +175,8 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
       }, 100);
   };
 
-  const onConnect = async (provider: any) => {
+  const onConnect = async (provider: ProviderRpcClient) => {
     setVenomProvider(provider);
-
     check(provider);
   };
 
