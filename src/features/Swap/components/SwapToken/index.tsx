@@ -23,6 +23,7 @@ export const SwapToken = ({ ...rest }: Props) => {
   const swapInfo = useSwap((state) => state.swapInfo);
   const setLoading = useSwap((state) => state.setLoading);
   const address = useConnectWallet((state) => state.address);
+  const venomProvider = useConnectWallet((state) => state.venomProvider);
 
   const leftRootPrice = useCoinPrice(swapTokens[0].symbol);
   const rightRootPrice = useCoinPrice(swapTokens[1].symbol);
@@ -30,7 +31,7 @@ export const SwapToken = ({ ...rest }: Props) => {
 
   const handleSwapToken = async () => {
     try {
-      if (!swapInfo || !address) return;
+      if (!swapInfo || !address || !venomProvider) return;
       setLoading(true);
 
       await exchange({
@@ -39,6 +40,7 @@ export const SwapToken = ({ ...rest }: Props) => {
         receive_token_root: swapInfo.receiveToken,
         send_gas_to: address,
         expected_amount: swapInfo?.expectedAmountAsNumber,
+        provider: venomProvider,
       });
       toast({
         description: "Swap successfully",

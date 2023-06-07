@@ -1,4 +1,4 @@
-import { Address } from "everscale-inpage-provider";
+import { Address, ProviderRpcClient } from "everscale-inpage-provider";
 
 import DexPairAbi from "@/abis/DexPair.json";
 import DexAccountAbi from "@/abis/DexAccount.json";
@@ -14,16 +14,18 @@ interface ExchangeProps {
   receive_token_root: string;
   expected_amount: number;
   send_gas_to: string;
+  provider: ProviderRpcClient;
 }
 
 export const getExchangeInfo = async (
   dexPairAddress: Address,
   spentTokenAddress: string,
-  amount: number
+  amount: number,
+  provider: ProviderRpcClient
 ): Promise<Partial<ExchangeInfo> | undefined> => {
-  const dexPair = await loadContract(dexPairAddress, DexPairAbi);
+  const dexPair = await loadContract(dexPairAddress, DexPairAbi, provider);
   try {
-    const info: any = await (dexPair.methods as any)
+    const info = await (dexPair.methods as any)
       .expectedExchange({
         answerId: 0,
         amount: amount * 1e18,
@@ -58,8 +60,13 @@ export const exchange = async ({
   receive_token_root,
   send_gas_to,
   expected_amount,
+  provider,
 }: ExchangeProps): Promise<void> => {
-  const dexAccount = await loadContract(ADDRESSES.USDT, DexAccountAbi);
+  const dexAccount = await loadContract(
+    ADDRESSES.USDT,
+    DexAccountAbi,
+    provider
+  );
   await (dexAccount.methods as any)
     .exchange({
       call_id: 0,

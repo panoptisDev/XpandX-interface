@@ -23,7 +23,6 @@ import { useTranslation } from "next-i18next";
 import { useState } from "react";
 import { WalletActivity } from "./WalletActivity";
 import { WalletToken } from "./WalletToken";
-import { ethers } from "ethers";
 
 interface IProps {
   isOpen: boolean;
@@ -31,7 +30,7 @@ interface IProps {
   btnRef: any;
   address: string;
   onDisconnectButtonClick: () => void;
-  balance: ethers.BigNumber;
+  balance: number;
 }
 
 export const Wallet = ({
@@ -44,9 +43,6 @@ export const Wallet = ({
 }: IProps) => {
   const { t } = useTranslation();
   const [status, setStatus] = useState("tokens");
-  const _balanceFromBigNb = useConverBigNummber("VENOM", balance, 9);
-  let _balance =
-    typeof balance === "string" ? +balance / +`1e${9}` : _balanceFromBigNb;
 
   return (
     <Drawer
@@ -117,7 +113,7 @@ export const Wallet = ({
                   fontWeight="bold"
                   lineHeight="140%"
                 >
-                  ${_balance}
+                  ${balance}
                 </Text>
 
                 <Flex align="center" gap="6px">
