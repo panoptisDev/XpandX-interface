@@ -1,17 +1,17 @@
+import { ComingSoon2 } from "@/components";
 import { XContainer } from "@/ui-kit";
-import React from "react";
+import { Stack } from "@chakra-ui/react";
 import {
   AnalyticsOverview,
   AnalyticsTableTopPools,
   AnalyticsTableTopToken,
   AnalyticsTableTransactions,
 } from "./components";
-import { Stack } from "@chakra-ui/react";
 
 export const Analytics = () => {
   return (
     <XContainer>
-      <Stack spacing={5}>
+      <Stack spacing={5} position="relative" filter="blur(5px)" opacity="0.6">
         <AnalyticsOverview />
 
         <AnalyticsTableTopToken />
@@ -20,6 +20,7 @@ export const Analytics = () => {
 
         <AnalyticsTableTransactions />
       </Stack>
+      <ComingSoon2 />
     </XContainer>
   );
 };
