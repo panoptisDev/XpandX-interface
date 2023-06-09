@@ -10,6 +10,7 @@ export const TokenSingle = () => {
       <InputSwapToken
         // hideRate
         symbol={COINS[6].symbol}
+        address={COINS[6].address}
         selectEnabled
         border="1px solid"
         borderColor="text.600"

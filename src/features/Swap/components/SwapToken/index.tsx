@@ -75,6 +75,7 @@ export const SwapToken = ({ ...rest }: Props) => {
           bgColor="text.700"
           pb="32px"
           symbol={swapTokens[0].symbol}
+          address={swapTokens[0].address}
           selectEnabled={swapTokens[0].symbol !== "USDT"}
           onChangeCoin={(coin) => onChangeSwapTokens([coin, swapTokens[1]])}
           disabledSelectTokens={[swapTokens[1].symbol]}
@@ -106,6 +107,7 @@ export const SwapToken = ({ ...rest }: Props) => {
           hideRate
           border="none"
           symbol={swapTokens[1].symbol}
+          address={swapTokens[1].address}
           selectEnabled={swapTokens[1].symbol !== "USDT"}
           onChangeCoin={(coin) => onChangeSwapTokens([swapTokens[0], coin])}
           disabledSelectTokens={[swapTokens[0].symbol]}

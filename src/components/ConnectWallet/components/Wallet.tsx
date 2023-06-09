@@ -23,6 +23,8 @@ import { useTranslation } from "next-i18next";
 import { useState } from "react";
 import { WalletActivity } from "./WalletActivity";
 import { WalletToken } from "./WalletToken";
+import { useTokenState } from "@/hooks";
+import { ADDRESSES } from "@/utils/contracts/_constant";
 
 interface IProps {
   isOpen: boolean;
@@ -43,6 +45,7 @@ export const Wallet = ({
 }: IProps) => {
   const { t } = useTranslation();
   const [status, setStatus] = useState("tokens");
+  
 
   return (
     <Drawer

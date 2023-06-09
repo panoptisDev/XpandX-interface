@@ -15,11 +15,12 @@ import { useTranslation } from "next-i18next";
 
 import { SelectToken } from "../SelectToken";
 import { Coin, Symbol } from "@/typings/coin";
-import { useCoinPrice } from "@/hooks";
+import { useCoinPrice, useTokenState } from "@/hooks";
 
 interface Props extends StackProps {
   hideRate?: boolean;
   symbol: Symbol;
+  address: string;
   selectEnabled?: boolean;
   value?: string;
   inputProps?: NumberInputProps;
@@ -30,6 +31,7 @@ interface Props extends StackProps {
 export const InputSwapToken = ({
   hideRate,
   symbol,
+  address,
   selectEnabled,
   value,
   inputProps,
@@ -39,6 +41,7 @@ export const InputSwapToken = ({
 }: Props) => {
   const { t } = useTranslation();
   const coinPrice = useCoinPrice(symbol);
+  const { balance } = useTokenState(address);
 
   return (
     <Box>
@@ -56,7 +59,7 @@ export const InputSwapToken = ({
             <Text as="span" color="text.500">
               {t("balance")}
             </Text>
-            : 3048.80 USDT
+            : {balance} {symbol}
           </Box>
         </Flex>
 
