@@ -1,13 +1,6 @@
 import DexRootAbi from "@/abis/DexRoot.json";
 import DexVaultAbi from "@/abis/DexVault.json";
-import XpandaXAbi from "@/abis/Xpandax.json";
-import usdtAbi from "@/abis/USDT.json";
-import usdcAbi from "@/abis/USDC.json";
-import daiAbi from "@/abis/DAI.json";
-import bnbAbi from "@/abis/BNB.json";
-import wethAbi from "@/abis/WETH.json";
-import wtdAbi from "@/abis/WTD.json";
-import wvenomAbi from "@/abis/WVENOM.json";
+import TokenAbi from "@/abis/TokenRoot.json";
 
 export const ADDRESSES = {
   DEXROOT: "0:5c4796acbcd1d056d54fd049a4e2f3ce9ccbc98dd7ef8beea34863503c7c8c59",
@@ -34,34 +27,34 @@ export const ROOT_DATA = [
   },
   {
     address: ADDRESSES.XPANDAX,
-    abi: XpandaXAbi,
+    abi: TokenAbi,
   },
   {
     address: ADDRESSES.USDT,
-    abi: usdtAbi,
+    abi: TokenAbi,
   },
   {
     address: ADDRESSES.USDC,
-    abi: usdcAbi,
+    abi: TokenAbi,
   },
   {
     address: ADDRESSES.DAI,
-    abi: daiAbi,
+    abi: TokenAbi,
   },
   {
     address: ADDRESSES.WETH,
-    abi: wethAbi,
+    abi: TokenAbi,
   },
   {
     address: ADDRESSES.BNB,
-    abi: bnbAbi,
+    abi: TokenAbi,
   },
   {
     address: ADDRESSES.WTD,
-    abi: wtdAbi,
+    abi: TokenAbi,
   },
   {
     address: ADDRESSES.WVENOM,
-    abi: wvenomAbi,
+    abi: TokenAbi,
   },
 ];

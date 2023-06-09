@@ -1,5 +1,14 @@
 import { ADDRESSES } from "@/utils/contracts/_constant";
 
+export interface Coin {
+  id: string;
+  img: string;
+  name: string;
+  symbol: string;
+  address: string;
+  decimals: number;
+}
+
 export const COINS = [
   {
     id: "",
@@ -7,7 +16,6 @@ export const COINS = [
     name: "XpandX",
     symbol: "XPX",
     address: ADDRESSES.XPANDAX,
-    price: 0.5,
     decimals: 18,
   },
   {
@@ -16,7 +24,6 @@ export const COINS = [
     name: "Tether USD",
     symbol: "USDT",
     address: ADDRESSES.USDT,
-    price: 1,
     decimals: 18,
   },
   {
@@ -25,7 +32,6 @@ export const COINS = [
     name: "USD Coin",
     symbol: "USDC",
     address: ADDRESSES.USDC,
-    price: 2,
     decimals: 18,
   },
   {
@@ -34,17 +40,16 @@ export const COINS = [
     name: "Wrapped Venom",
     symbol: "WVENOM",
     address: ADDRESSES.WVENOM,
-    price: 1,
     decimals: 18,
   },
-  {
-    id: "wrapped-bitcoin",
-    img: "/icons/coins/wrapped-btc.svg",
-    name: "Wrapped Bitcoin",
-    symbol: "WBTC",
-    address: "",
-    decimals: 18,
-  },
+  // {
+  //   id: "wrapped-bitcoin",
+  //   img: "/icons/coins/wrapped-btc.svg",
+  //   name: "Wrapped Bitcoin",
+  //   symbol: "WBTC",
+  //   address: "",
+  //   decimals: 18,
+  // },
   {
     id: "weth",
     img: "/icons/coins/wrapped-eth.svg",
@@ -60,7 +65,6 @@ export const COINS = [
     symbol: "BNB",
     address: ADDRESSES.BNB,
     decimals: 18,
-    price: 1,
   },
   {
     id: "dai",
@@ -69,6 +73,5 @@ export const COINS = [
     symbol: "DAI",
     address: ADDRESSES.DAI,
     decimals: 18,
-    price: 2,
   },
 ];

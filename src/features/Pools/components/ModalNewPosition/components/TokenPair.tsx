@@ -23,6 +23,7 @@ export const TokenPair = () => {
       <InputSwapToken
         hideRate
         symbol={tokens[0].symbol}
+        address={tokens[0].address}
         selectEnabled
         border="1px solid"
         borderColor="text.600"
@@ -31,6 +32,7 @@ export const TokenPair = () => {
       <InputSwapToken
         hideRate
         symbol={tokens[1].symbol}
+        address={tokens[1].address}
         selectEnabled
         border="1px solid"
         borderColor="text.600"
