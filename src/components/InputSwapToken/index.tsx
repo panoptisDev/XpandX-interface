@@ -12,10 +12,12 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useTranslation } from "next-i18next";
+import _ from "lodash";
 
 import { SelectToken } from "../SelectToken";
 import { Coin, Symbol } from "@/typings/coin";
-import { useCoinPrice, useTokenState } from "@/hooks";
+import { useCoinPrice } from "@/hooks";
+import { useTokenData } from "@/apis/coin";
 
 interface Props extends StackProps {
   hideRate?: boolean;
@@ -41,7 +43,8 @@ export const InputSwapToken = ({
 }: Props) => {
   const { t } = useTranslation();
   const coinPrice = useCoinPrice(symbol);
-  const { balance } = useTokenState(address);
+  const { data } = useTokenData();
+  const balance = _.find(data, (c) => c.address === address)?.balance || 0;
 
   return (
     <Box>

@@ -8,6 +8,12 @@ import { useSwap } from "@/store/swap";
 import { useConnectWallet } from "@/store/wallet";
 import { useCoinPrice } from "@/hooks";
 import { exchange } from "@/utils/contracts/dexpair";
+import {
+  getExpectedAccountAddress,
+  getWallets,
+} from "@/utils/contracts/dexroot";
+import { transfer, deployWallet } from "@/utils/contracts/token";
+import { useTokenData } from "@/apis/coin";
 
 interface Props extends StackProps {}
 
@@ -29,11 +35,42 @@ export const SwapToken = ({ ...rest }: Props) => {
   const rightRootPrice = useCoinPrice(swapTokens[1].symbol);
   const rightRootAmount = (leftRootPrice / rightRootPrice) * _.toNumber(amount);
 
+  const { data } = useTokenData();
+  const deployedTokenAddress =
+    _.find(data, (c) => c.address === address)?.deployedAddress || 0;
+
+  const handleTransferToken = async () => {
+    try {
+      if (!swapInfo || !address || !venomProvider || !deployedTokenAddress)
+        return;
+      await deployWallet(swapTokens[0].address, address, venomProvider);
+      const dexAccount = await getExpectedAccountAddress(
+        address,
+        venomProvider
+      );
+
+      if (dexAccount) {
+        const wallets = await getWallets(dexAccount, venomProvider);
+        await transfer({
+          amount: swapInfo.spentAmount,
+          address: deployedTokenAddress.toString(),
+          recipient: dexAccount,
+          provider: venomProvider,
+          walletAddress: address,
+          deployWalletValue: _.size(wallets) > 0 ? "0" : undefined,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleSwapToken = async () => {
     try {
       if (!swapInfo || !address || !venomProvider) return;
       setLoading(true);
 
+      // await handleTransferToken();
       await exchange({
         spent_amount: swapInfo.spentAmount,
         spent_token_root: swapInfo.spentToken,
