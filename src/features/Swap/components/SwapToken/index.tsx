@@ -93,6 +93,7 @@ export const SwapToken = ({ ...rest }: Props) => {
         address,
         venomProvider
       );
+
       await handleTransferToken(dexAccount);
       await exchange({
         dexAccountAddress: dexAccount as Address,
