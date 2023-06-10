@@ -1,6 +1,8 @@
 import { Box, Stack, Text, StackProps, useToast } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import _ from "lodash";
+import { Address } from "everscale-inpage-provider";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { ConnectWallet, InputSwapToken } from "@/components";
 import { SwapIcon } from "@/icons";
@@ -9,17 +11,22 @@ import { useConnectWallet } from "@/store/wallet";
 import { useCoinPrice } from "@/hooks";
 import { exchange } from "@/utils/contracts/dexpair";
 import {
+  deployDexAccount,
   getExpectedAccountAddress,
   getWallets,
+  addPair,
+  withdraw,
 } from "@/utils/contracts/dexroot";
 import { transfer, deployWallet } from "@/utils/contracts/token";
 import { useTokenData } from "@/apis/coin";
+import { QueryKeysEnum } from "@/typings/query-key";
 
 interface Props extends StackProps {}
 
 export const SwapToken = ({ ...rest }: Props) => {
   const { t } = useTranslation();
   const toast = useToast();
+  const queryClient = useQueryClient();
 
   const swapTokens = useSwap((state) => state.swapTokens);
   const amount = useSwap((state) => state.amount);
@@ -36,42 +43,59 @@ export const SwapToken = ({ ...rest }: Props) => {
   const rightRootAmount = (leftRootPrice / rightRootPrice) * _.toNumber(amount);
 
   const { data } = useTokenData();
-  const deployedTokenAddress =
-    _.find(data, (c) => c.address === address)?.deployedAddress || 0;
+  const deployedTokenAddress = _.find(
+    data,
+    (c) => c.address === swapTokens[0].address
+  )?.deployedAddress;
 
-  const handleTransferToken = async () => {
-    try {
-      if (!swapInfo || !address || !venomProvider || !deployedTokenAddress)
-        return;
-      await deployWallet(swapTokens[0].address, address, venomProvider);
-      const dexAccount = await getExpectedAccountAddress(
-        address,
-        venomProvider
-      );
+  const handleDeployToken = async () => {
+    await deployWallet(swapTokens[0].address, address!, venomProvider!);
+    await deployWallet(swapTokens[1].address, address!, venomProvider!);
+  };
 
-      if (dexAccount) {
-        const wallets = await getWallets(dexAccount, venomProvider);
-        await transfer({
-          amount: swapInfo.spentAmount,
-          address: deployedTokenAddress.toString(),
-          recipient: dexAccount,
-          provider: venomProvider,
-          walletAddress: address,
-          deployWalletValue: _.size(wallets) > 0 ? "0" : undefined,
-        });
+  const handleTransferToken = async (dexAccount?: Address) => {
+    if (!swapInfo || !address || !venomProvider || !deployedTokenAddress)
+      return;
+
+    await handleDeployToken();
+    await deployDexAccount(address, venomProvider);
+
+    if (dexAccount) {
+      const wallets = await getWallets(dexAccount, venomProvider);
+
+      if (_.size(wallets) === 0) {
+        await addPair(
+          swapTokens[0].address,
+          swapTokens[1].address,
+          dexAccount,
+          address,
+          venomProvider
+        );
       }
-    } catch (err) {
-      console.log(err);
+      await transfer({
+        amount: swapInfo.spentAmount,
+        address: deployedTokenAddress.toString(),
+        recipient: dexAccount,
+        provider: venomProvider,
+        walletAddress: address,
+        deployWalletValue: _.size(wallets) > 0 ? "0" : undefined,
+      });
     }
   };
 
   const handleSwapToken = async () => {
     try {
-      if (!swapInfo || !address || !venomProvider) return;
+      if (!swapInfo || !address || !venomProvider || !deployedTokenAddress)
+        return;
       setLoading(true);
 
-      // await handleTransferToken();
+      const dexAccount = await getExpectedAccountAddress(
+        address,
+        venomProvider
+      );
+      await handleTransferToken(dexAccount);
       await exchange({
+        dexAccountAddress: dexAccount as Address,
         spent_amount: swapInfo.spentAmount,
         spent_token_root: swapInfo.spentToken,
         receive_token_root: swapInfo.receiveToken,
@@ -79,6 +103,14 @@ export const SwapToken = ({ ...rest }: Props) => {
         expected_amount: swapInfo?.expectedAmountAsNumber,
         provider: venomProvider,
       });
+      await withdraw(
+        swapInfo.spentAmount,
+        swapTokens[1].address,
+        address,
+        dexAccount as Address,
+        venomProvider
+      );
+      await queryClient.resetQueries([QueryKeysEnum.GET_COIN_BALANCES]);
       toast({
         description: "Swap successfully",
         status: "success",

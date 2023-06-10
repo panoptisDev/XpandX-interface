@@ -9,6 +9,7 @@ import { ADDRESSES } from "./_constant";
 import { ExchangeInfo } from "@/typings/swap";
 
 interface ExchangeProps {
+  dexAccountAddress: Address;
   spent_amount: number;
   spent_token_root: string;
   receive_token_root: string;
@@ -55,6 +56,7 @@ export const getExchangeInfo = async (
 };
 
 export const exchange = async ({
+  dexAccountAddress,
   spent_amount,
   spent_token_root,
   receive_token_root,
@@ -63,22 +65,22 @@ export const exchange = async ({
   provider,
 }: ExchangeProps): Promise<void> => {
   const dexAccount = await loadContract(
-    ADDRESSES.USDT,
+    dexAccountAddress,
     DexAccountAbi,
     provider
   );
   await (dexAccount.methods as any)
     .exchange({
       call_id: 0,
-      spent_amount: spent_amount * 1e18,
+      spent_amount: `${spent_amount * 1e18}`,
       spent_token_root: new Address(spent_token_root),
       receive_token_root: new Address(receive_token_root),
-      expected_amount: expected_amount * 1e18,
+      expected_amount: 0,
       send_gas_to: new Address(send_gas_to),
     })
     .send({
       from: new Address(send_gas_to),
-      amount: "1000000000",
+      amount: "5000000000",
       bounce: true,
     });
 };
