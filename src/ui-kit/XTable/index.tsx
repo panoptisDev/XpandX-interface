@@ -28,7 +28,7 @@ export const XTable = ({ children, ...props }: TableContainerProps) => {
         </Table>
       </TableContainer>
 
-      <Box
+      {/* <Box
         sx={{
           position: "sticky",
           left: 0,
@@ -36,7 +36,7 @@ export const XTable = ({ children, ...props }: TableContainerProps) => {
         }}
       >
         <Pagination />
-      </Box>
+      </Box> */}
     </Box>
   );
 };

@@ -126,6 +126,8 @@ export const SwapToken = ({ ...rest }: Props) => {
     }
   };
 
+  console.log({ swapInfo });
+
   return (
     <Stack zIndex="0" w={{ base: "335px", sm: "500px", lg: "408px" }} {...rest}>
       <Box position="relative">
