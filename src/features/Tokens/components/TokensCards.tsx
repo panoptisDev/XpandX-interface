@@ -1,18 +1,16 @@
-import { Pagination } from "@/components";
+import { TOKENS_DATA } from "@/constants/coin";
+import { ArrowRight } from "@/icons";
+import { XImage } from "@/ui-kit";
 import {
   Divider,
   Flex,
+  Grid,
+  GridItem,
   Icon,
   Stack,
   Text,
-  Grid,
-  GridItem,
 } from "@chakra-ui/react";
-import React from "react";
-import { data } from "./TokensTable";
-import { XImage } from "@/ui-kit";
 import { useTranslation } from "next-i18next";
-import { ArrowRight, TrendDownIcon, TrendUpIcon } from "@/icons";
 
 export const TokensCards = () => {
   const { t } = useTranslation();
@@ -28,7 +26,7 @@ export const TokensCards = () => {
           lg: "repeat(3, 1fr)",
         }}
       >
-        {data.map((item, idx) => (
+        {TOKENS_DATA.map((item, idx) => (
           <GridItem
             key={idx}
             p="16px"
@@ -36,16 +34,19 @@ export const TokensCards = () => {
             bg="blackAlpha.50"
             _hover={{ bg: "text.700" }}
           >
-            <Stack spacing={3.5}>
+            <Stack
+              spacing={3.5}
+              onClick={() =>
+                window.open(
+                  `https://devnet.venomscan.com/accounts/${item.address}`
+                )
+              }
+              cursor="pointer"
+            >
               <Flex gap="10px" align="center">
-                <XImage
-                  src={item.token.icon}
-                  alt="venom"
-                  width="36"
-                  height="36"
-                />
-                <Text>{item.token.name}</Text>
-                <Text color="text.500">{item.token.stable}</Text>
+                <XImage src={item.icon} alt="venom" width="36" height="36" />
+                <Text>{item.name}</Text>
+                <Text color="text.500">{item.symbol}</Text>
               </Flex>
 
               <Divider borderColor="text.700" />
@@ -59,9 +60,7 @@ export const TokensCards = () => {
                 >
                   {t("price")}
                 </Text>
-                <Text color="text.50" fontSize="sm">
-                  {item.price}
-                </Text>
+                <Text color="text.50" fontSize="sm" />
               </Flex>
 
               <Flex align="center" justify="space-between">
@@ -74,7 +73,7 @@ export const TokensCards = () => {
                   {t("change")}
                 </Text>
 
-                <Flex
+                {/* <Flex
                   align="center"
                   gap="6px"
                   color={item.isChangeDown ? "#FF796C" : "#A7F984"}
@@ -85,7 +84,7 @@ export const TokensCards = () => {
                     h="20px"
                   />
                   <Text fontSize="sm">{item.change}</Text>
-                </Flex>
+                </Flex> */}
               </Flex>
 
               <Flex align="center" justify="space-between">
@@ -97,9 +96,9 @@ export const TokensCards = () => {
                 >
                   {t("volume24h")}
                 </Text>
-                <Text color="text.50" fontSize="sm">
+                {/* <Text color="text.50" fontSize="sm">
                   {item.volume}
-                </Text>
+                </Text> */}
               </Flex>
 
               <Flex align="center" justify="space-between">
@@ -120,15 +119,15 @@ export const TokensCards = () => {
                     {t("tvl")}
                   </Text>
                 </Flex>
-                <Text color="text.50" fontSize="sm">
+                {/* <Text color="text.50" fontSize="sm">
                   {item.tvl}
-                </Text>
+                </Text> */}
               </Flex>
             </Stack>
           </GridItem>
         ))}
       </Grid>
-      <Pagination />
+      {/* <Pagination /> */}
     </Stack>
   );
 };

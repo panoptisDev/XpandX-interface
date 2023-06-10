@@ -7,6 +7,7 @@ import { readableNumberFormatter } from "../number";
 import { loadContract } from "./ever";
 import { ADDRESSES } from "./_constant";
 import { ExchangeInfo } from "@/typings/swap";
+import { BigNumber } from "bignumber.js";
 
 interface ExchangeProps {
   spent_amount: number;
@@ -81,4 +82,74 @@ export const exchange = async ({
       amount: "1000000000",
       bounce: true,
     });
+};
+
+interface LiquidityProps {
+  left_amount: string;
+  left_root: string;
+  right_root: string;
+  right_amount: string;
+  expected_lp_root: Address;
+  owner: string;
+  provider: ProviderRpcClient;
+}
+
+export const depositLiquidity = async ({
+  provider,
+  left_amount,
+  right_amount,
+  left_root,
+  right_root,
+  expected_lp_root,
+  owner,
+}: LiquidityProps) => {
+  const dexAccount = await loadContract(
+    ADDRESSES.USDT,
+    DexAccountAbi,
+    provider
+  );
+
+  const tx = await (dexAccount.methods as any)
+    .depositLiquidity({
+      call_id: 0,
+      left_root: new Address(left_root),
+      left_amount: left_amount,
+      right_root: new Address(right_root),
+      right_amount: right_amount,
+      expected_lp_root: expected_lp_root,
+      auto_change: true,
+      send_gas_to: owner,
+    })
+    .send({
+      from: owner,
+      amount: "1000000000",
+    });
+  //
+  console.log("transaction", tx.id);
+};
+
+interface ExpectedDepositLiquidity {
+  left_amount: string;
+  right_amount: string;
+  pair_address: Address;
+  provider: ProviderRpcClient;
+}
+
+export const expectedDepositLiquidity = async ({
+  provider,
+  left_amount,
+  right_amount,
+  pair_address,
+}: ExpectedDepositLiquidity) => {
+  const dexPair = await loadContract(pair_address, DexPairAbi, provider);
+  console.log({ left_amount, right_amount, dexPair: dexPair.address });
+  const data = await (dexPair.methods as any)
+    .expectedDepositLiquidity({
+      answerId: 0,
+      left_amount,
+      right_amount,
+      auto_change: true,
+    })
+    .call();
+  return data.value0;
 };

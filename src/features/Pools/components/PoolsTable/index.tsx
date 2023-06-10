@@ -1,109 +1,8 @@
-import { ArrowRight, TrendDownIcon, TrendUpIcon } from "@/icons";
+import { PAIRS_DATA } from "@/constants/coin";
+import { ArrowRight } from "@/icons";
 import { XImage, XTable, XTableTd, XTableTh } from "@/ui-kit";
 import { Flex, Icon, Tbody, Text, Thead, Tr } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
-
-export const data = [
-  {
-    token: {
-      icon1: "/venom.svg",
-      icon2: "/usdt.svg",
-      name: "VENOM/USDT",
-      fee: "0.05%",
-    },
-    volume24h: "$1.1B",
-    volume7d: "$1,865.67",
-    tvl: "$687.6M",
-  },
-  {
-    token: {
-      icon1: "/usdc.svg",
-      icon2: "/eth.svg",
-      name: "USDC/ETH",
-      fee: "0.05%",
-    },
-    volume24h: "$1.1B",
-    volume7d: "$1,865.67",
-    tvl: "$687.6M",
-  },
-  {
-    token: {
-      icon1: "/btc.svg",
-      icon2: "/eth.svg",
-      name: "WBTC/ETH",
-      fee: "0.05%",
-    },
-    volume24h: "$1.1B",
-    volume7d: "$1,865.67",
-    tvl: "$687.6M",
-  },
-  {
-    token: {
-      icon1: "/usdt.svg",
-      icon2: "/bnb.svg",
-      name: "USDT/BNB",
-      fee: "0.05%",
-    },
-    volume24h: "$1.1B",
-    volume7d: "$1,865.67",
-    tvl: "$687.6M",
-  },
-  {
-    token: {
-      icon1: "/venom.svg",
-      icon2: "/bnb.svg",
-      name: "VENOM/BNB",
-      fee: "0.05%",
-    },
-    volume24h: "$1.1B",
-    volume7d: "$1,865.67",
-    tvl: "$687.6M",
-  },
-  {
-    token: {
-      icon1: "/venom.svg",
-      icon2: "/usdt.svg",
-      name: "VENOM/USDT",
-      fee: "0.05%",
-    },
-    volume24h: "$1.1B",
-    volume7d: "$1,865.67",
-    tvl: "$687.6M",
-  },
-  {
-    token: {
-      icon1: "/venom.svg",
-      icon2: "/usdt.svg",
-      name: "VENOM/USDT",
-      fee: "0.05%",
-    },
-    volume24h: "$1.1B",
-    volume7d: "$1,865.67",
-    tvl: "$687.6M",
-  },
-  {
-    token: {
-      icon1: "/btc.svg",
-      icon2: "/eth.svg",
-      name: "WBTC/ETH",
-      fee: "0.05%",
-    },
-    volume24h: "$1.1B",
-    volume7d: "$1,865.67",
-    tvl: "$687.6M",
-  },
-  {
-    token: {
-      icon1: "/btc.svg",
-      icon2: "/eth.svg",
-      name: "WBTC/ETH",
-      fee: "0.05%",
-    },
-    volume24h: "$1.1B",
-    volume7d: "$1,865.67",
-    tvl: "$687.6M",
-  },
-];
 
 export const TokensTable = () => {
   const { t } = useTranslation();
@@ -128,28 +27,36 @@ export const TokensTable = () => {
         </Tr>
       </Thead>
       <Tbody>
-        {data.map((item, idx) => (
-          <Tr key={idx}>
+        {PAIRS_DATA.map((item, idx) => (
+          <Tr
+            key={idx}
+            onClick={() =>
+              window.open(
+                `https://devnet.venomscan.com/accounts/${item.pairAddress}`
+              )
+            }
+            cursor="pointer"
+          >
             <XTableTd maxW="50px" boxProps={{ textAlign: "center" }}>
               {1 + idx}
             </XTableTd>
             <XTableTd boxProps={{ align: "center" }}>
               <Flex flexShrink="0">
                 <XImage
-                  src={item.token.icon1}
+                  src={item.pairToken.leftToken}
                   alt="venom"
                   width="20"
                   height="20"
                 />
                 <XImage
-                  src={item.token.icon2}
+                  src={item.pairToken.rightToken}
                   alt="venom"
                   width="20"
                   height="20"
                 />
               </Flex>
-              <Text>{item.token.name}</Text>
-              <Flex
+              <Text>{item.name}</Text>
+              {/* <Flex
                 justify="center"
                 align="center"
                 w="37px"
@@ -160,11 +67,14 @@ export const TokensTable = () => {
                 color="text.100"
               >
                 {item.token.fee}
-              </Flex>
+              </Flex> */}
             </XTableTd>
-            <XTableTd>{item.volume24h}</XTableTd>
+            {/* <XTableTd>{item.volume24h}</XTableTd>
             <XTableTd>{item.volume7d}</XTableTd>
-            <XTableTd>{item.tvl}</XTableTd>
+            <XTableTd>{item.tvl}</XTableTd> */}
+            <XTableTd />
+            <XTableTd />
+            <XTableTd />
           </Tr>
         ))}
       </Tbody>
