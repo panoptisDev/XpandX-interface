@@ -12,17 +12,6 @@ export const getExpectedAccountAddress = async (
   provider: ProviderRpcClient
 ): Promise<Address | undefined> => {
   const dexRoot = await loadContract(ADDRESSES.DEXROOT, DexRootAbi, provider);
-
-  await (dexRoot.methods as any)
-    .deployAccount({
-      account_owner: new Address(walletAddress),
-      send_gas_to: new Address(walletAddress),
-    })
-    .send({
-      from: new Address(walletAddress),
-      amount: "4000000000",
-    });
-
   const account = await (dexRoot.methods as any)
     .getExpectedAccountAddress({
       answerId: 0,
@@ -30,6 +19,30 @@ export const getExpectedAccountAddress = async (
     })
     .call();
   return account.value0;
+};
+
+export const deployDexAccount = async (
+  walletAddress: string,
+  provider: ProviderRpcClient
+): Promise<void> => {
+  const tokenState = (
+    await provider?.getFullContractState({
+      address: new Address(walletAddress),
+    })
+  )?.state;
+
+  if (tokenState?.isDeployed) return;
+
+  const dexRoot = await loadContract(ADDRESSES.DEXROOT, DexRootAbi, provider);
+  await (dexRoot.methods as any)
+    .deployAccount({
+      account_owner: new Address(walletAddress),
+      send_gas_to: new Address(walletAddress),
+    })
+    .send({
+      from: new Address(walletAddress),
+      amount: "1000000000",
+    });
 };
 
 export const getPair = async (
@@ -67,4 +80,84 @@ export const getWallets = async (
   );
   const wallets = await (dexAccount.methods as any).getWallets().call();
   return wallets.value0;
+};
+
+export const addPair = async (
+  leftRootAddress: string,
+  rightRootAddress: string,
+  dexAccountAddress: Address,
+  walletAddress: string,
+  provider: ProviderRpcClient
+): Promise<void> => {
+  const dexAccount = await loadContract(
+    dexAccountAddress,
+    DexAccountAbi,
+    provider
+  );
+  await (dexAccount.methods as any)
+    .addPair({
+      left_root: new Address(leftRootAddress),
+      right_root: new Address(rightRootAddress),
+    })
+    .send({
+      from: new Address(walletAddress),
+      amount: "5000000000",
+      bounce: true,
+    });
+};
+
+export const transfer = async (
+  amount: number,
+  tokenRoot: string,
+  recipient: string,
+  dexAccountAddress: Address,
+  provider: ProviderRpcClient
+): Promise<void> => {
+  const dexAccount = await loadContract(
+    dexAccountAddress,
+    DexAccountAbi,
+    provider
+  );
+  await (dexAccount.methods as any)
+    .transfer({
+      amount: amount * 1e18,
+      token_root: new Address(tokenRoot),
+      recipient: new Address(recipient),
+      willing_to_deploy: true,
+      send_gas_to: new Address(recipient),
+    })
+    .send({
+      from: new Address(recipient),
+      amount: "5000000000",
+      bounce: true,
+    });
+};
+
+export const withdraw = async (
+  amount: number,
+  tokenRoot: string,
+  recipient: string,
+  dexAccountAddress: Address,
+  provider: ProviderRpcClient
+): Promise<void> => {
+  const dexAccount = await loadContract(
+    dexAccountAddress,
+    DexAccountAbi,
+    provider
+  );
+
+  await (dexAccount.methods as any)
+    .withdraw({
+      call_id: "0",
+      amount: `${amount * 1e18}`,
+      token_root: new Address(tokenRoot),
+      recipient_address: new Address(recipient),
+      deploy_wallet_grams: "0",
+      send_gas_to: new Address(recipient),
+    })
+    .send({
+      from: new Address(recipient),
+      amount: "5000000000",
+      bounce: true,
+    });
 };

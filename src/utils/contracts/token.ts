@@ -35,16 +35,23 @@ export const deployWallet = async (
   walletAddress: string,
   provider: ProviderRpcClient
 ): Promise<void> => {
+  const tokenState = (
+    await provider?.getFullContractState({
+      address: new Address(tokenAddress),
+    })
+  )?.state;
+
+  if (tokenState?.isDeployed) return;
   const tokenContract = await loadContract(tokenAddress, TokenAbi, provider);
   await (tokenContract.methods as any)
     .deployWallet({
       answerId: 0,
       walletOwner: new Address(walletAddress),
-      deployWalletValue: "2000000000",
+      deployWalletValue: "200000000",
     })
     .send({
       from: new Address(walletAddress),
-      amount: "2000000000",
+      amount: "500000000",
       bounce: true,
     });
 };
@@ -79,17 +86,19 @@ export const transfer = async ({
     TokenWalletUpgradeableAbi,
     provider
   );
+
   await (tokenContract.methods as any)
     .transfer({
       amount: amount * 1e18,
       recipient,
-      deployWalletValue: deployWalletValue ?? "2000000000000000000",
+      deployWalletValue: deployWalletValue ?? "200000000",
       remainingGasTo: new Address(walletAddress),
       notify: true,
-      payload: "",
+      payload: "te6ccgEBAQEAAgAAAA==",
     })
     .send({
-      amount: "2000000000",
+      from: new Address(walletAddress),
+      amount: "500000000",
       bounce: false,
     });
 };
