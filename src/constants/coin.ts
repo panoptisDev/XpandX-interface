@@ -1,4 +1,5 @@
 import { ADDRESSES } from "@/utils/contracts/_constant";
+import { Address } from "everscale-inpage-provider";
 
 export interface Coin {
   id: string;
@@ -7,9 +8,11 @@ export interface Coin {
   symbol: string;
   address: string;
   decimals: number;
+  balance?: number;
+  deployedAddress?: Address;
 }
 
-export const COINS = [
+export const COINS: Coin[] = [
   {
     id: "",
     img: "/icons/coins/xpandx.svg",

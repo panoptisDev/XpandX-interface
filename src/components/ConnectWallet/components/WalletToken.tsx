@@ -2,17 +2,21 @@ import { ChevronDownIcon } from "@/icons";
 import { XImage } from "@/ui-kit";
 import { Box, Flex, Icon, Stack, Text } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
-import { useTokenState, useCoinPrice } from "@/hooks";
-import { COINS, Coin } from "@/constants/coin";
+import _ from "lodash";
+
+import { useCoinPrice } from "@/hooks";
+import { Coin } from "@/constants/coin";
 import { readableNumberFormatter } from "@/utils/number";
+import { useTokenData } from "@/apis/coin";
 
 export const WalletToken = () => {
   const { t } = useTranslation();
+  const { data } = useTokenData();
 
   return (
     <Stack spacing={5}>
       <Box mt="10px !important">
-        {COINS.map((item, idx) => (
+        {_.filter(data, (c) => !!c.balance).map((item, idx) => (
           <TokenItem key={item.symbol} coin={item} index={idx} />
         ))}
       </Box>
@@ -41,7 +45,6 @@ export const WalletToken = () => {
 };
 
 const TokenItem = ({ coin, index }: { coin: Coin; index: number }) => {
-  const { balance } = useTokenState(coin.address);
   const coinPrice = useCoinPrice(coin.symbol);
   const { t } = useTranslation();
 
@@ -65,7 +68,7 @@ const TokenItem = ({ coin, index }: { coin: Coin; index: number }) => {
         <Text fontSize="sm" color="text.500">
           {t("balance")}:{" "}
           <Box as="span" color="text.400">
-            {balance}
+            {coin.balance || 0}
           </Box>
         </Text>
       </Box>
