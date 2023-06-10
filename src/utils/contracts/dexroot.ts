@@ -41,7 +41,7 @@ export const deployDexAccount = async (
     })
     .send({
       from: new Address(walletAddress),
-      amount: "1000000000",
+      amount: "3000000000",
     });
 };
 
