@@ -105,7 +105,7 @@ export const SwapToken = ({ ...rest }: Props) => {
         provider: venomProvider,
       });
       await withdraw(
-        swapInfo.spentAmount,
+        swapInfo.expectedAmountAsNumber,
         swapTokens[1].address,
         address,
         dexAccount as Address,
@@ -126,8 +126,6 @@ export const SwapToken = ({ ...rest }: Props) => {
       setLoading(false);
     }
   };
-
-  console.log({ swapInfo });
 
   return (
     <Stack zIndex="0" w={{ base: "335px", sm: "500px", lg: "408px" }} {...rest}>
@@ -184,7 +182,7 @@ export const SwapToken = ({ ...rest }: Props) => {
           onChangeCoin={(coin) => onChangeSwapTokens([swapTokens[0], coin])}
           disabledSelectTokens={[swapTokens[0].symbol]}
           inputProps={{
-            value: amount && rightRootAmount,
+            value: (amount && swapInfo?.expectedAmountAsNumber) || 0,
             userSelect: "none",
             pointerEvents: "none",
           }}
