@@ -1,12 +1,23 @@
 import { InputSwapToken } from "@/components";
-import { Flex, Stack, Box, Text, Button } from "@chakra-ui/react";
+import { Coin } from "@/typings/coin";
+import { Stack, Text } from "@chakra-ui/react";
+import _ from "lodash";
 import { useTranslation } from "next-i18next";
-import React, { useState } from "react";
-import { COINS } from "@/constants/coin";
-import { EditIcon } from "@/icons";
 
-export const TokenPair = () => {
-  const [tokens, setTokens] = useState([COINS[1], COINS[2]]);
+type TAmount = { left_amount: string; right_amount: string };
+interface ITokenPair {
+  swapTokens: Coin[];
+  onChangeSwapTokens: (tokens: Coin[]) => void;
+  amount: TAmount;
+  setAmount: (value: TAmount) => void;
+}
+
+export const TokenPair = ({
+  swapTokens,
+  onChangeSwapTokens,
+  amount,
+  setAmount,
+}: ITokenPair) => {
   const { t } = useTranslation();
 
   return (
@@ -17,27 +28,39 @@ export const TokenPair = () => {
       borderColor="text.600"
       borderRadius="14px"
       p="16px"
+      maxW="350px"
     >
       <Text fontWeight="bold">{t("deposit_amounts")}</Text>
 
       <InputSwapToken
         hideRate
-        symbol={tokens[0].symbol}
-        selectEnabled
+        symbol={swapTokens[0].symbol}
+        address={swapTokens[0].address}
+        selectEnabled={swapTokens[0].symbol !== "USDT"}
+        onChangeCoin={(coin) => onChangeSwapTokens([coin, swapTokens[1]])}
+        disabledSelectTokens={[swapTokens[1].symbol]}
+        inputProps={{
+          value: amount.left_amount,
+          onChange: (val) => setAmount({ ...amount, left_amount: val }),
+        }}
         border="1px solid"
         borderColor="text.600"
         borderRadius="14px"
       />
       <InputSwapToken
         hideRate
-        symbol={tokens[1].symbol}
-        selectEnabled
-        border="1px solid"
-        borderColor="text.600"
-        borderRadius="14px"
+        symbol={swapTokens[1].symbol}
+        address={swapTokens[1].address}
+        selectEnabled={swapTokens[1].symbol !== "USDT"}
+        onChangeCoin={(coin) => onChangeSwapTokens([swapTokens[0], coin])}
+        disabledSelectTokens={[swapTokens[0].symbol]}
+        inputProps={{
+          value: amount.right_amount,
+          onChange: (val) => setAmount({ ...amount, right_amount: val }),
+        }}
       />
 
-      <Flex
+      {/* <Flex
         p="18px"
         bg="text.600"
         borderRadius="14px"
@@ -69,7 +92,7 @@ export const TokenPair = () => {
             Edit
           </Button>
         </Text>
-      </Flex>
+      </Flex> */}
     </Stack>
   );
 };

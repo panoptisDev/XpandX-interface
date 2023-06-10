@@ -1,6 +1,6 @@
+import { XContainer } from "@/ui-kit";
 import { Flex, Image, Text } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
-import { XContainer } from "@/ui-kit";
 
 export const ComingSoon = () => {
   const { t } = useTranslation();
@@ -23,5 +23,26 @@ export const ComingSoon = () => {
         </Text>
       </Flex>
     </XContainer>
+  );
+};
+
+export const ComingSoon2 = () => {
+  const { t } = useTranslation();
+
+  return (
+    <Flex
+      position="fixed"
+      w="100%"
+      h="100%"
+      top="0px"
+      left="0"
+      justify="center"
+      align="center"
+      zIndex="1"
+    >
+      <Text color="text.200" fontSize="2xl" fontWeight="bold">
+        {t("coming_soon_2")}
+      </Text>
+    </Flex>
   );
 };

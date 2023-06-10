@@ -1,3 +1,4 @@
+import { Pagination } from "@/components";
 import { ChevronDownIcon } from "@/icons";
 import {
   Box,
@@ -5,72 +6,37 @@ import {
   Icon,
   Table,
   TableContainer,
+  TableContainerProps,
   Td,
   Text,
   Th,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
-export const XTable = ({ children }: any) => {
+export const XTable = ({ children, ...props }: TableContainerProps) => {
   return (
     <Box
       border="1px solid"
       borderColor="text.700"
       borderRadius="14px"
       overflow="auto"
+      pb="10px"
     >
-      <TableContainer>
+      <TableContainer {...props}>
         <Table variant="striped" colorScheme="rgba(63, 63, 70, 0.4)">
           {children}
         </Table>
-
-        <Flex maxW="130px" m="0 auto" p="12px 0px" align="center" gap="8px">
-          <Flex
-            as={motion.div}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            cursor="pointer"
-            justify="center"
-            align="center"
-            minW="30px"
-            w="30px"
-            h="30px"
-            borderRadius="6"
-            border="1px solid"
-            borderColor="text.600"
-          >
-            <Icon
-              as={ChevronDownIcon}
-              transform="rotate(90deg)"
-              w="22px"
-              h="22px"
-            />
-          </Flex>
-          <Text fontSize="sm" color="text.500">
-            Page{" "}
-            <Box as="span" color="text.200">
-              1 / 4
-            </Box>
-          </Text>
-
-          <Flex
-            as={motion.div}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            cursor="pointer"
-            justify="center"
-            align="center"
-            minW="30px"
-            w="30px"
-            h="30px"
-            borderRadius="6"
-            border="1px solid"
-            borderColor="text.600"
-          >
-            <Icon as={ChevronDownIcon} transform="rotate(270deg)" />
-          </Flex>
-        </Flex>
       </TableContainer>
+
+      {/* <Box
+        sx={{
+          position: "sticky",
+          left: 0,
+          width: "100%",
+        }}
+      >
+        <Pagination />
+      </Box> */}
     </Box>
   );
 };

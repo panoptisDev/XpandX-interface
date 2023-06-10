@@ -7,9 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { MinusIcon, PlusIcon } from "@/icons";
 
-interface Props extends UseNumberInputProps {
-  defaultValue: number;
-}
+interface Props extends UseNumberInputProps {}
 
 export const NumberInput = ({ ...props }: Props) => {
   const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =

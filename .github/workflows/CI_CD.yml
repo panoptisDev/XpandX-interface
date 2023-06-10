@@ -1,7 +1,7 @@
 name: CI/CD XpandX
 on:
   push:
-    branches: [ master ]
+    branches: [ develop ]
 
 jobs:
 # Deploy in EC2

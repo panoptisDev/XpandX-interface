@@ -1,4 +1,4 @@
-import { Flex, Text, Box } from "@chakra-ui/react";
+import { Flex, Text, Box, Hide, Grid } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 
 import { BoxInfo, BoxInfoV2 } from "./";
@@ -17,13 +17,30 @@ export const DividendHeader = () => {
           <Text color="text.500">{t("allocate_dxpx_here")}</Text>
         </Box>
 
-        <Flex align="center" justify="space-between" gap="8px">
+        <Hide below="lg">
+          <Flex align="center" justify="space-between" gap="8px">
+            <BoxInfo icon="/icons/launchpad/trophy.svg" value="$1,3971.39" />
+            <BoxInfo icon="/icons/launchpad/coin.svg" value="$84.298M TVL" />
+          </Flex>
+        </Hide>
+      </Flex>
+
+      <Hide above="lg">
+        <Flex align="center" gap="8px" mt="20px">
           <BoxInfo icon="/icons/launchpad/trophy.svg" value="$1,3971.39" />
           <BoxInfo icon="/icons/launchpad/coin.svg" value="$84.298M TVL" />
         </Flex>
-      </Flex>
+      </Hide>
 
-      <Flex mt="24px" gap="14px">
+      <Grid
+        mt="24px"
+        gap="14px"
+        templateColumns={{
+          base: "repeat(1, 1fr)",
+          sm: "repeat(2, 1fr)",
+          lg: "repeat(4, 1fr)",
+        }}
+      >
         <BoxInfoV2
           name="total_allocations"
           value="11,397"
@@ -33,7 +50,7 @@ export const DividendHeader = () => {
         <BoxInfoV2 name="current_epoch" value="$76,9K" icon={TargetIcon} />
         <BoxInfoV2 name="apy" value="24.75%" icon={DiscountStarIcon} />
         <BoxInfoV2 name="deallocation_fee" value="0%" icon={CoinsIcon} />
-      </Flex>
+      </Grid>
     </Box>
   );
 };

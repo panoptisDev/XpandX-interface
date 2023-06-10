@@ -1,4 +1,5 @@
-import { GearSixIcon, PowerIcon, TrendDownIcon } from "@/icons";
+import { useConverBigNummber } from "@/hooks";
+import { CloseIcon, HourglassIcon, PowerIcon, TrendDownIcon } from "@/icons";
 import { XButton, XImage } from "@/ui-kit";
 import { ellipseAddress } from "@/utils";
 import {
@@ -12,9 +13,11 @@ import {
   DrawerContent,
   DrawerOverlay,
   Flex,
+  Hide,
   Icon,
   Stack,
   Text,
+  Tooltip,
 } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { useState } from "react";
@@ -27,7 +30,7 @@ interface IProps {
   btnRef: any;
   address: string;
   onDisconnectButtonClick: () => void;
-  balance: string;
+  balance: number;
 }
 
 export const Wallet = ({
@@ -50,10 +53,10 @@ export const Wallet = ({
     >
       <DrawerOverlay />
       <DrawerContent
-        margin="14px"
-        borderRadius="14px"
+        margin={{ base: 0, sm: "14px" }}
+        rounded={{ base: 0, sm: "14px" }}
         bg="text.600"
-        minW="380px"
+        minW={{ base: "100%", sm: "380px" }}
       >
         <DrawerBody p="0px">
           <Stack spacing={5}>
@@ -69,8 +72,7 @@ export const Wallet = ({
                 <Text color="text.50">{ellipseAddress(address, 4)}</Text>
               </Flex>
 
-              <Flex gap="8px">
-                <XImage src="/gear-six.svg" alt="gear" width="20" height="20" />
+              <Flex gap="8px" align="center">
                 <Icon
                   as={PowerIcon}
                   w="20px"
@@ -82,10 +84,26 @@ export const Wallet = ({
                   }}
                   cursor="pointer"
                 />
+                <Hide above="sm">
+                  <Icon
+                    as={CloseIcon}
+                    w="16px"
+                    h="16px"
+                    color="text.400"
+                    onClick={onClose}
+                    cursor="pointer"
+                  />
+                </Hide>
               </Flex>
             </Flex>
 
-            <Divider bg="text.600" p="0px 20px" />
+            <Divider
+              bg="text.600"
+              w="calc(100% - 40px)"
+              left="50%"
+              pos="relative"
+              transform="translateX(-50%)"
+            />
 
             <Stack spacing={2.5} p="0px 20px">
               <Box>
@@ -95,7 +113,7 @@ export const Wallet = ({
                   fontWeight="bold"
                   lineHeight="140%"
                 >
-                  ${balance}
+                  {balance}
                 </Text>
 
                 <Flex align="center" gap="6px">
@@ -105,7 +123,29 @@ export const Wallet = ({
                 </Flex>
               </Box>
 
-              <XButton size="md">{t("buy_crypto")}</XButton>
+              <Tooltip
+                label={
+                  <Flex align="center" gap="4px" minH="30px">
+                    <Icon
+                      as={HourglassIcon}
+                      w="18px"
+                      h="18px"
+                      color="text.900"
+                    />
+                    {t("Coming soon")}
+                  </Flex>
+                }
+                hasArrow
+                placement="top"
+                bg="text.0"
+                borderRadius="5"
+                color="text.900"
+                fontSize="sm"
+              >
+                <Box>
+                  <XButton size="md">{t("buy_crypto")}</XButton>
+                </Box>
+              </Tooltip>
             </Stack>
 
             <Breadcrumb

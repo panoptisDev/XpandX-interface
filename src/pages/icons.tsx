@@ -1,10 +1,14 @@
 import {
   ArrowRight,
   GearSixIcon,
+  HourglassIcon,
+  LayoutIcon,
   LightIcon,
   PlusIcon,
   PowerIcon,
   RefreshIcon,
+  SlidersIcon,
+  SquaresFourIcon,
   TrendDownIcon,
   TrendUpIcon,
   WalletIcon,
@@ -28,6 +32,10 @@ const Icons = () => {
       <RefreshIcon />
       <GearSixIcon />
       <PowerIcon />
+      <LayoutIcon />
+      <SquaresFourIcon />
+      <SlidersIcon />
+      <HourglassIcon />
     </Box>
   );
 };

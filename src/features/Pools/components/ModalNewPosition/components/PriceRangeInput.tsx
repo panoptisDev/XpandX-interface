@@ -1,15 +1,16 @@
-import { Stack, Text } from "@chakra-ui/react";
+import { Stack, Text, UseNumberInputProps } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 
 import { NumberInput } from "./NumberInput";
+import { useSwap } from "@/store/swap";
 
-interface Props {
+interface Props extends UseNumberInputProps {
   label: string;
-  value: number;
 }
 
-export const PriceRangeInput = ({ label, value }: Props) => {
+export const PriceRangeInput = ({ label, ...props }: Props) => {
   const { t } = useTranslation();
+  const swapTokens = useSwap((state) => state.swapTokens);
 
   return (
     <Stack
@@ -21,9 +22,9 @@ export const PriceRangeInput = ({ label, value }: Props) => {
       <Text color="text.400" align="center">
         {t(label)}
       </Text>
-      <NumberInput defaultValue={value} />
+      <NumberInput {...props} />
       <Text color="text.400" align="center">
-        USDT / ETH
+        {swapTokens[1].symbol} / {swapTokens[0].symbol}
       </Text>
     </Stack>
   );

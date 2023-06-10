@@ -49,7 +49,7 @@
   "pending_rewards": "Pending rewards",
   "buy_crypto_with_credit_card": "Buy Crypto with Credit Card",
   "search_token": "Search token...",
-  "minimum_to_receive": "Minimum to Receive",
+  "you_will_receive": "You will receive",
   "possible_slippage": "Possible Slippage",
   "avg_transaction_cost": "Avg. Transaction Cost",
   "refundable_fee": "Refundable Fee",
@@ -132,5 +132,11 @@
   "set_price_range": "Set price range",
   "min_price": "Min price",
   "max_price": "Max price",
-  "full_range": "Full range"
+  "full_range": "Full range",
+  "auto": "Auto",
+  "slippage": "Slippage",
+  "custom": "Custom",
+  "view_by": "View by",
+  "filter_tokens": "Filter tokens",
+  "lex_price": "Lex price"
 }

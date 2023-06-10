@@ -6,7 +6,7 @@ export const OverviewAll = () => {
   const { t } = useTranslation();
 
   return (
-    <Stack spacing="11px" p="12px 16px" bg="white" borderRadius="14px">
+    <Stack spacing="11px" p="12px 16px" bg="white" borderRadius="14px" h="100%">
       <Stack spacing="4px">
         <Text color="text.500" fontSize="sm">
           {t("volume24h")}

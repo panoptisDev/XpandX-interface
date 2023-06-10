@@ -16,7 +16,10 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
     >
       <Box>
         <Header />
-        <Box p="80px 84px" minH="100vh">
+        <Box
+          p={{ base: "80px 4px", sm: "80px 24px", lg: "80px 84px" }}
+          minH="100vh"
+        >
           {children}
         </Box>
       </Box>

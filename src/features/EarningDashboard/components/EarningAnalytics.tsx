@@ -1,5 +1,5 @@
 import { XImage } from "@/ui-kit";
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, Grid, GridItem } from "@chakra-ui/react";
 import React from "react";
 import { useTranslation } from "next-i18next";
 
@@ -29,38 +29,45 @@ const INFORMATION = [
 export const EarningAnalytics = () => {
   const { t } = useTranslation();
   return (
-    <Flex gap="12px">
+    <Grid
+      gap="12px"
+      templateColumns={{
+        base: "repeat(1, 1fr)",
+        sm: "repeat(2, 1fr)",
+        lg: "repeat(4, 1fr)",
+      }}
+    >
       {INFORMATION.map((item, idx) => (
-        <Flex
+        <GridItem
           key={idx}
           border="1px solid"
           borderColor="text.400"
           borderRadius="14px"
           p="12px"
-          gap="16px"
-          w="100%"
         >
-          <Flex
-            w="50px"
-            h="50px"
-            borderRadius="full"
-            bg="text.700"
-            justify="center"
-            align="center"
-          >
-            <XImage src={item.icon} alt={item.title} width="30" height="30" />
-          </Flex>
+          <Flex gap="16px" w="100%">
+            <Flex
+              w="50px"
+              h="50px"
+              borderRadius="full"
+              bg="text.700"
+              justify="center"
+              align="center"
+            >
+              <XImage src={item.icon} alt={item.title} width="30" height="30" />
+            </Flex>
 
-          <Box>
-            <Text fontSize="sm" color="text.500">
-              {t(item.title)}
-            </Text>
-            <Text fontSize="2xl" color="text.50">
-              {item.value}
-            </Text>
-          </Box>
-        </Flex>
+            <Box>
+              <Text fontSize="sm" color="text.500">
+                {t(item.title)}
+              </Text>
+              <Text fontSize="2xl" color="text.50">
+                {item.value}
+              </Text>
+            </Box>
+          </Flex>
+        </GridItem>
       ))}
-    </Flex>
+    </Grid>
   );
 };

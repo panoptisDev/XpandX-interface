@@ -94,10 +94,10 @@ export const AnalyticsTableTransactions = () => {
       <Flex align="center" justify="space-between">
         <Text color="text.300">{t("transactions")}</Text>
       </Flex>
-      <XTable>
+      <XTable minW="1200px">
         <Thead>
           <Tr>
-            <XTableTh maxW="200px !important">
+            <XTableTh maxW="220px !important" minW="240px">
               <Breadcrumb fontSize="sm" fontWeight="bold" color="text.500">
                 {FILTER.map((item, idx) => (
                   <BreadcrumbItem key={idx}>

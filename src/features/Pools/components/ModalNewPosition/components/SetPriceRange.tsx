@@ -1,11 +1,20 @@
 import { Box, Flex, Stack, Text, Button } from "@chakra-ui/react";
 import { useTranslation } from "next-i18next";
 import { PriceRangeSlider } from "./PriceRangeSlider";
-
 import { PriceRangeInput } from "./";
+import { usePools } from "@/store/pools";
+import { useSwap } from "@/store/swap";
+import { useCoinPrice } from "@/hooks";
+
 export const SetPriceRange = () => {
   const { t } = useTranslation();
 
+  const minPrice = usePools((state) => state.minPrice);
+  const maxPrice = usePools((state) => state.maxPrice);
+  const setMaxPrice = usePools((state) => state.setMaxPrice);
+  const setMinPrice = usePools((state) => state.setMinPrice);
+  const swapTokens = useSwap((state) => state.swapTokens);
+  const coinPrice = useCoinPrice(swapTokens[1].symbol);
   return (
     <Stack
       w="100%"
@@ -28,7 +37,9 @@ export const SetPriceRange = () => {
             align="center"
           >
             <Box bg="sec.4" rounded="50%" w="7px" h="7px" />
-            <Text ml="6px">1760.71 USDT / ETH</Text>
+            <Text ml="6px">
+              {coinPrice} {swapTokens[1].symbol} / {swapTokens[0].symbol}
+            </Text>
           </Flex>
         </Flex>
       </Stack>
@@ -37,13 +48,29 @@ export const SetPriceRange = () => {
         <PriceRangeSlider />
 
         <Stack spacing={2} direction="row" mt="30px">
-          <PriceRangeInput label="min_price" value={100} />
-          <PriceRangeInput label="max_price" value={200} />
+          <PriceRangeInput
+            label="min_price"
+            value={minPrice}
+            onChange={(_, val) => setMinPrice(val)}
+          />
+          <PriceRangeInput
+            label="max_price"
+            value={maxPrice}
+            onChange={(_, val) => setMaxPrice(val)}
+          />
         </Stack>
       </Box>
 
       <Flex justify="center">
-        <Button variant="outline" size="sm" w="180px" mx="auto">
+        <Button
+          variant="outline"
+          size="sm"
+          w="180px"
+          mx="auto"
+          onClick={() => {
+            setMinPrice(800), setMaxPrice(3400);
+          }}
+        >
           {t("full_range")}
         </Button>
       </Flex>

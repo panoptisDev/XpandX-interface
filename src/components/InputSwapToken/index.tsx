@@ -8,26 +8,43 @@ import {
   Stack,
   Text,
   StackProps,
+  NumberInputProps,
 } from "@chakra-ui/react";
 import React from "react";
 import { useTranslation } from "next-i18next";
+import _ from "lodash";
 
 import { SelectToken } from "../SelectToken";
-import { Symbol } from "@/typings/coin";
+import { Coin, Symbol } from "@/typings/coin";
+import { useCoinPrice } from "@/hooks";
+import { useTokenData } from "@/apis/coin";
 
 interface Props extends StackProps {
   hideRate?: boolean;
   symbol: Symbol;
+  address: string;
   selectEnabled?: boolean;
+  value?: string;
+  inputProps?: NumberInputProps;
+  disabledSelectTokens?: string[];
+  onChangeCoin?: (coin: Coin) => void;
 }
 
 export const InputSwapToken = ({
   hideRate,
   symbol,
+  address,
   selectEnabled,
+  value,
+  inputProps,
+  disabledSelectTokens,
+  onChangeCoin,
   ...rest
 }: Props) => {
   const { t } = useTranslation();
+  const coinPrice = useCoinPrice(symbol);
+  const { data } = useTokenData();
+  const balance = _.find(data, (c) => c.address === address)?.balance || 0;
 
   return (
     <Box>
@@ -45,13 +62,14 @@ export const InputSwapToken = ({
             <Text as="span" color="text.500">
               {t("balance")}
             </Text>
-            : 3048.80 USDT
+            : {balance} {symbol}
           </Box>
         </Flex>
 
         <Flex align="center" gap="18px">
-          <NumberInput defaultValue="0">
+          <NumberInput {...inputProps}>
             <NumberInputField
+              placeholder="0"
               w="100%"
               bg="transparent"
               border="none"
@@ -64,10 +82,15 @@ export const InputSwapToken = ({
 
           <Flex gap="18px">
             <Text color="text.500" fontSize="sm">
-              ~$1,335
+              ~${coinPrice}
             </Text>
 
-            <SelectToken symbol={symbol} selectEnabled={selectEnabled} />
+            <SelectToken
+              symbol={symbol}
+              selectEnabled={selectEnabled}
+              onChangeCoin={onChangeCoin}
+              disabledSelectTokens={disabledSelectTokens}
+            />
           </Flex>
         </Flex>
       </Stack>

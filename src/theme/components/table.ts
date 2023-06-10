@@ -40,6 +40,9 @@ const Table: ComponentStyleConfig = {
 
       tbody: {
         tr: {
+          _hover: {
+            bg: "text.700",
+          },
           td: {
             border: "none",
             _first: {

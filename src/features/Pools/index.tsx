@@ -1,25 +1,24 @@
+import { LayoutIcon, PlusIcon, RefreshIcon, SquaresFourIcon } from "@/icons";
+import { XButton, XContainer } from "@/ui-kit";
 import {
   Box,
-  Button,
   Flex,
   Icon,
-  Menu,
-  MenuButton,
   Stack,
   Text,
   useDisclosure,
+  Hide,
 } from "@chakra-ui/react";
-import React from "react";
 import { useTranslation } from "next-i18next";
 import {
-  ArrowRight,
-  ChevronDownIcon,
-  LightIcon,
-  PlusIcon,
-  RefreshIcon,
-} from "@/icons";
-import { XButton, XImage } from "@/ui-kit";
-import { ModalNewPosition, ModalRefreshTable } from "./components";
+  ModalNewPosition,
+  ModalRefreshTable,
+  PoolsActive,
+  TokensCards,
+  TokensTable,
+} from "./components";
+import { useConnectWallet } from "@/store/wallet";
+import { useState } from "react";
 
 export const Pools = () => {
   const { t } = useTranslation();
@@ -29,109 +28,115 @@ export const Pools = () => {
     onOpen: onOpenModalRefresh,
     onClose: onCloseModalRefresh,
   } = useDisclosure();
+  const address = useConnectWallet((state) => state.address);
+  const [layout, setLayout] = useState("cards");
 
   return (
-    <Stack w="100%" maxW="624px" margin="0 auto" spacing={4}>
-      <Flex w="100%" align="center" justify="space-between">
-        <Text color="text.50" fontSize="2xl" fontWeight="bold">
-          {t("pools")}
-        </Text>
-
-        <Flex align="center" justify="space-between" gap="8px">
-          <Flex
-            bg="text.700"
-            borderRadius="50px"
-            align="center"
-            p="5px 18px"
-            gap="6px"
-            cursor="pointer"
-            onClick={onOpenModalRefresh}
-          >
-            <Icon as={RefreshIcon} />
-            <Text>{t("refresh")}</Text>
-          </Flex>
-          <XButton
-            bg="transparent"
-            border="1px solid"
-            borderColor="text.50"
-            color="text.50"
-            leftIcon={<Icon as={PlusIcon} />}
-            minW="150px"
-            onClick={onOpen}
-          >
-            {t("new_position")}
-          </XButton>
-        </Flex>
-      </Flex>
-
-      <Box borderRadius="14px" bg="text.700">
-        <Stack
-          spacing={4}
-          p="24px 20px"
-          borderBottom="1px solid"
-          borderColor="text.900"
-          justify="center"
-          align="center"
+    <XContainer>
+      <Stack
+        w="100%"
+        margin="0 auto"
+        spacing={4}
+        maxW={!address ? { base: "100%", lg: "624px" } : "100%"}
+      >
+        <Flex
+          w="100%"
+          gap="8px"
+          align={{ base: "flex-start", lg: "center" }}
+          justify="space-between"
+          direction={{ base: "column", lg: "row" }}
         >
-          <XImage
-            src="/pools-cards.webp"
-            alt="pools-cards"
-            width="242"
-            height="211"
-          />
-
-          <Text fontSize="xl" color="text.50">
-            {t("your_active_v3_liquidity_positions_will_appear_here")}
+          <Text color="text.50" fontSize="2xl" fontWeight="bold">
+            {t("pools")}
           </Text>
 
-          <XButton rightIcon={<Icon as={ArrowRight} />} size="md" maxW="210px">
-            {t("connect_a_wallet")}
-          </XButton>
-        </Stack>
+          <Flex align="center" justify="space-between" gap="8px">
+            <Flex
+              bg="text.700"
+              borderRadius="50px"
+              align="center"
+              p="5px 18px"
+              gap="6px"
+              cursor="pointer"
+            >
+              <Icon as={RefreshIcon} />
+              <Text>{t("refresh")}</Text>
+            </Flex>
+            <XButton
+              bg="transparent"
+              border="1px solid"
+              borderColor="text.50"
+              color="text.50"
+              leftIcon={<Icon as={PlusIcon} />}
+              minW={{ base: "140px", sm: "150px" }}
+              onClick={onOpen}
+            >
+              {t("new_position")}
+            </XButton>
 
-        <Flex p="24px 20px">
-          <Flex gap="4px" w="100%">
-            <Icon as={LightIcon} w="20px" h="20px" />
+            <Flex
+              bg="text.700"
+              borderRadius="50px"
+              p={{ base: "3px 4px 3px 5px", sm: "3px" }}
+              h="32px"
+              minW={{ base: "unset", sm: "132px" }}
+              gap="8px"
+              justify="center"
+              align="center"
+            >
+              <Hide below="sm">
+                <Text fontSize="sm" color="text.400">
+                  {t("view_by")}
+                </Text>
+              </Hide>
 
-            <Box>
-              <Text
-                fontSize="sm"
-                fontWeight="bold"
-                lineHeight="160%"
-                color="text.200"
-              >
-                {t("learn_about_providing_liquidity")}
-              </Text>
-              <Text lineHeight="160%" color="text.400">
-                {t("check_out_our_v3_lp_walkthrough_and_migration_guides")}
-              </Text>
-            </Box>
-          </Flex>
+              <Flex gap="2px">
+                <Flex
+                  w="26px"
+                  h="26px"
+                  bg={layout === "table" ? "text.500" : "transparent"}
+                  borderRadius="50px"
+                  justify="center"
+                  align="center"
+                  onClick={() => setLayout("table")}
+                  cursor="pointer"
+                >
+                  <Icon as={LayoutIcon} w="20px" h="20px" />
+                </Flex>
 
-          <Flex gap="4px" w="100%">
-            <Icon as={LightIcon} w="20px" h="20px" />
-
-            <Box>
-              <Text
-                fontSize="sm"
-                fontWeight="bold"
-                lineHeight="160%"
-                color="text.200"
-              >
-                {t("top_pools")}
-              </Text>
-              <Text lineHeight="160%" color="text.400">
-                {t("explore_xpand_x_analytics")}
-              </Text>
-            </Box>
+                <Flex
+                  w="26px"
+                  h="26px"
+                  bg={layout === "cards" ? "text.500" : "transparent"}
+                  borderRadius="50px"
+                  justify="center"
+                  align="center"
+                  onClick={() => setLayout("cards")}
+                  cursor="pointer"
+                >
+                  <Icon as={SquaresFourIcon} w="20px" h="20px" />
+                </Flex>
+              </Flex>
+            </Flex>
           </Flex>
         </Flex>
-      </Box>
-      <ModalNewPosition isOpen={isOpen} onClose={onClose} />
-      <ModalRefreshTable
-        isOpen={isOpenModalRefresh}
-        onClose={onCloseModalRefresh}
-      />
-    </Stack>
+
+        {address ? (
+          layout === "table" ? (
+            <TokensTable />
+          ) : (
+            <TokensCards />
+          )
+        ) : (
+          <PoolsActive />
+        )}
+
+        <ModalNewPosition isOpen={isOpen} onClose={onClose} />
+        <ModalRefreshTable
+          isOpen={isOpenModalRefresh}
+          onClose={onCloseModalRefresh}
+        />
+      </Stack>
+    </XContainer>
   );
 };
